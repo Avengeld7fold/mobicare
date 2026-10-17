@@ -50,7 +50,7 @@ export default function BrandExplorer({ services, categoryName, brandIcons }: Br
   };
 
   return (
-    <div className="space-y-2.5 lg:space-y-4">
+    <div className="space-y-2 lg:space-y-2.5">
       {[...brands.entries()].map(([brand, seriesMap]) => {
         const brandOpen = openBrand === brand;
         const customBrandIcon = brandIcons?.[brand];
@@ -74,14 +74,14 @@ export default function BrandExplorer({ services, categoryName, brandIcons }: Br
                 {customBrandIcon ? (
                   <ServiceIcon
                     name={customBrandIcon}
-                    className="h-6 w-6 lg:h-7 lg:w-7 object-contain"
+                    className="h-5 w-5 lg:h-6 lg:w-6 object-contain"
                   />
                 ) : brandImage(brand) ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={brandImage(brand)!}
                     alt={`Logo ${brand}`}
-                    className="h-6 w-6 lg:h-7 lg:w-7 object-contain"
+                    className="h-5 w-5 lg:h-6 lg:w-6 object-contain"
                     loading="lazy"
                   />
                 ) : (
@@ -94,7 +94,7 @@ export default function BrandExplorer({ services, categoryName, brandIcons }: Br
               <span className="service-count">
                 {namedSeries > 0 ? `${namedSeries} series` : `${svcTotal} service`}
               </span>
-              {brandOpen ? <Minus size={22} aria-hidden="true" /> : <Plus size={22} aria-hidden="true" />}
+              {brandOpen ? <Minus size={18} aria-hidden="true" /> : <Plus size={18} aria-hidden="true" />}
             </button>
 
             <div
@@ -137,7 +137,7 @@ export default function BrandExplorer({ services, categoryName, brandIcons }: Br
                         >
                           <span className="service-symbol">
                             <ChevronRight
-                              className={`h-[1.125rem] w-[1.125rem] lg:h-5 lg:w-5 text-primary transition-transform duration-300 ease-out ${
+                              className={`h-4 w-4 lg:h-[1.125rem] lg:w-[1.125rem] text-primary transition-transform duration-300 ease-out ${
                                 seriesOpen ? "rotate-90" : "group-hover:translate-x-0.5"
                               }`}
                               aria-hidden="true"
@@ -146,7 +146,7 @@ export default function BrandExplorer({ services, categoryName, brandIcons }: Br
                           <span className="service-name">
                             {series}
                           </span>
-                          {seriesOpen ? <Minus size={22} aria-hidden="true" /> : <Plus size={22} aria-hidden="true" />}
+                          {seriesOpen ? <Minus size={18} aria-hidden="true" /> : <Plus size={18} aria-hidden="true" />}
                         </button>
 
                         <div

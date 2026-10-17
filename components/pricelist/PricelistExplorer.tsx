@@ -94,7 +94,7 @@ export default function PricelistExplorer({
               />
             )}
             {activeCategory.service_types.some((s) => !s.Brand) && (
-              <div className={activeCategory.service_types.some((s) => s.Brand) ? "mt-2.5 lg:mt-4" : ""}>
+              <div className={activeCategory.service_types.some((s) => s.Brand) ? "mt-2 lg:mt-2.5" : ""}>
                 <ServiceAccordion
                   services={activeCategory.service_types.filter((s) => !s.Brand)}
                   categoryName={activeCategory.Name}

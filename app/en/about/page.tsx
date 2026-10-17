@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
-import MobiCarePlaceholder from "@/components/MobiCarePlaceholder";
+import AboutPageContent from "@/components/about/AboutPageContent";
 
 export const metadata: Metadata = {
-  title: "About MobiCare",
-  description: "The MobiCare story is being prepared.",
+  title: "About MobiCare — Repair Excellence & Quality Standards",
+  description:
+    "Official profile of MobiCare Service Center: trusted smart device repair center in Bali. Microsoldering lab, certified technicians, and official warranty.",
   alternates: {
     canonical: "/en/about",
   },
   openGraph: {
-    title: "About MobiCare",
-    description: "The MobiCare story is being prepared.",
+    title: "About MobiCare — Repair Excellence & Quality Standards",
+    description:
+      "Official profile of MobiCare Service Center: trusted smart device repair center in Bali. Microsoldering lab, certified technicians, and official warranty.",
     url: "/en/about",
     images: [
       {
@@ -23,5 +25,5 @@ export const metadata: Metadata = {
 };
 
 export default function EnglishAboutPage() {
-  return <MobiCarePlaceholder title="ABOUT MOBICARE" description="This page is being prepared as part of the new MobiCare identity." action="View price list" />;
+  return <AboutPageContent />;
 }

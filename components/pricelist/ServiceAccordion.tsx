@@ -59,7 +59,7 @@ export default function ServiceAccordion({ services, categoryName, sub = false }
   if (services.length === 0) return null;
 
   return (
-    <div ref={listRef} className="space-y-2.5 lg:space-y-4">
+    <div ref={listRef} className="space-y-2 lg:space-y-2.5">
       {services.map((service) => {
         const open = openSlug === service.Slug;
         const hasBeenOpened = openedSlugs.has(service.Slug);
@@ -83,14 +83,14 @@ export default function ServiceAccordion({ services, categoryName, sub = false }
               <span
                 className="service-symbol"
               >
-                <ServiceIcon name={service.icon} className="h-[1.125rem] w-[1.125rem] lg:h-5 lg:w-5 text-primary" />
+                <ServiceIcon name={service.icon} className="h-4 w-4 lg:h-[1.125rem] lg:w-[1.125rem] text-primary" />
               </span>
               <span className="service-name">
                 {getLocalizedServiceName(service, locale)}
               </span>
               <span className="service-action" aria-hidden="true">
                 <span>{open ? (locale === "en" ? "Close" : "Tutup") : (locale === "en" ? "View prices" : "Lihat harga")}</span>
-                {open ? <Minus size={22} /> : <Plus size={22} />}
+                {open ? <Minus size={18} /> : <Plus size={18} />}
               </span>
             </button>
 
@@ -109,7 +109,7 @@ export default function ServiceAccordion({ services, categoryName, sub = false }
               <div className="overflow-hidden">
                 {hasBeenOpened && (
                   <div
-                    className="service-panel-content px-2 pb-2.5 lg:px-5 lg:pb-5"
+                    className="service-panel-content px-2 pb-2.5 lg:px-4 lg:pb-4"
                   >
                     <PriceTable service={service} categoryName={categoryName} sub={sub} />
                   </div>

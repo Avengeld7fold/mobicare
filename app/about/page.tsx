@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
-import MobiCarePlaceholder from "@/components/MobiCarePlaceholder";
+import AboutPageContent from "@/components/about/AboutPageContent";
 
 export const metadata: Metadata = {
-  title: "Tentang MobiCare",
-  description: "Halaman tentang MobiCare sedang disiapkan.",
+  title: "Tentang MobiCare — Pusat Perbaikan & Standar Kualitas Gadget",
+  description:
+    "Profil resmi MobiCare Service Center: laboratorium perbaikan perangkat pintar terpercaya di Bali. Spesialis mikrosolder, teknisi bersertifikasi, dan garansi resmi.",
   alternates: {
     canonical: "/about",
   },
   openGraph: {
-    title: "Tentang MobiCare",
-    description: "Halaman tentang MobiCare sedang disiapkan.",
+    title: "Tentang MobiCare — Pusat Perbaikan & Standar Kualitas Gadget",
+    description:
+      "Profil resmi MobiCare Service Center: laboratorium perbaikan perangkat pintar terpercaya di Bali. Spesialis mikrosolder, teknisi bersertifikasi, dan garansi resmi.",
     url: "/about",
     images: [
       {
@@ -23,5 +25,5 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  return <MobiCarePlaceholder title="TENTANG MOBICARE" description="Halaman ini sedang kami siapkan sebagai bagian dari identitas MobiCare yang baru." action="Lihat price list" />;
+  return <AboutPageContent />;
 }

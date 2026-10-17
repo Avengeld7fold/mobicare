@@ -340,5 +340,12 @@ input[type="search"]::-webkit-search-results-decoration {
   [class*="border-red-"], [class*="border-rose-"] {
     border-color: color-mix(in srgb, var(--mobi-danger) 40%, transparent) !important;
   }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 

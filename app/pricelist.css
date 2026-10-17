@@ -33,14 +33,14 @@
 .price-device-image { position: relative; width: 120px; max-width: 100%; height: 88px; display: grid; place-items: center; }
 .price-device-check { position: absolute; top: 12px; right: 12px; color: var(--mobi-green-hover); }
 .mobi-pricelist :is(button, a, input, [tabindex]):focus-visible { outline: 2px solid var(--mobi-green-hover); outline-offset: 3px; }
-.service-disclosure { border: 1px solid #39423c; border-radius: 4px; background: #141615; }
-.price-services .service-trigger { display: flex; width: 100%; align-items: center; gap: 20px; min-height: 92px; padding: 24px; border-radius: 3px; background: #edf1eb; color: #080c09; text-align: left; font-family: var(--mobi-text); cursor: pointer; transition: background .2s ease-out; }
+.service-disclosure { border: 1px solid #39423c; border-radius: 6px; background: #141615; overflow: hidden; }
+.price-services .service-trigger { display: flex; width: 100%; align-items: center; gap: 16px; min-height: 56px; padding: 14px 20px; border-radius: 5px; background: #edf1eb; color: #080c09; text-align: left; font-family: var(--mobi-text); cursor: pointer; transition: background .18s ease-out; }
 .price-services .service-trigger:hover { background: #dcebdd; }
-.price-services .service-trigger[aria-expanded='true'] { background: #cce5d4; }
-.service-symbol { display: grid; place-items: center; flex-shrink: 0; width: 32px; height: 32px; }
+.price-services .service-trigger[aria-expanded='true'] { background: #cce5d4; border-bottom: 1px solid #b1c9b8; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.service-symbol { display: grid; place-items: center; flex-shrink: 0; width: 28px; height: 28px; }
 .price-services .service-trigger svg { color: currentColor; flex-shrink: 0; }
-.price-services .service-name { flex: 1; min-width: 0; font-size: 20px; font-weight: 700; line-height: 1.4; color: inherit; overflow-wrap: anywhere; }
-.service-action { display: flex; align-items: center; gap: 20px; font-size: 13px; font-weight: 500; flex-shrink: 0; }
+.price-services .service-name { flex: 1; min-width: 0; font-size: 16px; font-weight: 700; line-height: 1.35; color: inherit; overflow-wrap: anywhere; letter-spacing: -0.01em; }
+.service-action { display: flex; align-items: center; gap: 12px; font-size: 13px; font-weight: 600; flex-shrink: 0; color: #102619; }
 .service-panel-content {
   --color-foreground: #102619;
   --color-text-muted: #4c6052;
@@ -52,10 +52,10 @@
   border-top: 1px solid #b1c9b8;
 }
 .price-services .service-count { font-family: var(--mobi-text); font-size: 13px; color: inherit; }
-.price-services .service-nested { padding: 12px; }
-.price-services .service-nested .service-trigger { min-height: 76px; padding: 18px; }
-.price-services .service-nested .service-name { font-size: 18px; }
-.price-table { font-family: var(--mobi-text); padding-top: 20px; }
+.price-services .service-nested { padding: 8px; }
+.price-services .service-nested .service-trigger { min-height: 48px; padding: 10px 14px; gap: 12px; }
+.price-services .service-nested .service-name { font-size: 15px; font-weight: 600; }
+.price-table { font-family: var(--mobi-text); padding-top: 14px; }
 .price-table input[type='search'] { min-height: 44px; font-family: var(--mobi-text); font-size: 16px; border-radius: 4px; color: #102619; background: #f8faf6; border-color: #8b9e8f; caret-color: #17452b; box-shadow: none; }
 .price-table input::placeholder { color: #4c6052; opacity: 1; }
 .price-table :is(input, button, [tabindex]):focus-visible { outline-color: #17452b; outline-offset: 2px; }
@@ -102,14 +102,16 @@
   .price-device-image { height: 60px; width: 80px; }
   .price-device-check { top: 7px; right: 7px; width: 13px; }
   .price-categories { margin-bottom: 32px; }
-  .price-services .service-trigger { min-height: 88px; padding: 18px 14px; gap: 12px; }
-  .price-services .service-name, .price-services .service-nested .service-name { font-size: 16px; }
-  .service-symbol { width: 24px; }
+  .price-services .service-trigger { min-height: 50px; padding: 12px 14px; gap: 10px; }
+  .price-services .service-name { font-size: 14.5px; }
+  .service-symbol { width: 22px; height: 22px; }
+  .service-action { gap: 8px; }
   .service-action > span { display: none; }
   .price-services .service-nested { padding: 6px; }
-  .price-services .service-nested .service-trigger { padding: 16px 10px; gap: 8px; }
+  .price-services .service-nested .service-trigger { min-height: 44px; padding: 10px 10px; gap: 8px; }
+  .price-services .service-nested .service-name { font-size: 14px; }
   .price-table th:first-child, .price-table td:first-child, .price-table col:first-child { width: 128px; min-width: 128px; max-width: 128px; }
-  .price-table { padding-top: 14px; }
+  .price-table { padding-top: 10px; }
   .price-table td { font-size: 13px; padding: 10px; }
   .price-table th { padding-block: 12px; }
   .mobi-pricelist h3 { font-size: 21px; }
