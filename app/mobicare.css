@@ -1,0 +1,78 @@
+/* Measured against the reference at matching CSS viewports. Keep these pixel
+   values independent from the legacy Price List's proportional rem scale. */
+.mobi-nav, .mobi-hero, .mobi-placeholder {
+  --mobi-ink: #080c09;
+  --mobi-paper: #fff;
+  --mobi-green: #00a651;
+  --mobi-pad: clamp(22px, 4vw, 76px);
+  font-family: var(--mobi-text);
+  color: var(--mobi-paper);
+}
+.mobi-nav *, .mobi-hero *, .mobi-placeholder * { box-sizing: border-box; }
+.mobi-nav { position: relative; z-index: 60; background: var(--mobi-ink); border-bottom: 1px solid #29352d; }
+.mobi-nav__inner { height: 81px; padding: 0 var(--mobi-pad); display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+.mobi-nav__brand { display: flex; align-items: center; width: 240px; min-height: 44px; flex-shrink: 0; }
+.mobi-nav__brand svg { width: 100%; height: 44px; }
+.mobi-nav__desktop-links { display: flex; align-items: center; gap: clamp(16px, 2vw, 32px); }
+.mobi-nav a, .mobi-button { text-decoration: none; }
+.mobi-nav__desktop-links > a:not(.mobi-nav__cta) { position: relative; padding: 29px 0; color: #fff; font-size: 14px; font-weight: 700; line-height: 1.58; letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
+.mobi-nav__desktop-links > a:not(.mobi-nav__cta)::after { content: ''; position: absolute; bottom: 20px; left: 0; right: 100%; height: 2px; background: var(--mobi-green); transition: right .2s; }
+.mobi-nav__desktop-links > a:hover::after, .mobi-nav__desktop-links > a:focus-visible::after { right: 0; }
+.mobi-nav__cta, .mobi-nav__drawer-cta, .mobi-button { display: inline-flex; align-items: center; justify-content: center; gap: 18px; font-family: var(--mobi-text); font-size: 14px; font-weight: 700; line-height: 1; letter-spacing: .12em; text-transform: uppercase; min-height: 44px; border: 1px solid var(--mobi-green); background: var(--mobi-green); color: #04170d; transition: background .2s, color .2s, border-color .2s; }
+.mobi-nav__cta { width: 208.414px; height: 44px; padding: 14px 18px; flex-shrink: 0; }
+.mobi-nav__cta:hover, .mobi-nav__drawer-cta:hover, .mobi-button--primary:hover { background: #34d67e; border-color: #34d67e; }
+.mobi-nav__menu-button, .mobi-nav__drawer { display: none; }
+.mobi-hero { position: relative; isolation: isolate; background: #050a07; display: grid; place-items: center; min-height: calc(100vh - 82px); overflow: hidden; }
+.mobi-hero__device, .mobi-hero__wash { position: absolute; inset: 0; }
+.mobi-hero__device img { object-fit: cover; object-position: center 44%; opacity: .9; }
+.mobi-hero__wash { background: radial-gradient(circle, transparent 8%, rgb(0 9 4 / .38) 58%, rgb(0 9 4 / .84)), linear-gradient(transparent 40%, rgb(0 9 4 / .68)); }
+.mobi-hero__content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; width: min(1000px, 88%); padding: 64px 0; text-align: center; }
+.mobi-hero__logo { position: relative; width: clamp(230px, 21vw, 330px); height: clamp(25.156px, 2.297vw, 36.094px); margin-bottom: 26px; }
+/* Preserve the source logo's aspect ratio and full visual width while keeping
+   the measured headline/CTA positions fixed. Taller artwork extends upward. */
+.mobi-hero__logo svg { position: absolute; bottom: 0; left: 0; width: 100%; height: auto; }
+.mobi-hero h1 { display: flex; flex-direction: column; align-items: center; gap: clamp(10px, 1vw, 18px); margin: 0 0 24px; font-family: var(--font-gobold), sans-serif; font-size: clamp(66px, 7vw, 112px); font-weight: 400; line-height: 1; letter-spacing: -.025em; text-transform: uppercase; }
+.mobi-hero h1 span { display: block; color: #fff; white-space: nowrap; }
+.mobi-hero h1 span:last-child { color: #00bb5b; }
+.mobi-hero__content > p { margin: 0 0 30px; max-width: 100%; color: #fff; font-size: 14px; line-height: 1.45; letter-spacing: .18em; text-transform: uppercase; text-wrap: initial; }
+.mobi-hero__actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px; }
+.mobi-button { padding: 16px 24px; }
+.mobi-hero .mobi-button--primary { width: 220.414px; height: 48px; }
+.mobi-button--secondary { width: 140.625px; min-height: 44px; padding: 15px 20px; font-size: 13px; line-height: 1.58; border-color: #fff; background: transparent; color: #fff; }
+.mobi-button--secondary:hover { background: #fff; color: var(--mobi-ink); }
+.mobi-nav a:focus-visible, .mobi-nav button:focus-visible, .mobi-button:focus-visible { outline: 2px solid #65f5a1; outline-offset: 5px; }
+.mobi-nav ::selection, .mobi-hero ::selection, .mobi-placeholder ::selection { background: #00a651; color: #fff; }
+.mobi-placeholder { min-height: calc(100svh - 82px); display: grid; align-items: center; padding: 90px var(--mobi-pad); background: var(--mobi-ink); }
+.mobi-placeholder > div { max-width: 760px; }
+.mobi-placeholder h1 { font-family: var(--font-gobold), sans-serif; font-size: clamp(48px, 7vw, 96px); line-height: 1.08; font-weight: 400; color: #fff; }
+.mobi-placeholder p { margin: 28px 0 36px; font-size: 16px; line-height: 1.65; }
+@media (max-width: 1050px) {
+  .mobi-nav__desktop-links { display: none; }
+  .mobi-nav__menu-button { display: flex; flex-direction: column; justify-content: center; gap: 8px; width: 48px; height: 48px; background: transparent; border: 0; padding: 0; cursor: pointer; }
+  .mobi-nav__menu-button span { display: block; margin-left: auto; width: 32px; height: 2px; background: #fff; transition: transform .2s; }
+  .mobi-nav__menu-button[aria-expanded='true'] span:first-child { transform: translateY(5px) rotate(45deg); }
+  .mobi-nav__menu-button[aria-expanded='true'] span:last-child { transform: translateY(-5px) rotate(-45deg); }
+  .mobi-nav__drawer.is-open { display: flex; flex-direction: column; align-items: flex-start; position: absolute; top: 81px; left: 0; right: 0; background: var(--mobi-ink); border-bottom: 1px solid #29352d; padding: 22px var(--mobi-pad) 34px; }
+  .mobi-nav__drawer-links { display: flex; flex-direction: column; gap: 4px; width: 100%; }
+  .mobi-nav__drawer-links a { display: flex; align-items: center; min-height: 44px; color: #fff; font-size: 16px; line-height: 1.58; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+  .mobi-nav__drawer-cta { margin-top: 14px; padding: 16px 24px; }
+  .mobi-hero h1 { font-size: clamp(64px, 7vw, 86px); }
+}
+@media (max-width: 720px) {
+  .mobi-nav__inner { height: 75px; }
+  .mobi-nav__brand { width: 196px; }
+  .mobi-nav__drawer.is-open { top: 75px; }
+  .mobi-hero { min-height: calc(100svh - 76px); }
+  .mobi-hero__device img { object-position: 60% center; opacity: .9; }
+  .mobi-hero__content { width: 90%; padding: 52px 0; }
+  .mobi-hero__logo { width: 230px; height: 25.156px; margin-bottom: 22px; }
+  .mobi-hero h1 { gap: 10px; font-size: clamp(54px, 15vw, 62px); }
+  .mobi-hero__content > p { max-width: 310px; margin-bottom: 28px; }
+  .mobi-hero__actions { gap: 8px; }
+  .mobi-hero .mobi-button { padding: 14px 15px; font-size: 12px; }
+  .mobi-hero .mobi-button--primary { width: 180.641px; height: 44px; }
+  .mobi-hero .mobi-button--secondary { width: 123.039px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mobi-nav *, .mobi-hero * { transition: none; }
+}

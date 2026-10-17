@@ -1,0 +1,344 @@
+@import "tailwindcss";
+@source "../components";
+@source "../app";
+
+/* ============================
+   MobiCare global design system
+   ============================ */
+
+:root {
+  --mobi-green: #00a651;
+  --mobi-green-bright: #00bb5b;
+  --mobi-green-hover: #34d67e;
+  --mobi-ink: #080c09;
+  --mobi-surface: #101712;
+  --mobi-surface-raised: #15211a;
+  --mobi-paper: #ffffff;
+  --mobi-muted: #b4c0b7;
+  --mobi-line: rgba(255, 255, 255, 0.18);
+  --mobi-danger: #ff8f8f;
+  --mobi-warning: #b7e86a;
+  --mobi-page-pad: clamp(22px, 4vw, 76px);
+  --mobi-text: "MobiCareTextLetters", system-ui, sans-serif;
+
+}
+
+/* Greycliff demo has unreliable numeric/punctuation glyphs. Keep its local
+   letterforms, then let the browser use a complete system face for symbols. */
+@font-face {
+  font-family: "MobiCareTextLetters";
+  src: url("/fonts/mobicare/Greycliff-Regular.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0041-005A, U+0061-007A, U+00C0-00D6, U+00D8-00F6, U+00F8-00FF, U+0100-024F;
+}
+
+@font-face {
+  font-family: "MobiCareTextLetters";
+  src: url("/fonts/mobicare/Greycliff-Medium.otf") format("opentype");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  unicode-range: U+0041-005A, U+0061-007A, U+00C0-00D6, U+00D8-00F6, U+00F8-00FF, U+0100-024F;
+}
+
+@font-face {
+  font-family: "MobiCareTextLetters";
+  src: url("/fonts/mobicare/Greycliff-Bold.otf") format("opentype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+0041-005A, U+0061-007A, U+00C0-00D6, U+00D8-00F6, U+00F8-00FF, U+0100-024F;
+}
+
+@theme inline {
+  --color-background: var(--mobi-ink);
+  --color-foreground: var(--mobi-muted);
+  --color-primary: var(--mobi-green);
+  --color-primary-light: var(--mobi-green-hover);
+  --color-primary-dark: var(--mobi-green);
+  --color-accent: var(--mobi-green-bright);
+  --color-accent-light: var(--mobi-green-hover);
+  --color-surface: var(--mobi-surface);
+  --color-surface-alt: var(--mobi-surface-raised);
+  --color-surface-elevated: var(--mobi-surface-raised);
+  --color-text-secondary: var(--mobi-muted);
+  --color-text-muted: var(--mobi-muted);
+  --color-border: var(--mobi-line);
+  --color-border-light: var(--mobi-line);
+  --color-divider: var(--mobi-line);
+  --color-panel: var(--mobi-surface);
+  --color-panel-raised: var(--mobi-surface-raised);
+  --color-panel-border: var(--mobi-line);
+  --font-display: var(--font-gobold), sans-serif;
+  --font-sans: var(--mobi-text);
+  --font-mono: var(--mobi-text);
+  --font-mobicare-display: var(--font-gobold), Arial, sans-serif;
+  --font-mobicare-sans: var(--mobi-text);
+}
+
+/* ============================
+   Base Styles
+   (reset margin/padding/box-sizing sudah ditangani preflight Tailwind;
+   jangan tambah reset `*` tanpa @layer karena akan menimpa semua utility)
+   ============================ */
+
+@layer base {
+  html {
+    /* JANGAN set scroll-behavior: smooth — konflik fatal dengan Lenis
+       (Lenis menulis scrollTop per frame; CSS smooth menganimasikan tiap
+       penulisan; keduanya saling lawan = scroll macet). Lenis yang memegang
+       smoothing di seluruh situs. */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /*
+      Proportional rem scaling — layout stacked (mobile/tablet, < 1024px).
+      Basis desain mobile 390px; clamp mencegah teks mikroskopis di layar
+      sangat kecil dan raksasa di tablet. Cap 18px (bukan 21px): tablet
+      768-1023px = layout mobile di-zoom 1.125×, bukan 1.31× yang terasa
+      kebesaran.
+    */
+    font-size: clamp(14px, 4.103vw, 18px);
+  }
+
+  /*
+    Layout grid desktop (>= 1024px, breakpoint lg — sama dengan titik
+    layout berubah, sehingga tidak ada lompatan skala di tengah layout).
+    Basis desain desktop 1440px; seluruh halaman menskala proporsional
+    seperti zoom, dibatasi 16px di layar ultra-wide. Floor 13px (bukan
+    11.5px): di laptop 1024-1170px teks tidak lagi menciut sampai ±10px
+    (text-sm tabel harga sebelumnya terasa kekecilan).
+  */
+  @media (min-width: 1024px) {
+    html {
+      font-size: clamp(13px, 1.111vw, 16px);
+    }
+  }
+}
+
+body {
+  background: var(--mobi-ink);
+  color: var(--mobi-muted);
+  font-family: var(--mobi-text);
+  overflow-x: hidden;
+}
+
+/* One content rail for public pages and admin surfaces, aligned with the navbar. */
+.mobi-container {
+  width: calc(100% - (2 * var(--mobi-page-pad)));
+  margin-inline: auto;
+}
+
+/* Gambar situs bukan sumber interaksi: cegah drag desktop dan callout
+   simpan/salin saat long-press di browser berbasis WebKit. */
+img,
+picture {
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* ============================
+   Typography calibration (Impeccable rules)
+   ============================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  color: var(--mobi-paper);
+  letter-spacing: -0.02em; /* Display letter-spacing must be >= -0.04em */
+  text-wrap: balance;
+}
+
+p {
+  max-width: 72ch; /* Cap body line length at 65-75ch */
+  text-wrap: pretty;
+}
+
+/* ============================
+   Selection
+   ============================ */
+
+::selection {
+  background: rgba(0, 166, 81, 0.28);
+  color: var(--mobi-paper);
+}
+
+/* ============================
+   Scrollbar
+   ============================ */
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--mobi-line);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--mobi-green);
+}
+
+/* ============================
+   Utility Classes
+   ============================ */
+
+/* Tinggi hero = viewport - navbar (4.5rem). svh (small viewport height)
+   menghitung URL bar browser mobile sehingga konten bawah hero tidak
+   terpotong di iOS Safari; vh sebagai fallback browser lama. */
+.min-h-hero {
+  min-height: calc(100vh - 4.5rem);
+}
+@supports (height: 100svh) {
+  .min-h-hero {
+    min-height: calc(100svh - 4.5rem);
+  }
+}
+
+.mobicare-glass {
+  background: rgba(8, 12, 9, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.mobicare-glass-strong {
+  background: rgba(8, 12, 9, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* 
+   Hairline precision card - no soft drop shadows 
+   Max card border radius is 12px 
+*/
+.mobicare-card {
+  background: var(--mobi-surface);
+  border: 1px solid var(--mobi-line);
+  border-radius: 12px;
+  transition: border-color 0.2s ease-out, background-color 0.2s ease-out;
+}
+
+.mobicare-card:hover {
+  border-color: var(--mobi-green);
+  background: var(--mobi-surface-raised);
+}
+
+/* Timeline Row Title Hover Interaction */
+.exp-timeline-row {
+  cursor: default;
+}
+.exp-timeline-row:hover .timeline-role-title {
+  color: var(--mobi-green) !important;
+}
+
+/* Entrance ringan untuk konten yang berganti (tab kategori admin, panel).
+   Dimatikan otomatis oleh rule prefers-reduced-motion di bawah. */
+.fade-rise {
+  animation: fadeRise 0.28s ease-out both;
+}
+@keyframes fadeRise {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Konten harga tetap terlihat sejak HTML pertama tampil; hanya posisi yang bergerak. */
+.pricelist-enter {
+  animation: pricelist-enter 0.55s ease-out backwards;
+}
+@keyframes pricelist-enter {
+  from { transform: translateY(0.75rem); }
+  to { transform: translateY(0); }
+}
+
+/* ============================
+   Footer motion — readout refresh saat ganti toko (bukan entrance dekoratif).
+   Crossfade opacity murni: konten baru "menyala" halus, TANPA translateY-up
+   (gerak fade-up berjenjang = pola slop generic; sengaja dihindari). Rail
+   penunjuk (Footer.tsx) yang membawa continuity. Mati oleh reduced-motion.
+   ============================ */
+@keyframes footer-row-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.footer-spec > div {
+  animation: footer-row-in 0.26s ease-out both;
+  animation-delay: calc(var(--row, 0) * 45ms);
+}
+
+/* Sembunyikan tombol 'X' bawaan browser pada input type search */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
+/* Reduced Motion implementation */
+@media (prefers-reduced-motion: reduce) {
+  .pricelist-enter { animation: none; }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Status utilities stay inside the MobiCare palette, including admin states. */
+@layer utilities {
+  .text-amber-300, .text-amber-400, .text-amber-500,
+  .text-emerald-300, .text-emerald-400, .text-emerald-500,
+  .text-green-300, .text-green-400, .text-green-500 {
+    color: var(--mobi-green-hover) !important;
+  }
+  .text-red-300, .text-red-400, .text-rose-300, .text-rose-400 {
+    color: var(--mobi-danger) !important;
+  }
+  .bg-amber-500, .bg-emerald-500, .bg-emerald-600, .bg-green-500 {
+    background-color: color-mix(in srgb, var(--mobi-green) 85%, transparent) !important;
+  }
+  .bg-red-500, .bg-rose-500, .bg-rose-600 {
+    background-color: color-mix(in srgb, var(--mobi-danger) 85%, transparent) !important;
+  }
+  .border-amber-500, .border-emerald-500, .border-green-500 {
+    border-color: color-mix(in srgb, var(--mobi-green) 65%, transparent) !important;
+  }
+  .border-red-500, .border-rose-500 {
+    border-color: color-mix(in srgb, var(--mobi-danger) 65%, transparent) !important;
+  }
+  [class*="text-amber-"], [class*="text-emerald-"], [class*="text-green-"] {
+    color: var(--mobi-green-hover) !important;
+  }
+  [class*="text-red-"], [class*="text-rose-"] {
+    color: var(--mobi-danger) !important;
+  }
+  [class*="bg-amber-"], [class*="bg-emerald-"], [class*="bg-green-"] {
+    background-color: color-mix(in srgb, var(--mobi-green) 22%, transparent) !important;
+  }
+  [class*="bg-red-"], [class*="bg-rose-"] {
+    background-color: color-mix(in srgb, var(--mobi-danger) 22%, transparent) !important;
+  }
+  [class*="border-amber-"], [class*="border-emerald-"], [class*="border-green-"] {
+    border-color: color-mix(in srgb, var(--mobi-green) 40%, transparent) !important;
+  }
+  [class*="border-red-"], [class*="border-rose-"] {
+    border-color: color-mix(in srgb, var(--mobi-danger) 40%, transparent) !important;
+  }
+}
+

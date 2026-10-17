@@ -1,0 +1,201 @@
+import { copyFile, link, readFile, stat, unlink } from "node:fs/promises";
+import { randomUUID } from "node:crypto";
+import { join } from "node:path";
+import { cache } from "react";
+import type { Category, ServiceType, Variant, DevicePrice } from "./data";
+import { SKELETON_PRICELIST } from "./pricelist-skeleton";
+
+// ============================================================
+// Ikon fallback per jenis service (dikelola di kode, §4.3)
+// ============================================================
+
+const SERVICE_ICONS: Record<string, string> = {
+  "lcd-display": "smartphone",
+  battery: "battery",
+  "charger-port": "plug",
+  camera: "camera",
+  "face-id-sensor": "scan-face",
+  "housing-backglass": "layers",
+};
+
+function resolveServiceIcon(serviceSlug: string): string {
+  // Service bertingkat memakai slug "brand-series--service"; META dicari
+  // dengan bagian setelah "--" (mis. "samsung-galaxy-s-series--lcd-display"
+  // → "lcd-display").
+  const baseSlug = serviceSlug.includes("--")
+    ? serviceSlug.split("--").pop()!
+    : serviceSlug;
+  return SERVICE_ICONS[baseSlug] ?? "wrench";
+}
+
+// ============================================================
+// Pricelist — dibaca via fs setiap request (JANGAN import statis,
+// agar perubahan admin tampil tanpa rebuild — §7.2). SERVER-ONLY.
+// data/pricelist.json bertindak sebagai runtime database (diabaikan git).
+// Bila belum ada, otomatis di-seed dari data/pricelist.template.json.
+// ============================================================
+
+const PRICELIST_PATH = join(process.cwd(), "data", "pricelist.json");
+const TEMPLATE_PATH = join(process.cwd(), "data", "pricelist.template.json");
+
+/**
+ * Pastikan file data/pricelist.json tersedia.
+ * Jika belum ada (fresh install / clone baru), otomatis salin dari template.
+ */
+async function ensurePricelistFile(): Promise<string> {
+  try {
+    return await readFile(PRICELIST_PATH, "utf8");
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+  }
+
+  const tempPath = `${PRICELIST_PATH}.${process.pid}.${randomUUID()}.tmp`;
+  try {
+    await copyFile(TEMPLATE_PATH, tempPath);
+    try {
+      await link(tempPath, PRICELIST_PATH);
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== "EEXIST") throw error;
+    }
+  } finally {
+    await unlink(tempPath).catch(() => {});
+  }
+
+  return readFile(PRICELIST_PATH, "utf8");
+}
+
+const MONTH_NAMES_ID = [
+  "Januari",
+  "Februari",
+  "Maret",
+  "April",
+  "Mei",
+  "Juni",
+  "Juli",
+  "Agustus",
+  "September",
+  "Oktober",
+  "November",
+  "Desember",
+];
+
+function assert(condition: unknown, message: string): asserts condition {
+  if (!condition) throw new Error(`pricelist.json tidak valid: ${message}`);
+}
+
+/**
+ * Mendapatkan tanggal terakhir data pricelist diedit di backend/filesystem.
+ * Format: "Update [Bulan] [Tahun]" (contoh: "Update Agustus 2026").
+ */
+export const getPricelistLastUpdated = cache(async function getPricelistLastUpdated(): Promise<string> {
+  try {
+    let s;
+    try {
+      s = await stat(PRICELIST_PATH);
+    } catch {
+      await ensurePricelistFile();
+      s = await stat(PRICELIST_PATH);
+    }
+    const date = s.mtime;
+    const month = MONTH_NAMES_ID[date.getMonth()] ?? "Januari";
+    const year = date.getFullYear();
+    return `Update ${month} ${year}`;
+  } catch {
+    const now = new Date();
+    const month = MONTH_NAMES_ID[now.getMonth()] ?? "Januari";
+    return `Update ${month} ${now.getFullYear()}`;
+  }
+});
+
+/**
+ * Baca & validasi pricelist dari filesystem.
+ *
+ * JIKA file data/pricelist.json TIDAK DITEMUKAN / KOSONG:
+ * Sistem mengembalikan SKELETON_PRICELIST (kartu kategori & gambar tetap tampil,
+ * tetapi TANPA akordeon/tabel hardcoded).
+ *
+ * JIKA file data/pricelist.json DITEMUKAN (atau berhasil di-seed dari template):
+ * Akordeon dan tabel harga dirender murni dari isi service_types yang terdaftar di file.
+ */
+export const getPricelist = cache(async function getPricelist(): Promise<Category[]> {
+  try {
+    const raw = await ensurePricelistFile();
+    if (!raw.trim()) {
+      return SKELETON_PRICELIST;
+    }
+
+    const parsed = JSON.parse(raw);
+    assert(Array.isArray(parsed) && parsed.length > 0, "root harus array kategori non-kosong");
+
+    // Map categories murni dari JSON
+    const categories = parsed.map((cat: unknown): Category => {
+      assert(cat && typeof cat === "object", "kategori bukan objek");
+      const c = cat as Record<string, unknown>;
+      assert(typeof c.Name === "string" && typeof c.Slug === "string", "kategori tanpa Name/Slug");
+      assert(Array.isArray(c.service_types), `service_types kategori ${c.Slug} bukan array`);
+
+      const service_types = (c.service_types as unknown[]).map((st): ServiceType => {
+        const s = st as Record<string, unknown>;
+        assert(typeof s.Name === "string" && typeof s.Slug === "string", "service tanpa Name/Slug");
+        assert(Array.isArray(s.variants), `variants ${c.Slug}/${s.Slug} bukan array`);
+        assert(Array.isArray(s.device_prices), `device_prices ${c.Slug}/${s.Slug} bukan array`);
+
+        const brand = typeof s.Brand === "string" && s.Brand.trim() ? s.Brand.trim() : undefined;
+        const series = typeof s.Series === "string" && s.Series.trim() ? s.Series.trim() : undefined;
+        const nameEn = typeof s.Name_en === "string" && s.Name_en.trim() ? s.Name_en.trim() : undefined;
+        const icon = typeof s.icon === "string" && s.icon.trim() ? s.icon.trim() : resolveServiceIcon(s.Slug);
+        return {
+          Name: s.Name,
+          ...(nameEn ? { Name_en: nameEn } : {}),
+          Slug: s.Slug,
+          ...(brand ? { Brand: brand } : {}),
+          ...(series ? { Series: series } : {}),
+          variants: (s.variants as Variant[]).map((v) => ({
+            Key: v.Key,
+            Label: v.Label,
+            ...(v.Label_en ? { Label_en: v.Label_en } : {}),
+            Note: v.Note || "",
+            ...(v.Type ? { Type: v.Type } : {}),
+          })),
+          device_prices: s.device_prices as DevicePrice[],
+          title: (typeof s.title === "string" && s.title.trim()) ? s.title.trim() : s.Name,
+          icon,
+        };
+      });
+
+      const brand_icons: Record<string, string> = {};
+      if (c.brand_icons && typeof c.brand_icons === "object") {
+        for (const [b, ic] of Object.entries(c.brand_icons as Record<string, unknown>)) {
+          if (typeof b === "string" && b.trim() && typeof ic === "string" && ic.trim()) {
+            brand_icons[b.trim()] = ic.trim();
+          }
+        }
+      }
+
+      return {
+        Name: c.Name,
+        Slug: c.Slug,
+        description: typeof c.description === "string" ? c.description : "",
+        Image: typeof c.Image === "string" ? c.Image : null,
+        brand_icons: Object.keys(brand_icons).length > 0 ? brand_icons : undefined,
+        service_types,
+      };
+    });
+
+    return categories;
+  } catch (error) {
+    console.warn("Notice: data/pricelist.json not found or unreadable, using SKELETON_PRICELIST fallback.", error);
+    return SKELETON_PRICELIST;
+  }
+});
+
+export async function getPricelistView(categorySlug?: string) {
+  const categories = await getPricelist();
+  const lastUpdated = await getPricelistLastUpdated();
+
+  return {
+    categoryCards: categories.map(({ Name, Slug, Image }) => ({ Name, Slug, Image })),
+    activeCategory: categories.find((category) => category.Slug === categorySlug) ?? categories[0],
+    lastUpdated,
+  };
+}

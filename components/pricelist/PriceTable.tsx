@@ -1,0 +1,400 @@
+"use client";
+
+import { useEffect, useMemo, useRef, useState } from "react";
+import { MoveLeft, MoveRight, Search, X, MessageCircle } from "lucide-react";
+import type { ServiceType } from "@/lib/data";
+import { whatsappUrl } from "@/lib/constants";
+import { useI18n } from "@/lib/i18n/context";
+import {
+  getLocalizedServiceName,
+  getLocalizedVariantLabel,
+  getLocalizedVariantNote,
+} from "@/lib/i18n/service-translation";
+
+const priceFormatter = new Intl.NumberFormat("id-ID");
+
+export interface SmartTextSegment {
+  type: "text" | "badge";
+  value: string;
+}
+
+export function parseSmartText(text: string): SmartTextSegment[] {
+  if (!text) return [];
+  const cleanText = text.replace(/[\uFFFD\u00bf\u00ef]+/g, "–").trim();
+  const matches = Array.from(cleanText.matchAll(/\b(A\d{4}[A-Z]?)\b/gi));
+  if (matches.length === 0) {
+    return [{ type: "text", value: cleanText }];
+  }
+
+  const segments: SmartTextSegment[] = [];
+  let lastIdx = 0;
+
+  for (const m of matches) {
+    const start = m.index ?? 0;
+    const end = start + m[0].length;
+    if (start > lastIdx) {
+      const before = cleanText.slice(lastIdx, start);
+      const beforeCleaned = before.replace(/^\s*[-–—/,\s]+|[-–—/,\s]+$/g, "").trim();
+      if (beforeCleaned) {
+        segments.push({ type: "text", value: beforeCleaned });
+      }
+    }
+    segments.push({ type: "badge", value: m[0].toUpperCase() });
+    lastIdx = end;
+  }
+
+  if (lastIdx < cleanText.length) {
+    const after = cleanText.slice(lastIdx);
+    const afterCleaned = after.replace(/^\s*[-–—/,\s]+|[-–—/,\s]+$/g, "").trim();
+    if (afterCleaned) {
+      segments.push({ type: "text", value: afterCleaned });
+    }
+  }
+
+  return segments;
+}
+
+function SmartCell({
+  text,
+  align = "center",
+}: {
+  text: string;
+  align?: "left" | "center";
+}) {
+  const segments = parseSmartText(text);
+
+  return (
+    <span
+      className={`inline-flex flex-wrap items-center gap-x-1.5 gap-y-1 ${
+        align === "center" ? "justify-center text-center" : "justify-start text-left"
+      }`}
+    >
+      {segments.map((s, idx) =>
+        s.type === "badge" ? (
+          <span
+            key={idx}
+            className="price-model-code"
+          >
+            {s.value}
+          </span>
+        ) : (
+          <span key={idx} className="font-medium text-foreground">
+            {s.value}
+          </span>
+        )
+      )}
+    </span>
+  );
+}
+
+interface PriceTableProps {
+  service: ServiceType;
+  categoryName: string;
+  sub?: boolean;
+}
+
+export default function PriceTable({ service, categoryName, sub = false }: PriceTableProps) {
+  const { dict, locale } = useI18n();
+  const isEn = locale === "en";
+  const [query, setQuery] = useState("");
+
+  // Afordansi geser horizontal: true selama masih ada kolom terpotong di
+  // kanan → tampilkan hint "Geser tabel" + gradien fade tepi kanan. Otomatis
+  // hilang begitu digulir sampai ujung (atau semua kolom muat).
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canRight, setCanRight] = useState(false);
+  const [canLeft, setCanLeft] = useState(false);
+  const rafId = useRef<number | null>(null);
+
+  const lastScrollLeft = useRef(0);
+
+  const updateHint = () => {
+    if (rafId.current !== null) return;
+    rafId.current = requestAnimationFrame(() => {
+      rafId.current = null;
+      const el = scrollRef.current;
+      if (!el) return;
+      setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 8);
+      setCanLeft(el.scrollLeft > 8);
+    });
+  };
+
+  const handleScroll = () => {
+    const left = scrollRef.current?.scrollLeft ?? 0;
+    if (left === lastScrollLeft.current) return;
+    lastScrollLeft.current = left;
+    updateHint();
+  };
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    // ResizeObserver menembak sekali saat observe → status awal tanpa
+    // setState langsung di badan efek.
+    const ro = new ResizeObserver(updateHint);
+    ro.observe(el);
+    const table = el.querySelector("table");
+    if (table) ro.observe(table);
+    return () => {
+      ro.disconnect();
+      if (rafId.current !== null) cancelAnimationFrame(rafId.current);
+    };
+  }, []);
+
+  const variantSearchText = useMemo(() => service.variants.flatMap((v) => [
+    v.Label,
+    v.Note ?? "",
+    getLocalizedVariantLabel(v, locale),
+    getLocalizedVariantNote(v.Note, locale),
+  ]).join("\n").toLowerCase(), [service.variants, locale]);
+
+  const rows = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return service.device_prices;
+    if (variantSearchText.includes(q)) return service.device_prices;
+    return service.device_prices.filter((d) => {
+      if (d.DeviceModel.toLowerCase().includes(q)) return true;
+      if (
+        Object.values(d.prices).some(
+          (val) => typeof val === "string" && val.toLowerCase().includes(q)
+        )
+      ) {
+        return true;
+      }
+      return false;
+    });
+  }, [query, service.device_prices, variantSearchText]);
+
+  const variants = service.variants;
+
+  const seriesColumns = useMemo(() => new Set(
+    variants.filter((v) => service.device_prices.some((d) => {
+      const val = d.prices[v.Key];
+      return typeof val === "string" && /\bA\d{4}[A-Z]?\b/i.test(val);
+    })).map((v) => v.Key)
+  ), [variants, service.device_prices]);
+
+  const tableMinWidth = useMemo(() => {
+    let remSum = 10;
+    for (const v of variants) {
+      if (seriesColumns.has(v.Key)) {
+        remSum += 12;
+      } else if (v.Type === "text") {
+        remSum += 7.5;
+      } else {
+        remSum += 7.25;
+      }
+    }
+    return `max(100%, ${remSum}rem)`;
+  }, [variants, seriesColumns]);
+
+  return (
+    <div className="price-table pt-4">
+      {/* Pencarian + penghitung model */}
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+        <div className="relative w-full max-w-[22rem]">
+          <Search
+            className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted"
+            aria-hidden="true"
+          />
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder={isEn ? "Search device model..." : "Cari model perangkat..."}
+            aria-label={dict.pricelist.searchPlaceholder}
+            className={`w-full rounded-[12px] border py-2.5 pl-9 pr-9 text-sm text-foreground placeholder:text-text-muted outline-none transition-[border-color,box-shadow] duration-200 focus:border-primary focus:ring-2 focus:ring-primary/20 [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden ${
+              sub ? "border-[#282828] bg-[#121212]" : "border-panel-border bg-background"
+            }`}
+          />
+          {query && (
+            <button
+              type="button"
+              onClick={() => setQuery("")}
+              aria-label={isEn ? "Clear search" : "Hapus pencarian"}
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-text-muted hover:text-foreground transition-colors p-1"
+            >
+              <X className="h-3.5 w-3.5" aria-hidden="true" />
+            </button>
+          )}
+        </div>
+        <p className="font-mono text-[0.6875rem] uppercase tracking-widest text-text-muted">
+          {rows.length} {isEn ? "models" : "model"}
+        </p>
+      </div>
+
+      {/* Hint geser (pola fixmibali "Geser tabel untuk detail →"). Baris tetap
+          ter-mount selama tabel bisa digeser (dua arah) — unmount saat mentok
+          membuat tabel lompat/berkedip. Mentok kanan → hint berbalik arah (←). */}
+      {(canRight || canLeft) && (
+        <p className="mb-2 flex items-center justify-end text-right ml-auto w-full gap-1.5 font-mono text-[0.625rem] sm:text-[0.6875rem] uppercase tracking-widest text-primary">
+          {canRight ? (
+            <>
+              {isEn ? "Swipe table for details" : "Geser tabel untuk detail"}
+              <MoveRight className="h-3.5 w-3.5" aria-hidden="true" />
+            </>
+          ) : (
+            <>
+              <MoveLeft className="h-3.5 w-3.5" aria-hidden="true" />
+              {isEn ? "Swipe table for details" : "Geser tabel untuk detail"}
+            </>
+          )}
+        </p>
+      )}
+
+      {/* One native scroller keeps headers and prices aligned without JS synchronization. */}
+      <div className="relative -mx-2 lg:mx-0">
+        <div
+          ref={scrollRef}
+          onScroll={handleScroll}
+          data-lenis-prevent-horizontal
+          tabIndex={0}
+          aria-label={`${getLocalizedServiceName(service, locale)} - ${categoryName}`}
+          style={{ overscrollBehaviorY: "auto" }}
+          className="max-h-[35rem] overflow-auto [overscroll-behavior-x:contain] [touch-action:pan-x_pan-y] [scrollbar-width:thin] focus-visible:outline-2 focus-visible:outline-primary"
+        >
+          <table
+            className="w-full table-fixed border-separate border-spacing-0 text-left"
+            style={{ minWidth: tableMinWidth }}
+          >
+            <colgroup>
+              <col className="w-[10rem] sm:w-[11rem] lg:w-[14.5rem]" />
+              {variants.map((v) => (
+                <col
+                  key={v.Key}
+                  className={
+                    seriesColumns.has(v.Key)
+                      ? "w-[12rem] sm:w-[13.5rem] lg:w-[16rem]"
+                      : v.Type === "text"
+                      ? "w-[7.5rem] sm:w-[8.5rem] lg:w-[10.5rem]"
+                      : "w-[7.25rem] sm:w-[8rem] lg:w-[10rem]"
+                  }
+                />
+              ))}
+            </colgroup>
+            <thead>
+              <tr>
+                <th
+                  scope="col"
+                  className={`sticky top-0 left-0 z-30 w-[10rem] sm:w-[11rem] lg:w-[14.5rem] min-w-[10rem] sm:min-w-[11rem] lg:min-w-[14.5rem] max-w-[10rem] sm:max-w-[11rem] lg:max-w-[14.5rem] border-b border-r px-2.5 sm:px-3 lg:px-4 pb-2.5 sm:pb-3 pt-2 text-center align-middle font-sans ${
+                    sub ? "border-[#262626] bg-[#161616]" : "border-panel-border bg-panel"
+                  }`}
+                >
+                  <span className="block font-sans text-[0.6875rem] uppercase tracking-[0.14em] text-foreground text-center">
+                    {getLocalizedServiceName(service, locale)}
+                  </span>
+                  <span className="mt-0.5 block font-sans text-[0.625rem] font-normal tracking-wide text-text-muted text-center">
+                    {categoryName} {isEn ? "Models" : "Model"}
+                  </span>
+                </th>
+                {variants.map((v) => (
+                  <th
+                    key={v.Key}
+                    scope="col"
+                    className={`sticky top-0 z-20 border-b px-2.5 sm:px-3 lg:px-4 pb-2.5 sm:pb-3 pt-2 text-center align-middle font-sans ${
+                      sub ? "border-[#262626] bg-[#161616]" : "border-panel-border bg-panel"
+                    }`}
+                  >
+                    <span className="block font-sans text-[0.6875rem] uppercase tracking-[0.14em] text-foreground text-center leading-snug">
+                      {getLocalizedVariantLabel(v, locale)}
+                    </span>
+                    {v.Note && (
+                      <span className="mt-0.5 block font-sans text-[0.625rem] font-normal normal-case tracking-wide text-text-muted text-center leading-tight">
+                        {getLocalizedVariantNote(v.Note, locale)}
+                      </span>
+                    )}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row) => (
+                  <tr
+                    key={row.DeviceModel}
+                    className={`group transition-colors ${
+                      sub ? "hover:bg-[#1E1E1E]" : "hover:bg-panel-raised"
+                    }`}
+                  >
+                    <td
+                      className={`sticky left-0 z-10 w-[10rem] sm:w-[11rem] lg:w-[14.5rem] min-w-[10rem] sm:min-w-[11rem] lg:min-w-[14.5rem] max-w-[10rem] sm:max-w-[11rem] lg:max-w-[14.5rem] border-b border-r border-l-2 border-l-transparent px-2.5 sm:px-3 lg:px-4 py-[10px] sm:py-[11px] lg:py-3.5 text-[12px] sm:text-[14px] font-medium text-foreground leading-snug break-words transition-[colors,border-color] duration-200 group-hover:border-l-primary ${
+                        sub
+                          ? "border-[#262626] bg-[#161616] group-hover:bg-[#1E1E1E]"
+                          : "border-panel-border/60 border-r-panel-border bg-panel group-hover:bg-panel-raised"
+                      }`}
+                    >
+                      <SmartCell text={row.DeviceModel} align="left" />
+                    </td>
+                    {variants.map((v) => {
+                      const val = row.prices[v.Key];
+                      const isSeries = seriesColumns.has(v.Key);
+                      const isText = v.Type === "text" || typeof val === "string";
+
+                      return (
+                        <td
+                          key={v.Key}
+                          className={`border-b px-2.5 sm:px-3 lg:px-4 py-[10px] sm:py-[11px] lg:py-3.5 text-center font-mono text-[13px] sm:text-[14px] tabular-nums ${
+                            sub ? "border-[#262626]" : "border-panel-border/60"
+                          } ${isSeries ? "whitespace-normal" : "whitespace-nowrap"} ${
+                            isText ? "text-foreground font-normal" : ""
+                          }`}
+                        >
+                          {val == null || val === "" || val === 0 ? (
+                            <span className="text-text-muted select-none">–</span>
+                          ) : typeof val === "string" || v.Type === "text" ? (
+                            <SmartCell text={String(val)} align="center" />
+                          ) : (
+                            <>
+                              <span className="price-currency">Rp</span>
+                              <span className="price-amount">
+                                {priceFormatter.format(val as number)}
+                              </span>
+                            </>
+                          )}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Gradien fade tepi kanan */}
+        <div
+          aria-hidden="true"
+          className={`price-scroll-fade pointer-events-none absolute inset-y-0 right-0 z-40 transition-opacity duration-300 ${canRight ? "opacity-100" : "opacity-0"}`}
+        />
+      </div>
+      {rows.length === 0 && (
+        <div role="status" className="px-4 py-8 text-center [overflow-wrap:anywhere]">
+          {query.trim() ? (
+            <p className="text-sm text-text-muted">
+              {isEn ? `No models matching "${query}".` : `Tidak ada model yang cocok dengan "${query}".`}
+            </p>
+          ) : (
+            <div className="flex flex-col items-center justify-center gap-3 py-2">
+              <p className="text-sm text-text-muted">
+                {isEn
+                  ? "Device model pricing for this service is currently being updated."
+                  : "Daftar harga model perangkat untuk layanan ini sedang diperbarui."}
+              </p>
+              <a
+                href={whatsappUrl(
+                  isEn
+                    ? `Hello FIXMI, I would like to ask for an estimated repair quote for ${getLocalizedServiceName(service, "en")} (${categoryName}).`
+                    : `Halo FIXMI, saya ingin konsultasi estimasi biaya ${getLocalizedServiceName(service, "id")} (${categoryName}).`
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex max-w-full items-center gap-2 rounded-xl bg-primary/10 border border-primary/20 px-4 py-2 text-xs font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white active:scale-95"
+              >
+                <MessageCircle className="h-4 w-4 shrink-0" />
+                <span>{isEn ? "Ask Price Quote via WhatsApp" : "Tanya Estimasi Biaya via WhatsApp"}</span>
+              </a>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}

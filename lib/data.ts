@@ -1,0 +1,150 @@
+import galleryData from "@/data/gallery.json";
+
+// ============================================================
+// Type Definitions — struktur pricelist multi-varian
+// (PRD-pricelist-fixmi.md §4.2). Modul ini AMAN untuk client:
+// tidak boleh mengimpor `fs`/`path`. Baca file ada di lib/pricelist-server.ts.
+// ============================================================
+
+export interface Variant {
+  Key: string; // kunci stabil untuk lookup harga, mis. "original-apple"
+  Label: string; // teks kolom, mis. "ORIGINAL APPLE"
+  Label_en?: string; // teks kolom bahasa Inggris, mis. "PRICE" atau "ORIGINAL APPLE"
+  Note: string; // keterangan garansi di bawah label, boleh kosong
+  Type?: "price" | "text"; // tipe kolom: "price" (default nominal rupiah) atau "text" (seri perangkat / keterangan teks)
+}
+
+export interface DevicePrice {
+  DeviceModel: string;
+  prices: Record<string, number | string | null>; // key = Variant.Key; number untuk harga, string untuk teks/kode seri, null / absen = tidak tersedia
+}
+
+export interface ServiceType {
+  Name: string; // "LCD / Display" atau "Ganti LCD" (teks asli apa adanya)
+  Name_en?: string; // teks terjemahan bahasa Inggris kustom, mis. "Screen Replacement"
+  Slug: string; // "lcd-display" — atau "samsung-galaxy-s-series--lcd-display" bila bertingkat
+  // Hirarki opsional (pola fixmibali.com untuk Android): service ber-Brand
+  // dirender bertingkat Merk → Series → jenis service, bukan daftar datar.
+  Brand?: string; // "Samsung"
+  Series?: string; // "Galaxy S Series"
+  variants: Variant[];
+  device_prices: DevicePrice[];
+  title?: string; // judul akordeon (opsional, fallback ke Name)
+  icon: string; // nama ikon lucide-react, mis. "smartphone"
+}
+
+export interface Category {
+  Name: string;
+  Slug: string;
+  description: string;
+  Image: string | null; // foto kartu kategori; null → fallback ikon
+  brand_icons?: Record<string, string>; // custom icon per merk, mis. { "Samsung": "brand:samsung" }
+  service_types: ServiceType[];
+}
+
+export interface GalleryItem {
+  id: number;
+  Title: string;
+  Image: string | null;
+  altText?: string;
+}
+
+// ============================================================
+// Gallery Helpers
+// ============================================================
+
+export function getGalleryData(): GalleryItem[] {
+  return galleryData as GalleryItem[];
+}
+
+// ============================================================
+// Utility Helpers
+// ============================================================
+
+/** Batas kolom varian per jenis service (PRD §10). Client-safe — dipakai editor & validasi server. */
+export const MAX_VARIANTS = 6;
+
+/** Slug stabil dari label: "OEM Screen" → "oem-screen". Dipakai editor admin & parser import. */
+export function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+/**
+ * Logo merk Android (public/brands, 11 merk default fixmibali).
+ * Key = slugify(nama merk); nilai = nama file tanpa ekstensi.
+ * null → UI fallback ke chip inisial huruf.
+ */
+export const BRAND_IMAGES: Record<string, string> = {
+  xiaomi: "xiaomi",
+  redmi: "xiaomi",
+  poco: "xiaomi",
+  samsung: "samsung",
+  realme: "realme",
+  infinix: "infinix",
+  oppo: "oppo",
+  vivo: "vivo",
+  iqoo: "vivo",
+  asus: "zenfone",
+  zenfone: "zenfone",
+  rog: "zenfone",
+  "google-pixel": "google-pixel",
+  google: "google-pixel",
+  pixel: "google-pixel",
+  itel: "itel",
+  tecno: "tecno",
+  huawei: "huawei",
+  honor: "huawei",
+};
+
+export function brandImage(brand: string): string | null {
+  if (!brand) return null;
+  const normalized = slugify(brand.replace(/^brand:/, ""));
+  const file = BRAND_IMAGES[normalized];
+  return file ? `/brands/${file}.svg` : null;
+}
+
+/** Format angka ke Rupiah (Intl id-ID, tanpa desimal). */
+export function formatRupiah(value: number | null | undefined): string {
+  if (value === null || value === undefined) return "Rp. 0";
+  return `Rp. ${formatThousands(value)}`;
+}
+
+/**
+ * Titik ribuan gaya Indonesia tanpa prefix "Rp" — untuk input harga di editor.
+ * 3000 → "3.000", 30000 → "30.000", 3000000 → "3.000.000".
+ * Bila value berupa teks (mis. "A1489" atau "2 Minggu"), dikembalikan apa adanya.
+ * null/kosong → "".
+ */
+export function formatThousands(value: number | string | null | undefined): string {
+  if (value === null || value === undefined || value === "") return "";
+  if (typeof value === "string") {
+    const trimmed = value.trim();
+    if (/^\d+$/.test(trimmed)) {
+      return new Intl.NumberFormat("id-ID").format(Number(trimmed));
+    }
+    return trimmed;
+  }
+  if (typeof value === "number" && !Number.isNaN(value)) {
+    return new Intl.NumberFormat("id-ID").format(value);
+  }
+  return "";
+}
+
+/** Ambil digit dari teks harga ("Rp 3.000" / "3.000") → 3000, atau pertahankan teks bila berupa string identitas ("A1489" / "2 Minggu"). */
+export function parseThousands(text: string): number | string | null {
+  if (!text) return null;
+  const trimmed = text.trim();
+  if (!trimmed || trimmed === "-" || trimmed === "–" || trimmed === "---") return null;
+
+  // Jika mengandung huruf atau garis miring kode seri ("A1489", "A1538/A1550", "2 Minggu")
+  if (/[a-zA-Z]/.test(trimmed) || /[/]/.test(trimmed)) {
+    return trimmed;
+  }
+
+  const digits = trimmed.replace(/[^0-9]/g, "");
+  return digits === "" ? null : Number(digits);
+}

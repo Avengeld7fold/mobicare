@@ -1,0 +1,366 @@
+/* ========================================
+   StaggeredMenu — CSS Styles
+   Modified for FIXMI Diagnostic Brand
+   ======================================== */
+
+.staggered-menu-wrapper {
+  position: relative;
+  z-index: 40;
+  pointer-events: none;
+}
+
+.staggered-menu-wrapper.fixed-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 40;
+  overflow: hidden;
+}
+
+/* Backdrop — tappable dark overlay on the left gap */
+.sm-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 54;
+  background: rgba(0, 0, 0, 0.5);
+  pointer-events: auto;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  will-change: opacity;
+}
+
+[data-open] .sm-backdrop {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ─── Toggle Button (Aligned naturally inside the flex row) ─── */
+.sm-toggle {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--mobi-green);
+  z-index: 60;
+  padding: 0;
+  pointer-events: auto;
+  transition: color 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.sm-toggle:hover {
+  color: var(--mobi-green) !important;
+  background: transparent;
+}
+
+.sm-toggle:active {
+  transform: scale(0.92);
+}
+
+.sm-toggle:focus-visible {
+  outline: 2px solid var(--mobi-green);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* ─── Hamburger 3-line Icon ─── */
+.sm-hamburger-box {
+  width: 24px;
+  height: 16px;
+  display: inline-block;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.sm-toggle:hover .sm-hamburger-box {
+  transform: scale(1.08);
+}
+
+.sm-hamburger-inner,
+.sm-hamburger-inner::before,
+.sm-hamburger-inner::after {
+  width: 24px;
+  height: 2px;
+  background-color: currentColor;
+  border-radius: 2px;
+  position: absolute;
+  transition-property: transform, opacity, background-color, top, bottom;
+  transition-duration: 0.35s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sm-hamburger-inner {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.sm-hamburger-inner::before {
+  content: "";
+  top: -7px;
+  left: 0;
+}
+
+.sm-hamburger-inner::after {
+  content: "";
+  bottom: -7px;
+  left: 0;
+}
+
+/* Hamburger active/open states — transform into 'X' */
+.sm-hamburger-inner.open {
+  transform: translateY(-50%) rotate(45deg);
+  transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.sm-hamburger-inner.open::before {
+  top: 0;
+  opacity: 0;
+  transform: scale(0) rotate(45deg);
+}
+
+.sm-hamburger-inner.open::after {
+  bottom: 0;
+  transform: rotate(-90deg);
+  transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Dynamic Hover Interaction on the 'X' */
+.sm-toggle:hover .sm-hamburger-inner.open {
+  transform: translateY(-50%) rotate(135deg) scale(1.12);
+  color: var(--mobi-green);
+}
+
+/* Active touch feedback */
+.sm-toggle:active .sm-hamburger-inner.open {
+  transform: translateY(-50%) rotate(135deg) scale(0.92);
+}
+
+/* ─── Pre-layers (staggered color underlays) ─── */
+.sm-prelayers {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 85%;
+  max-width: 440px;
+  pointer-events: none;
+  z-index: 55;
+  opacity: 0;
+}
+
+[data-position="left"] .sm-prelayers {
+  right: auto;
+  left: 0;
+}
+
+.sm-prelayer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  backface-visibility: hidden;
+  opacity: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: -10px 0 25px rgba(0, 0, 0, 0.45);
+}
+
+[data-position="left"] .sm-prelayer {
+  border-left: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 10px 0 25px rgba(0, 0, 0, 0.45);
+}
+
+/* ─── Panel ─── */
+.staggered-menu-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 85%;
+  max-width: 440px;
+  height: 100%;
+  height: 100dvh;
+  background: var(--mobi-ink);
+  display: flex;
+  flex-direction: column;
+  padding: 5rem 1.5rem 1.5rem 1.5rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: 56;
+  pointer-events: auto;
+  opacity: 0;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  backface-visibility: hidden;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: -12px 0 35px rgba(0, 0, 0, 0.6);
+}
+
+[data-position="left"] .staggered-menu-panel {
+  right: auto;
+  left: 0;
+  border-left: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 12px 0 35px rgba(0, 0, 0, 0.6);
+}
+
+.sm-panel-inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ─── Menu Items ─── */
+.sm-panel-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sm-panel-itemWrap {
+  position: relative;
+  overflow: hidden;
+  line-height: 1.15;
+}
+
+.sm-panel-item {
+  position: relative;
+  color: var(--mobi-paper);
+  font-family: var(--font-gobold), sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.375rem, 7.5vw, 3.25rem);
+  cursor: pointer;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  transition: color 0.25s;
+  display: inline-block;
+  text-decoration: none;
+  padding-right: 1.4em;
+  white-space: nowrap;
+}
+
+.sm-panel-itemLabel {
+  display: inline-block;
+  will-change: transform;
+  transform-origin: 50% 100%;
+}
+
+.sm-panel-item:hover,
+.sm-panel-item:focus-visible {
+  color: var(--sm-accent, var(--mobi-green));
+}
+
+/* Numbering */
+.sm-panel-list[data-numbering] {
+  counter-reset: smItem;
+}
+
+.sm-panel-list[data-numbering] .sm-panel-item::after {
+  counter-increment: smItem;
+  content: counter(smItem, decimal-leading-zero);
+  position: absolute;
+  top: 0.1em;
+  right: 2.8em;
+  font-family: var(--font-greycliff), monospace;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--sm-accent, var(--mobi-green));
+  letter-spacing: 0;
+  pointer-events: none;
+  user-select: none;
+  opacity: var(--sm-num-opacity, 0);
+}
+
+/* ─── Socials ─── */
+.sm-socials {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sm-socials-title {
+  margin: 0;
+  font-family: var(--font-greycliff), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mobi-muted);
+}
+
+.sm-socials-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.sm-socials-link {
+  font-family: var(--font-greycliff), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--mobi-muted);
+  text-decoration: none;
+  position: relative;
+  padding: 8px 12px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 6px;
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.sm-socials-list .sm-socials-link {
+  opacity: 1;
+}
+
+.sm-socials-list:hover .sm-socials-link {
+  opacity: 0.35;
+}
+
+.sm-socials-list:hover .sm-socials-link:hover {
+  opacity: 1;
+  color: var(--sm-accent, var(--mobi-green));
+}
+
+.sm-socials-link:focus-visible {
+  outline: 2px solid var(--sm-accent, var(--mobi-green));
+  outline-offset: 3px;
+}
+
+.sm-socials-list:focus-within .sm-socials-link {
+  opacity: 0.35;
+}
+
+.sm-socials-list:focus-within .sm-socials-link:focus-visible {
+  opacity: 1;
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .sm-panel-item,
+  .sm-socials-link,
+  .sm-toggle {
+    transition: none;
+  }
+}
