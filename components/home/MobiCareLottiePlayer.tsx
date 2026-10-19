@@ -84,7 +84,7 @@ export default function MobiCareLottiePlayer({ className }: MobiCareLottiePlayer
           if (isMounted) {
             setIsLoaded(true);
             if (prefersReducedMotion) {
-              anim.goToAndStop(215, true); // Jump directly to settled logo
+              anim.goToAndStop(350, true); // Settled logo after the camera pull-back.
             } else {
               syncPlayback();
             }
