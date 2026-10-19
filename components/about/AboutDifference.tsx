@@ -28,65 +28,65 @@ export default function AboutDifference() {
     ? [
         {
           num: "01",
-          title: "Direct & Open Diagnostics",
-          desc: "All inspections are conducted openly in front of the customer. We outline the exact hardware condition, provide fixed cost estimates upfront, and ensure zero surprise surcharges.",
+          title: "Device Intake & Consultation",
+          desc: "Recording device symptoms, initial operating condition, and specific customer requirements thoroughly as the foundation of the repair.",
         },
         {
           num: "02",
-          title: "Chip-Level Microsoldering Lab",
-          desc: "Equipped with industrial-grade digital microscopes and ESD-safe cleanroom stations, our lab recovers complex logic boards, chip-level IC faults, and water-damaged devices that standard shops turn down.",
+          title: "Inspection & Diagnosis",
+          desc: "Conducting comprehensive hardware and software testing to accurately identify root causes and evaluate viable repair paths.",
         },
         {
           num: "03",
-          title: "Certified Component Repository",
-          desc: "Displays, battery cells, camera modules, and flex sensors are vetted against strict manufacturer specifications to preserve TrueTone, touch fidelity, and factory-level reliability.",
+          title: "Clear Options & Estimates",
+          desc: "Presenting diagnosis findings, repair options, itemized transparent costs, and expected turnaround times before any work is authorized.",
         },
         {
           num: "04",
-          title: "Customer & Data-First Approach",
-          desc: "Less downtime, zero data risk, better reliability. We safeguard internal storage and user privacy throughout the repair cycle without arbitrary factory resets.",
+          title: "Targeted Repair Execution",
+          desc: "Performing meticulous repairs strictly according to agreed customer scope and established technical craftsmanship standards.",
         },
         {
           num: "05",
-          title: "Proven Decade of Experience",
-          desc: "Master technicians with over a decade of dedicated Apple and Android expertise in Bali since 2014, bringing deep technical insight, speed, and trust to every repair bench.",
+          title: "Comprehensive Quality Check",
+          desc: "Testing all related device functions post-repair to verify full operational stability, responsiveness, and performance.",
         },
         {
           num: "06",
-          title: "Streamlined Warranty Process",
-          desc: "Clear coverage terms, rapid post-service support, and hassle-free warranty fulfillment. We make post-service protection effortless without compromising quality.",
+          title: "Handover & Service Warranty",
+          desc: "Explaining repair results clearly, providing documented warranty coverage, and sharing vital care tips as the device is returned.",
         },
       ]
     : [
         {
           num: "01",
-          title: "Diagnosa Terbuka & Transparan",
-          desc: "Pemeriksaan perangkat dikerjakan langsung di hadapan Anda. Kami menjelaskan akar permasalahan hardware, memberikan estimasi biaya pasti di awal, dan tanpa biaya tersembunyi.",
+          title: "Penerimaan Perangkat",
+          desc: "Mencatat keluhan, kondisi awal, dan kebutuhan spesifik pelanggan dengan teliti sebagai dasar penanganan perbaikan.",
         },
         {
           num: "02",
-          title: "Lab Mikrosolder Chip-Level",
-          desc: "Didukung stasiun mikroskop presisi dan instrumen elektrostatik (ESD), kami menangani logic board kompleks, perbaikan IC, dan pemulihan sirkuit yang tidak dapat ditangani bengkel umum.",
+          title: "Pemeriksaan & Diagnosis",
+          desc: "Mengecek perangkat secara menyeluruh untuk mengidentifikasi kemungkinan penyebab masalah dan opsi perbaikan terbaik.",
         },
         {
           num: "03",
-          title: "Suku Cadang Bersertifikasi",
-          desc: "Komponen layar, baterai, sensor, dan flexibel dipilih secara ketat dengan standar spesifikasi pabrikan tertinggi guna menjamin stabilitas, TrueTone, dan daya tahan jangka panjang.",
+          title: "Penjelasan & Estimasi",
+          desc: "Menyampaikan temuan diagnosis, opsi tindakan, rincian estimasi biaya transparan, dan perkiraan waktu pengerjaan sebelum perbaikan disetujui.",
         },
         {
           num: "04",
-          title: "Customer & Data-First Approach",
-          desc: "Keamanan data pribadi Anda adalah prioritas mutlak. Seluruh proses perbaikan memprioritaskan keamanan informasi internal perangkat tanpa perlu reset data kecuali atas persetujuan Anda.",
+          title: "Pengerjaan Terarah",
+          desc: "Melakukan perbaikan sesuai persetujuan pelanggan dan ruang lingkup pekerjaan dengan ketelitian teknis standar profesional.",
         },
         {
           num: "05",
-          title: "Pengalaman Lebih Dari Satu Dekade",
-          desc: "Tim teknisi spesialis kami telah berdedikasi melayani perbaikan ekosistem Apple dan Android di Bali sejak 2014, menggabungkan jam terbang ribuan perangkat dengan ketelitian tinggi.",
+          title: "Pemeriksaan Kualitas",
+          desc: "Memeriksa fungsi menyeluruh perangkat terkait setelah pengerjaan selesai sesuai jenis perbaikan guna memastikan performa optimal.",
         },
         {
           num: "06",
-          title: "Garansi Resmi Tertulis",
-          desc: "Proses klaim mudah, transparan, dan tanpa birokrasi berbelit. Setiap unit yang selesai diperbaiki dilindungi jaminan garansi resmi tertulis untuk kenyamanan jangka panjang Anda.",
+          title: "Serah Terima & Garansi",
+          desc: "Menjelaskan hasil layanan, memberikan jaminan garansi resmi tertulis, dan menyampaikan informasi penting saat perangkat dikembalikan.",
         },
       ];
 
@@ -141,13 +141,13 @@ export default function AboutDifference() {
     <section ref={sectionRef} className="about-difference">
       <header ref={headerRef}>
         <div>
-          <p className="kicker">built different</p>
-          <h2>Our Difference</h2>
+          <p className="kicker">{isEn ? "03 / service experience" : "03 / standar pelayanan"}</p>
+          <h2>{isEn ? "Service Process" : "Proses Pelayanan"}</h2>
         </div>
         <p>
           {isEn
-            ? "Our standards of technical excellence, transparent diagnostics, and lasting warranties that set MobiCare apart."
-            : "Standar keunggulan layanan, transparansi pengerjaan, dan dedikasi teknis yang membedakan kualitas perbaikan MobiCare."}
+            ? "We make every stage of the repair experience clear and transparent, from initial device intake to final verified handover."
+            : "Kami berupaya membuat proses servis mudah dipahami, dari penerimaan perangkat hingga serah terima setelah pengerjaan."}
         </p>
       </header>
 

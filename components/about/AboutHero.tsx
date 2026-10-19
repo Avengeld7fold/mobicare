@@ -7,7 +7,7 @@ interface AboutHeroProps {
   imageSrc?: string;
 }
 
-export default function AboutHero({ imageSrc = "/images/mobicare-team.webp" }: AboutHeroProps) {
+export default function AboutHero({ imageSrc = "/images/mobi-team.webp" }: AboutHeroProps) {
   const { locale } = useI18n();
   const isEn = locale === "en";
 
@@ -40,7 +40,7 @@ export default function AboutHero({ imageSrc = "/images/mobicare-team.webp" }: A
         </h1>
 
         <p className="about-hero-sub">
-          {isEn ? "Your home for precision." : "Dedikasi untuk presisi."}
+          {isEn ? "Your Device. Our Expertise. Your Trust." : "Your Device. Our Expertise. Your Trust."}
         </p>
       </div>
     </section>

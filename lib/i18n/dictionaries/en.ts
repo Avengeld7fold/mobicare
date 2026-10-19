@@ -226,64 +226,64 @@ export const enDictionary: Dictionary = {
     emptyGallery: "No showcase photos available in this category yet.",
   },
   about: {
-    metaTitle: "About Us — Track Record & Standards of FIXMI Service Center",
+    metaTitle: "About MobiCare — Professional Gadget Repair & Technical Solutions",
     metaDescription:
-      "Official profile of FIXMI Service Center: Bali's premier certified smart device repair laboratory since August 2014. Micro-soldering specialists, FIXMI Tech Academy, and B2B partnerships across 3 Bali service centers.",
-    headline: "ABOUT US",
-    driveBadge: "01 / THE DRIVE",
+      "Official profile of MobiCare Service Center: Digital device repair solutions with professional service, clear communication, and customer trust.",
+    headline: "ABOUT MOBICARE",
+    driveBadge: "01 / WHO WE ARE",
     driveHeadline:
-      "Established in August 2014 in Bali, we set the benchmark for smart device repairs grounded in integrity, technical precision, and official warranty assurance.",
+      "MobiCare Service Center delivers professional, informative, and customer-oriented digital device repair experiences.",
     driveP1:
-      "At FIXMI, we dedicate ourselves to providing utmost peace of mind and comfort for every device owner. We eliminate doubts regarding component authenticity and guarantee all itemized cost estimates are presented transparently from the initial diagnostic stage.",
+      "MobiCare Service Center is a digital device repair and technical support brand. We are committed to delivering professional, informative, and customer-oriented service experiences. Great service not only resolves device issues, but also ensures customers understand the process and options available.",
     driveP2:
-      "From OLED/LCD screen replacements, battery performance restoration, camera fixes, to chip-level logic board circuitry recovery at our",
-    microsolderLabel: "microsolder lab",
+      "Backed by professional technician capabilities across smartphones, advanced hardware, logic boards, and",
+    microsolderLabel: "advanced hardware support",
     microsolderCaption:
-      "Precision microscope facility handling component-level motherboard and IC repairs.",
+      "Thorough advanced hardware examination matching targeted diagnosis and technician capabilities.",
     cleanroomLabel: "precision tools",
     cleanroomCaption:
-      "Safe display and housing surgical tools eliminating any secondary damage risk.",
-    originalPartsLabel: "certified spare parts",
+      "Structured workflows with meticulous attention to detail and device specifications.",
+    originalPartsLabel: "tested parts & warranty",
     originalPartsCaption:
-      "Premium OEM-certified replacement components backed by official store warranty.",
-    behindBadge: "02 / BEHIND THE BENCH",
+      "Strict workmanship quality with complete functional testing post-service.",
+    behindBadge: "02 / WHAT WE DO",
     behindP1:
-      "Our service reliability is powered by profound technical mastery and dedicated skill advancement through",
+      "Our core services cover Smartphone Repair (screens, batteries, charging ports), Advanced Hardware, Laptop & MacBook, and Software & Diagnostics through",
     behindP2:
-      "Every reinstalled component, reconstructed micro-electronic trace, and renewed water-resistant acoustic seal is executed with meticulous discipline, precision, and strict compliance with device safety standards.",
-    academyLabel: "FIXMI Tech Academy",
+      "Every service phase is handled with precision, honest technical recommendations, strict device safety, and uncompromising customer data privacy.",
+    academyLabel: "tested technician capabilities",
     academyCaption:
-      "Professional technician training and skill certification hub in Bali.",
-    communityBadge: "03 / THE COMMUNITY & TRUST",
+      "Continuously refining technical skills and operational processes.",
+    communityBadge: "04 / OUR FOUNDATION",
     communityP1:
-      "Beyond serving thousands of individual residents and international travelers in Bali, FIXMI Service Center is trusted as the official technical repair partner by leading",
+      "MobiCare operates with its own distinct brand identity, supported by the technical and operational experience of",
     communityP2:
-      "We invite you to visit our central workshop at Jalan Raya Uluwatu No. 79, Kedonganan, Kuta, for a comprehensive live diagnostic and the highest standard repair solution for your device.",
-    partnersLabel: "premier retail networks in Bali",
+      "This approach maintains MobiCare's strong distinct character while demonstrating solid foundation: technical care, clear communication, and customer trust.",
+    partnersLabel: "Fixmi Service Center",
     partnersCaption:
-      "Trusted by Cellular World ID, iUsed Phone, RA Gadget, and thousands of clients.",
-    workshopHint: "WORKSHOP DOCUMENTATION",
+      "Operational capabilities, service standards, and proven technical backing.",
+    workshopHint: "WORKSHOP SHOWCASE",
     swipeHint: "Swipe Horizontal →",
     cards: [
       {
-        tag: "SERVICE CENTER",
-        title: "Certified Master Technicians",
-        subtitle: "Industry Experience Since August 2014",
+        tag: "PROFESSIONAL SERVICE",
+        title: "Structured & Precise Workflows",
+        subtitle: "Attention to Detail & Device Requirements",
       },
       {
-        tag: "MICROSOLDER LAB",
-        title: "Hardware Lab & Microsoldering",
-        subtitle: "Chip-Level & Motherboard Recovery",
+        tag: "ADVANCED HARDWARE",
+        title: "In-Depth Component Inspection",
+        subtitle: "Targeted Diagnostics & Technical Expertise",
       },
       {
-        tag: "INTEGRATED ECOSYSTEM",
-        title: "Bali Smart Device Hub",
-        subtitle: "Kedonganan, Kuta, and Denpasar",
+        tag: "POWERED BY FIXMI",
+        title: "Powered by Fixmi Service Center",
+        subtitle: "Proven Technical Experience & Operational Standards",
       },
       {
-        tag: "QUALITY ASSURANCE",
-        title: "Precision & Official Warranty",
-        subtitle: "iPhone, Android, and MacBook",
+        tag: "TRUST & DATA PRIVACY",
+        title: "Data Safety & Quality Assurance",
+        subtitle: "Accountability, Care & Service Warranty",
       },
     ],
     stats: [

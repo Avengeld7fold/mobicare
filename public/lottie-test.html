@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>MobiCare Lottie Motion Verification</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      background: #f7f9f7;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    .preview-card {
+      width: 760px;
+      height: 480px;
+      background: #ffffff;
+      border: 1px solid #e2e8e2;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #lottie-box {
+      width: 100%;
+      height: 100%;
+    }
+    .controls {
+      margin-top: 24px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    button {
+      padding: 8px 16px;
+      border: 1px solid #00a651;
+      background: #00a651;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <h2>MobiCare Motion Graphic Logo (Lottie JSON)</h2>
+  <div class="preview-card">
+    <div id="lottie-box"></div>
+  </div>
+  <div class="controls">
+    <button onclick="anim.goToAndPlay(0, true)">Replay from 0</button>
+    <button onclick="anim.goToAndStop(120, true)">Frame 120 (Squash)</button>
+    <button onclick="anim.goToAndStop(146, true)">Frame 146 (Overshoot)</button>
+    <button onclick="anim.goToAndStop(210, true)">Frame 210 (Settle)</button>
+    <button onclick="anim.goToAndPlay(220, true)">Play Idle Loop</button>
+  </div>
+
+  <script src="/lottie/lottie.min.js"></script>
+  <script>
+    var anim = lottie.loadAnimation({
+      container: document.getElementById('lottie-box'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: '/lottie/mobicare-motion.json'
+    });
+    window.anim = anim;
+  </script>
+</body>
+</html>

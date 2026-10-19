@@ -2,16 +2,16 @@ import type { Metadata } from "next";
 import AboutPageContent from "@/components/about/AboutPageContent";
 
 export const metadata: Metadata = {
-  title: "Tentang MobiCare — Pusat Perbaikan & Standar Kualitas Gadget",
+  title: "Tentang MobiCare — Solusi Perbaikan Gadget & Layanan Profesional",
   description:
-    "Profil resmi MobiCare Service Center: laboratorium perbaikan perangkat pintar terpercaya di Bali. Spesialis mikrosolder, teknisi bersertifikasi, dan garansi resmi.",
+    "Profil resmi MobiCare Service Center: Solusi perbaikan perangkat digital dengan layanan profesional, komunikasi yang jelas, dan perhatian pada kepercayaan pelanggan.",
   alternates: {
     canonical: "/about",
   },
   openGraph: {
-    title: "Tentang MobiCare — Pusat Perbaikan & Standar Kualitas Gadget",
+    title: "Tentang MobiCare — Solusi Perbaikan Gadget & Layanan Profesional",
     description:
-      "Profil resmi MobiCare Service Center: laboratorium perbaikan perangkat pintar terpercaya di Bali. Spesialis mikrosolder, teknisi bersertifikasi, dan garansi resmi.",
+      "Profil resmi MobiCare Service Center: Solusi perbaikan perangkat digital dengan layanan profesional, komunikasi yang jelas, dan perhatian pada kepercayaan pelanggan.",
     url: "/about",
     images: [
       {

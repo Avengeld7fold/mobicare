@@ -36,36 +36,36 @@ export default function AboutPageContent() {
   const stackPhotos: StackPhoto[] = [
     {
       id: 1,
-      tag: dict.about.cards[0]?.tag || "SERVICE CENTER",
-      title: dict.about.cards[0]?.title || (isEn ? "Certified Master Technicians" : "Teknisi Ahli & Bersertifikasi"),
-      subtitle: dict.about.cards[0]?.subtitle || (isEn ? "Industry Experience Since August 2014" : "Pengalaman Sejak Agustus 2014"),
-      src: "/images/teknisi-2.webp",
+      tag: dict.about.cards[0]?.tag || (isEn ? "PROFESSIONAL SERVICE" : "LAYANAN PROFESIONAL"),
+      title: dict.about.cards[0]?.title || (isEn ? "Structured & Precise Workflows" : "Proses Kerja Terarah & Teliti"),
+      subtitle: dict.about.cards[0]?.subtitle || (isEn ? "Attention to Detail & Device Requirements" : "Perhatian Pada Detail & Kebutuhan Perangkat"),
+      src: "/images/teknisi1.webp",
       desktopOffset: "lg:self-end lg:z-10 lg:sm:-translate-x-2",
       tiltClass: "-rotate-2 sm:-rotate-3 lg:-rotate-[3.5deg]",
     },
     {
       id: 2,
-      tag: dict.about.cards[1]?.tag || "MICROSOLDER LAB",
-      title: dict.about.cards[1]?.title || (isEn ? "Hardware Lab & Microsoldering" : "Hardware Lab & Mikrosolder"),
-      subtitle: dict.about.cards[1]?.subtitle || (isEn ? "Chip-Level & Motherboard Recovery" : "Penanganan Motherboard & Chip-Level"),
+      tag: dict.about.cards[1]?.tag || "ADVANCED HARDWARE",
+      title: dict.about.cards[1]?.title || (isEn ? "In-Depth Component Inspection" : "Pemeriksaan Kerusakan Lanjutan"),
+      subtitle: dict.about.cards[1]?.subtitle || (isEn ? "Targeted Diagnostics & Technical Expertise" : "Diagnosis Mendalam & Kapabilitas Teknisi"),
       src: "/images/fixmi-lab1.webp",
       desktopOffset: "lg:self-start lg:-ml-12 lg:z-20",
       tiltClass: "",
     },
     {
       id: 3,
-      tag: dict.about.cards[2]?.tag || "INTEGRATED ECOSYSTEM",
-      title: dict.about.cards[2]?.title || (isEn ? "Bali Smart Device Hub" : "Pusat Solusi Gadget Bali"),
-      subtitle: dict.about.cards[2]?.subtitle || (isEn ? "Kedonganan, Kuta, and Denpasar" : "Kedonganan, Kuta, dan Denpasar"),
+      tag: dict.about.cards[2]?.tag || "POWERED BY FIXMI",
+      title: dict.about.cards[2]?.title || (isEn ? "Powered by Fixmi Service Center" : "Didukung Fixmi Service Center"),
+      subtitle: dict.about.cards[2]?.subtitle || (isEn ? "Proven Technical Experience & Operational Standards" : "Pengalaman Teknis & Standar Operasional Teruji"),
       src: "/images/toko1.webp",
       desktopOffset: "lg:self-end lg:z-30",
       tiltClass: "",
     },
     {
       id: 4,
-      tag: dict.about.cards[3]?.tag || "QUALITY ASSURANCE",
-      title: dict.about.cards[3]?.title || (isEn ? "Precision & Official Warranty" : "Presisi & Garansi Resmi"),
-      subtitle: dict.about.cards[3]?.subtitle || (isEn ? "iPhone, Android, and MacBook" : "iPhone, Android, dan MacBook"),
+      tag: dict.about.cards[3]?.tag || (isEn ? "TRUST & DATA PRIVACY" : "KEPERCAYAAN & PRIVASI"),
+      title: dict.about.cards[3]?.title || (isEn ? "Data Safety & Quality Assurance" : "Keamanan Data & Kontrol Kualitas"),
+      subtitle: dict.about.cards[3]?.subtitle || (isEn ? "Accountability, Care & Service Warranty" : "Tanggung Jawab, Kehati-hatian & Garansi Resmi"),
       src: "/images/spareparts.webp",
       desktopOffset: "lg:self-start lg:-ml-8 lg:z-40",
       tiltClass: "",
@@ -135,7 +135,7 @@ export default function AboutPageContent() {
                 aria-hidden="true"
               />
               <span className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--mobi-green)] font-bold">
-                {isEn ? "EXPERTISE & REPUTATION" : "KEAHLIAN & REPUTASI"}
+                {isEn ? "01 / WHO WE ARE" : "01 / TENTANG MOBICARE"}
               </span>
             </div>
 
@@ -152,13 +152,13 @@ export default function AboutPageContent() {
             >
               {isEn ? (
                 <>
-                  <span className="block text-[#080c09]">DEDICATION TO</span>
-                  <span className="block accent-green">PRECISION.</span>
+                  <span className="block text-[#080c09]">PROFESSIONAL GADGET REPAIR &</span>
+                  <span className="block accent-green">TECHNICAL SOLUTIONS.</span>
                 </>
               ) : (
                 <>
-                  <span className="block text-[#080c09]">DEDIKASI UNTUK</span>
-                  <span className="block accent-green">PRESISI.</span>
+                  <span className="block text-[#080c09]">SOLUSI PERBAIKAN GADGET &</span>
+                  <span className="block accent-green">DUKUNGAN TEKNIS.</span>
                 </>
               )}
             </h2>
@@ -166,8 +166,8 @@ export default function AboutPageContent() {
             {/* Narrative Overview */}
             <p className="editorial-copy text-base sm:text-lg leading-relaxed text-[#2e332f] mb-8 font-sans">
               {isEn
-                ? "MobiCare is your premier smart device service center in Bali. We combine transparent diagnostics, certified micro-electronics craftsmanship, and genuine-grade components to keep your technology performing at its highest potential."
-                : "MobiCare hadir sebagai pusat perbaikan dan pemeliharaan perangkat pintar terpercaya di Bali. Kami memadukan diagnosa terbuka, ketelitian teknisi bersertifikasi, serta kepastian suku cadang bergaransi resmi untuk menjaga performa optimal gadget Anda."}
+                ? "MobiCare Service Center is a digital device repair and technical support brand. We are committed to delivering professional, informative, and customer-oriented service experiences. Great service not only resolves device issues, but also ensures customers understand the process and options available."
+                : "MobiCare Service Center merupakan brand layanan perbaikan dan dukungan teknis perangkat digital. Kami berkomitmen menghadirkan pengalaman servis yang profesional, informatif, dan berorientasi pada kebutuhan pelanggan. Layanan yang baik bukan hanya menyelesaikan masalah perangkat, tetapi juga membuat pelanggan memahami proses dan pilihan yang tersedia."}
             </p>
 
             {/* Action CTA Button */}
@@ -181,62 +181,62 @@ export default function AboutPageContent() {
               </Link>
             </div>
 
-            {/* ── Dummy Editorial Points Below CTA Button ── */}
+            {/* ── 3 Core Pillars From Company Profile ── */}
             <div className="editorial-points-border space-y-7 pt-6 border-t border-[#e5e8e5]">
-              {/* Point 01: Transparent Diagnostics */}
+              {/* Point 01: Professional Service */}
               <div className="space-y-2.5">
                 <div className="flex items-center gap-2">
                   <span className="editorial-point-kicker font-mono text-xs uppercase tracking-[0.14em] text-[var(--mobi-green)] font-bold">
-                    01 / {isEn ? "THE DRIVE" : "STANDAR DIAGNOSA TERBUKA"}
+                    01 / {isEn ? "PROFESSIONAL SERVICE" : "LAYANAN PROFESIONAL"}
                   </span>
                 </div>
                 <h3 className="editorial-point-title text-base sm:text-lg font-bold text-[#080c09] tracking-tight">
                   {isEn
-                    ? "Upfront Diagnostics & Zero Hidden Surcharges"
-                    : "Pemeriksaan Menyeluruh Tanpa Biaya Tersembunyi"}
+                    ? "Structured Workflows & Meticulous Attention to Detail"
+                    : "Proses Kerja Terarah & Perhatian Pada Detail"}
                 </h3>
                 <p className="editorial-point-desc text-xs sm:text-sm leading-relaxed text-[#4f5752]">
                   {isEn
-                    ? "Every repair at MobiCare begins with a thorough inspection in front of the customer. We outline the core hardware issue, determine cost estimates upfront, and safeguard the absolute privacy of your device data."
-                    : "Setiap pengerjaan di MobiCare berlandaskan kejujuran teknis. Kami memeriksa perangkat langsung di hadapan Anda, memberikan rincian estimasi biaya secara transparan sebelum pengerjaan dimulai, dan menjamin keamanan penuh data pribadi Anda."}
+                    ? "Structured workflows with thorough attention to detail and device specifications, ensuring targeted diagnostics and meticulous handling from intake to final handover."
+                    : "Setiap tahapan servis dijalankan dengan terarah dan teliti, memperhatikan kondisi awal, kebutuhan spesifik perangkat, serta kehati-hatian penuh dari pemeriksaan hingga serah terima."}
                 </p>
               </div>
 
-              {/* Point 02: Hardware Lab & Microsoldering */}
+              {/* Point 02: Clear Communication */}
               <div className="space-y-2.5">
                 <div className="flex items-center gap-2">
                   <span className="editorial-point-kicker font-mono text-xs uppercase tracking-[0.14em] text-[var(--mobi-green)] font-bold">
-                    02 / {isEn ? "HARDWARE LAB" : "LAB MIKROSOLDER & CHIP-LEVEL"}
+                    02 / {isEn ? "CLEAR COMMUNICATION" : "KOMUNIKASI JELAS"}
                   </span>
                 </div>
                 <h3 className="editorial-point-title text-base sm:text-lg font-bold text-[#080c09] tracking-tight">
                   {isEn
-                    ? "Microsoldering Lab & Cleanroom Equipment"
-                    : "Rekonstruksi Motherboard & Penanganan IC Presisi"}
+                    ? "Upfront Diagnostics, Repair Options & Clear Estimates"
+                    : "Penjelasan Diagnosis, Opsi & Estimasi Sebelum Pengerjaan"}
                 </h3>
                 <p className="editorial-point-desc text-xs sm:text-sm leading-relaxed text-[#4f5752]">
                   {isEn
-                    ? "Equipped with high-precision digital microscopes and ESD-safe cleanroom tools, our certified technicians solve logic board issues, IC replacements, and circuit repairs beyond ordinary repair shops."
-                    : "Didukung stasiun mikroskop digital dan instrumen elektrostatik standar industri, tim teknisi kami menguasai perbaikan tingkat komponen pada logic board iPhone, Android, dan MacBook yang membutuhkan ketelitian tingkat mikron."}
+                    ? "Explaining diagnostic findings and estimates in straightforward language. We provide clear repair options, exact cost estimates, and timelines before any work begins."
+                    : "Menjelaskan hasil diagnosis dan estimasi biaya secara transparan dengan bahasa yang mudah dipahami. Pelanggan mendapatkan opsi tindakan dan estimasi waktu sebelum perbaikan disetujui."}
                 </p>
               </div>
 
-              {/* Point 03: Documented Warranty */}
+              {/* Point 03: Trust & Data Privacy */}
               <div className="space-y-2.5">
                 <div className="flex items-center gap-2">
                   <span className="editorial-point-kicker font-mono text-xs uppercase tracking-[0.14em] text-[var(--mobi-green)] font-bold">
-                    03 / {isEn ? "WARRANTY & TRUST" : "JAMINAN GARANSI & INTEGRITAS"}
+                    03 / {isEn ? "TRUST & PRIVACY" : "KEPERCAYAAN & KEAMANAN DATA"}
                   </span>
                 </div>
                 <h3 className="editorial-point-title text-base sm:text-lg font-bold text-[#080c09] tracking-tight">
                   {isEn
-                    ? "Certified Spare Parts & Official Post-Service Guarantee"
-                    : "Suku Cadang Teruji & Jaminan Perlindungan Resmi"}
+                    ? "Prioritizing Accountability, Care & Customer Privacy"
+                    : "Mengutamakan Tanggung Jawab, Kehati-hatian & Privasi Pelanggan"}
                 </h3>
                 <p className="editorial-point-desc text-xs sm:text-sm leading-relaxed text-[#4f5752]">
                   {isEn
-                    ? "We strictly source durable, original-specification spare parts accompanied by documented warranty terms. Peace of mind and post-repair confidence remain our uncompromised promise."
-                    : "Kami hanya menyediakan komponen pilihan bersertifikasi dengan daya tahan teruji. Setiap perbaikan dilindungi jaminan garansi resmi tertulis, memberikan ketenangan dan kepastian bagi setiap pemilik perangkat."}
+                    ? "We prioritize rigorous care for customer devices and personal information. Data access and device handling strictly adhere to customer consent and standard operating procedures."
+                    : "Kami mengedepankan kehati-hatian terhadap perangkat dan informasi pelanggan. Penanganan perangkat serta akses data selalu mengikuti persetujuan pelanggan dan prosedur operasional yang berlaku."}
                 </p>
               </div>
             </div>

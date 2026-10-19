@@ -18,7 +18,7 @@
   --mobi-line: rgba(255, 255, 255, 0.18);
   --mobi-danger: #ff8f8f;
   --mobi-warning: #b7e86a;
-  --mobi-page-pad: clamp(22px, 4vw, 76px);
+  --mobi-page-pad: clamp(22px, 4.5vw, 76px);
   --mobi-text: "MobiCareTextLetters", system-ui, sans-serif;
 
 }

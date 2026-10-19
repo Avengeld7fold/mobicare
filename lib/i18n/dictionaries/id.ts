@@ -226,64 +226,64 @@ export const idDictionary: Dictionary = {
     emptyGallery: "Belum ada foto dokumentasi di kategori ini.",
   },
   about: {
-    metaTitle: "Tentang Kami — Rekam Jejak & Standar FIXMI Service Center",
+    metaTitle: "Tentang MobiCare — Solusi Perbaikan Gadget & Layanan Profesional",
     metaDescription:
-      "Profil resmi FIXMI Service Center: laboratorium perbaikan perangkat pintar terpercaya sejak Agustus 2014 di Bali. Spesialis mikrosolder, FIXMI Tech Academy, dan kemitraan B2B di 3 gerai Bali.",
-    headline: "TENTANG KAMI",
-    driveBadge: "01 / THE DRIVE",
+      "Profil resmi MobiCare Service Center: Solusi perbaikan perangkat digital dengan layanan profesional, komunikasi yang jelas, dan perhatian pada kepercayaan pelanggan.",
+    headline: "TENTANG MOBICARE",
+    driveBadge: "01 / WHO WE ARE",
     driveHeadline:
-      "Hadir sejak Agustus 2014 di Bali, kami membangun standar perbaikan perangkat pintar berlandaskan kejujuran, ketelitian teknis, dan kepastian garansi resmi.",
+      "MobiCare Service Center menghadirkan pengalaman servis yang profesional, informatif, dan berorientasi pada kebutuhan pelanggan.",
     driveP1:
-      "Di FIXMI, kami mendedikasikan diri untuk memberikan rasa aman dan kenyamanan maksimal bagi setiap pemilik perangkat. Kami mengeliminasi keraguan terhadap keaslian suku cadang serta memastikan seluruh rincian estimasi biaya disampaikan secara transparan sejak tahap diagnosa awal.",
+      "MobiCare Service Center merupakan brand layanan perbaikan dan dukungan teknis perangkat digital. Kami berkomitmen menghadirkan pengalaman servis yang profesional, informatif, dan berorientasi pada kebutuhan pelanggan. Layanan yang baik bukan hanya menyelesaikan masalah perangkat, tetapi juga membuat pelanggan memahami proses dan pilihan yang tersedia.",
     driveP2:
-      "Mulai dari pergantian layar LCD, pemulihan performa baterai, perbaikan kamera, hingga rekonstruksi sirkuit motherboard pada",
-    microsolderLabel: "lab mikrosolder",
+      "Didukung oleh kapabilitas teknisi profesional untuk penanganan smartphone, perbaikan hardware lanjutan, logic board, hingga",
+    microsolderLabel: "dukungan hardware lanjutan",
     microsolderCaption:
-      "Fasilitas mikroskop presisi & penanganan logic board tingkat komponen dan IC.",
+      "Pemeriksaan kerusakan hardware lanjutan sesuai diagnosis dan kapabilitas teknisi.",
     cleanroomLabel: "peralatan presisi",
     cleanroomCaption:
-      "Peralatan pembedahan LCD dan housing aman tanpa risiko kerusakan sekunder.",
-    originalPartsLabel: "sparepart bersertifikasi",
+      "Proses kerja terarah dengan perhatian penuh pada detail dan kebutuhan perangkat.",
+    originalPartsLabel: "komponen teruji & garansi",
     originalPartsCaption:
-      "Suku cadang pilihan berkualitas tinggi dengan jaminan garansi resmi.",
-    behindBadge: "02 / BEHIND THE BENCH",
+      "Kualitas pengerjaan terjaga dengan pemeriksaan fungsi menyeluruh sesuai jenis layanan.",
+    behindBadge: "02 / WHAT WE DO",
     behindP1:
-      "Keandalan layanan kami didukung oleh penguasaan teknis mendalam dan dedikasi pengembangan keahlian melalui",
+      "Fokus layanan kami mencakup Smartphone Repair (layar, baterai, konektor pengisian daya), Advanced Hardware, Laptop & MacBook, serta Software & Diagnostics melalui",
     behindP2:
-      "Setiap komponen yang dipasang kembali, jalur mikroelektronika yang direkonstruksi, hingga segel proteksi air yang diperbarui dikerjakan dengan disiplin tinggi, presisi, dan kepatuhan penuh terhadap standar keselamatan perangkat.",
-    academyLabel: "FIXMI Tech Academy",
+      "Setiap tahapan servis dijalankan dengan teliti, mengutamakan kejujuran rekomendasi, kehati-hatian terhadap perangkat, serta perlindungan privasi data pelanggan.",
+    academyLabel: "kapabilitas teknisi teruji",
     academyCaption:
-      "Pusat pelatihan & sertifikasi keahlian teknisi profesional di Bali.",
-    communityBadge: "03 / THE COMMUNITY & TRUST",
+      "Terus meningkatkan keterampilan dan standar pengerjaan secara berkelanjutan.",
+    communityBadge: "04 / OUR FOUNDATION",
     communityP1:
-      "Selain melayani ribuan pelanggan individu dan wisatawan di Bali, FIXMI Service Center dipercaya sebagai mitra teknis resmi oleh berbagai",
+      "MobiCare menggunakan identitas brand sendiri, dengan dukungan pengalaman teknis dan operasional dari",
     communityP2:
-      "Kami menyambut Anda untuk berkonsultasi langsung di workshop pusat kami di Jalan Raya Uluwatu No. 79, Kedonganan, Kuta, guna memperoleh diagnosa menyeluruh dan solusi perbaikan terbaik bagi perangkat Anda.",
-    partnersLabel: "jaringan retail terkemuka di Bali",
+      "Pendekatan ini menjaga karakter MobiCare tetap kuat sekaligus menampilkan dukungan solid di balik layanan: technical care, clear communication, dan customer trust.",
+    partnersLabel: "Fixmi Service Center",
     partnersCaption:
-      "Dipercaya Cellular World ID, iUsed Phone, RA Gadget, dan ribuan pelanggan.",
+      "Penguatan kapabilitas, standar layanan, dan pengalaman operasional teruji.",
     workshopHint: "DOKUMENTASI WORKSHOP",
     swipeHint: "Geser Horizontal →",
     cards: [
       {
-        tag: "SERVICE CENTER",
-        title: "Teknisi Ahli & Bersertifikasi",
-        subtitle: "Pengalaman Sejak Agustus 2014",
+        tag: "LAYANAN PROFESIONAL",
+        title: "Proses Kerja Terarah & Teliti",
+        subtitle: "Perhatian Pada Detail & Kebutuhan Perangkat",
       },
       {
-        tag: "MICROSOLDER LAB",
-        title: "Hardware Lab & Mikrosolder",
-        subtitle: "Penanganan Motherboard & Chip-Level",
+        tag: "ADVANCED HARDWARE",
+        title: "Pemeriksaan Kerusakan Lanjutan",
+        subtitle: "Diagnosis Mendalam & Kapabilitas Teknisi",
       },
       {
-        tag: "INTEGRATED ECOSYSTEM",
-        title: "Pusat Solusi Gadget Bali",
-        subtitle: "Kedonganan, Kuta, dan Denpasar",
+        tag: "POWERED BY FIXMI",
+        title: "Didukung Fixmi Service Center",
+        subtitle: "Pengalaman Teknis & Standar Operasional Teruji",
       },
       {
-        tag: "QUALITY ASSURANCE",
-        title: "Presisi & Garansi Resmi",
-        subtitle: "iPhone, Android, dan MacBook",
+        tag: "KEPERCAYAAN & PRIVASI",
+        title: "Keamanan Data & Kontrol Kualitas",
+        subtitle: "Tanggung Jawab, Kehati-hatian & Garansi Resmi",
       },
     ],
     stats: [
