@@ -9,10 +9,42 @@ interface MobiCareLottiePlayerProps {
 export default function MobiCareLottiePlayer({ className }: MobiCareLottiePlayerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const animRef = useRef<import("lottie-web").AnimationItem | null>(null);
+  const inViewportRef = useRef(false);
+  const hasStartedRef = useRef(false);
+  const prefersReducedMotionRef = useRef(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
+
+    const syncPlayback = () => {
+      const anim = animRef.current;
+      if (!anim || prefersReducedMotionRef.current) return;
+
+      if (document.hidden || !inViewportRef.current) {
+        anim.pause();
+        return;
+      }
+
+      if (!hasStartedRef.current) {
+        hasStartedRef.current = true;
+        anim.goToAndPlay(0, true);
+        return;
+      }
+
+      anim.play();
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        inViewportRef.current = entry.isIntersecting && entry.intersectionRatio >= 0.1;
+        syncPlayback();
+      },
+      { threshold: 0.1 }
+    );
+
+    if (containerRef.current) observer.observe(containerRef.current);
+    document.addEventListener("visibilitychange", syncPlayback);
 
     async function initLottie() {
       if (!containerRef.current) return;
@@ -28,12 +60,13 @@ export default function MobiCareLottiePlayer({ className }: MobiCareLottiePlayer
         }
 
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        prefersReducedMotionRef.current = prefersReducedMotion;
 
         const anim = lottie.loadAnimation({
           container: containerRef.current,
           renderer: "svg",
           loop: true,
-          autoplay: !prefersReducedMotion,
+          autoplay: false,
           path: "/lottie/mobicare-motion.json",
           rendererSettings: {
             preserveAspectRatio: "xMidYMid meet",
@@ -52,6 +85,8 @@ export default function MobiCareLottiePlayer({ className }: MobiCareLottiePlayer
             setIsLoaded(true);
             if (prefersReducedMotion) {
               anim.goToAndStop(215, true); // Jump directly to settled logo
+            } else {
+              syncPlayback();
             }
           }
         });
@@ -68,22 +103,16 @@ export default function MobiCareLottiePlayer({ className }: MobiCareLottiePlayer
         animRef.current.destroy();
         animRef.current = null;
       }
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", syncPlayback);
     };
   }, []);
-
-  const handleReplay = () => {
-    if (animRef.current) {
-      animRef.current.goToAndPlay(0, true);
-    }
-  };
 
   return (
     <div
       className={`who-lottie-container ${isLoaded ? "is-loaded" : ""} ${className || ""}`}
       aria-label="Animasi logo motion graphic MobiCare Service Center"
       role="img"
-      onClick={handleReplay}
-      title="Klik untuk putar ulang animasi"
     >
       <div ref={containerRef} className="who-lottie-player" />
     </div>

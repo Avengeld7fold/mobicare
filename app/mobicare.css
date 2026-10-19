@@ -617,7 +617,7 @@
   align-items: center;
   justify-content: center;
   z-index: 2;
-  cursor: pointer;
+  cursor: default;
   padding: clamp(10px, 3vw, 40px);
   user-select: none;
 }
