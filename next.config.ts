@@ -29,10 +29,11 @@ const CSP = [
   "frame-ancestors 'none'",
   "form-action 'self'",
   scriptSrc,
+  "worker-src 'self'",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com blob: data:",
   "font-src 'self' data: https://fonts.gstatic.com",
-  "img-src 'self' data: blob: https://images.unsplash.com https://maps.googleapis.com https://maps.gstatic.com https://*.googleapis.com https://*.ggpht.com https://*.googleusercontent.com",
-  `connect-src 'self' https://maps.googleapis.com https://*.googleapis.com${isDev ? " http://localhost:8400 ws: wss: http: blob: data:" : ""}`,
+  "img-src 'self' data: blob: https://images.unsplash.com https://maps.googleapis.com https://maps.gstatic.com https://*.googleapis.com https://*.ggpht.com https://*.googleusercontent.com https://tile.openstreetmap.org",
+  `connect-src 'self' https://tiles.openfreemap.org https://maps.googleapis.com https://*.googleapis.com${isDev ? " http://localhost:8400 ws: wss: http: blob: data:" : ""}`,
   // Peta memakai iframe embed Google sebagai fallback tanpa API key.
   "frame-src https://www.google.com https://maps.google.com",
   // PENTING: upgrade-insecure-requests HANYA untuk HTTPS di produksi.
@@ -61,6 +62,7 @@ const nextConfig: NextConfig = {
   // Jangan bocorkan versi framework ke penyerang.
   poweredByHeader: false,
   reactStrictMode: true,
+  devIndicators: false,
 
   compiler: {
     removeConsole: !isDev ? { exclude: ["error", "warn"] } : false,

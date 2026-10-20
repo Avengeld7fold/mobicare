@@ -27,8 +27,8 @@ export default function HomeWhoWeAre() {
 
           <h2 id="home-who-heading">
             {isEn
-              ? "MobiCare Service Center is a modern device repair specialist built on precision and trust"
-              : "MobiCare Service Center adalah spesialis servis gadget modern dengan standar presisi dan transparansi"}
+              ? "MobiCare is a modern precision gadget repair specialist"
+              : "MobiCare adalah spesialis servis gadget modern dan presisi"}
           </h2>
 
           <p>

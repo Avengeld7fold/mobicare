@@ -55,6 +55,8 @@ next-env.d.ts
 
 # Scratch / testing artifacts
 scratch/
+public/lottie/*.png
+public/lottie/*.svg
 
 # AI Agent configurations & skills (local development only)
 .agents/
@@ -72,5 +74,6 @@ prd.md
 skills.md
 skills-lock.json
 
-# Dev-only scripts
-scripts/
+# Dev-only scripts (allow production build scripts)
+scripts/*
+!scripts/prepare-map-worker.mjs

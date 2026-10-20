@@ -1,31 +1,59 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, X } from "lucide-react";
+import { useLenis } from "lenis/react";
 import { useI18n } from "@/lib/i18n/context";
 
 export default function HomeSmarterWay() {
   const { locale, getLocalizedPath } = useI18n();
   const isEn = locale === "en";
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const lenis = useLenis();
 
   useEffect(() => {
     if (!isVideoOpen) return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setIsVideoOpen(false);
       }
     };
-    const origOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.body.style.overflow = origOverflow;
-      window.removeEventListener("keydown", handleKeyDown);
+
+    // Mencegah scrolling mouse wheel / touchpad / touch swipe saat modal aktif
+    const preventScroll = (e: Event) => {
+      e.preventDefault();
+      e.stopPropagation();
     };
-  }, [isVideoOpen]);
+
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+    const wasStopped = lenis?.isStopped;
+
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    document.body.classList.add("video-modal-active");
+    lenis?.stop();
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("wheel", preventScroll, { passive: false });
+    window.addEventListener("touchmove", preventScroll, { passive: false });
+
+    return () => {
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
+      document.body.classList.remove("video-modal-active");
+      if (!wasStopped) {
+        lenis?.start();
+      }
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("wheel", preventScroll);
+      window.removeEventListener("touchmove", preventScroll);
+    };
+  }, [isVideoOpen, lenis]);
 
   return (
     <section className="home-smarter" aria-labelledby="home-smarter-heading">
@@ -98,8 +126,8 @@ export default function HomeSmarterWay() {
           </div>
         </div>
 
-        {/* Modal Lightbox Video Player */}
-        {isVideoOpen && (
+        {/* Modal Lightbox Video Player (Teleported to document.body to avoid stacking context issues) */}
+        {isVideoOpen && typeof document !== "undefined" && createPortal(
           <div
             className="smarter-modal"
             role="dialog"
@@ -128,7 +156,8 @@ export default function HomeSmarterWay() {
                 className="smarter-modal-video"
               />
             </div>
-          </div>
+          </div>,
+          document.body
         )}
 
         {/* Bottom Technical Rail */}

@@ -219,6 +219,8 @@ export interface Dictionary {
       phonePlaceholder: string;
       deviceLabel: string;
       devicePlaceholder: string;
+      modelLabel?: string;
+      modelPlaceholder?: string;
       serviceTypeLabel: string;
       serviceTypePlaceholder: string;
       issueLabel: string;
@@ -227,6 +229,8 @@ export interface Dictionary {
       outletPlaceholder: string;
       submitBtn: string;
       submitting: string;
+      resendBtn?: string;
+      resetBtn?: string;
       successTitle: string;
       successMessage: string;
     };

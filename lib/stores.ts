@@ -1,89 +1,56 @@
-/**
- * Data 3 gerai FIXMI — SATU sumber kebenaran untuk halaman Contact & Footer.
- * Ganti di sini sekali, berlaku di seluruh situs.
- */
+import type { StoreHoursConfig } from "./storeStatus";
 
 export interface Store {
   key: string;
-  /** Peran gerai, mis. "Toko Utama" */
-  role: string;
-  /** Nama resmi gerai */
   name: string;
-  /** Area singkat untuk daftar, mis. "Kedonganan · Badung" */
   region: string;
   address: string;
   phone: string;
-  hours: string;
-  /** Query pencarian Google Maps */
-  map: string;
-  /** Titik pin di peta (koordinat gerai sebenarnya) */
+  mapUrl: string;
   lat: number;
   lng: number;
-  openHour: number;
-  closeHourWeekday: number;
-  closeHourSunday: number;
+  schedule: StoreHoursConfig | null;
+  googleRatingSnapshot: {
+    rating: number;
+    reviewCount: number;
+    checkedAt: string;
+    sourceUrl: string;
+  };
 }
 
-/** Titik tengah peta agar ketiga gerai muat dalam satu tampilan. */
-export const MAP_CENTER = { lat: -8.74, lng: 115.18 };
-
+// Addresses/contacts supplied by Erwin; coordinates verified against the
+// supplied Google Maps listings on 2026-10-20, not inherited from Fixmi.
 export const STORES: Store[] = [
   {
-    key: "kedonganan",
-    role: "Toko Utama",
-    name: "Fixmi Service Center",
-    region: "Kedonganan · Badung",
-    address:
-      "Link. Kubu Alit Kedonganan, Jl. Raya Uluwatu, Kedonganan, Kec. Kuta, Kabupaten Badung, Bali 80361",
-    phone: "0819-9933-6722",
-    hours: "Senin – Sabtu 09.00 – 21.00 WITA · Minggu Tutup",
-    map: "Fixmi Service Center Kedonganan Jl Raya Uluwatu Bali 80361",
-    lat: -8.759229543631317,
-    lng: 115.17628628769123,
-    openHour: 9,
-    closeHourWeekday: 21,
-    closeHourSunday: 0,
+    key: "teuku-umar", name: "Teuku Umar", region: "Denpasar",
+    address: "Jl. Teuku Umar No.57, Dauh Puri Kauh, Kec. Denpasar Barat, Kota Denpasar, Bali 80113",
+    phone: "08991099999", mapUrl: "https://share.google/6c6c2hDtJye4EdXhJ",
+    lat: -8.6705254, lng: 115.2095412, schedule: null,
+    googleRatingSnapshot: { rating: 4.4, reviewCount: 167, checkedAt: "2026-10-20", sourceUrl: "https://www.google.com/maps/place/Mobicare+Service+Center/data=!4m2!3m1!1s0x0:0x7e4bf1c703f4a420" },
   },
   {
-    key: "taman-griya",
-    role: "Cabang Jimbaran",
-    name: "Fixmi Service Center Phone Taman Griya",
-    region: "Jimbaran · Badung",
-    address:
-      "Taman Griya, Jl. Nuansa Utama No. 33, Jimbaran, Kuta Selatan, Kabupaten Badung, Bali 80361",
-    phone: "0851-2357-9557",
-    hours: "Senin – Sabtu 09.00 – 21.00 WITA · Minggu Tutup",
-    map: "Fixmi Service Center Phone Taman Griya Jl Nuansa Utama Jimbaran Bali",
-    lat: -8.795211286730995,
-    lng: 115.18692765700816,
-    openHour: 9,
-    closeHourWeekday: 21,
-    closeHourSunday: 0,
+    key: "canggu", name: "Canggu", region: "Badung",
+    address: "Jl. Raya Canggu No.60, Tibubeneng, Kec. Kuta Utara, Kabupaten Badung, Bali 80361",
+    phone: "081999334664", mapUrl: "https://share.google/W6ZCTd5R5sQA2J2nr",
+    lat: -8.6440305, lng: 115.1572175, schedule: null,
+    googleRatingSnapshot: { rating: 5, reviewCount: 1, checkedAt: "2026-10-20", sourceUrl: "https://www.google.com/maps/place/Mobicare+Service+Center+Canggu/data=!4m2!3m1!1s0x0:0xb83411c0921f4f35" },
   },
   {
-    key: "denpasar",
-    role: "Partner Store Denpasar",
-    name: "Mobicare Service Center",
-    region: "Denpasar Barat",
-    address:
-      "Cellular World Arena, Jl. Teuku Umar No. 57, Dauh Puri Kauh, Kec. Denpasar Barat, Kota Denpasar, Bali 80113",
-    phone: "+62 899-1099-999",
-    hours: "Setiap Hari 09.00 – 22.00 WITA",
-    map: "Mobicare Service Center Cellular World Arena Jl Teuku Umar Denpasar Bali",
-    lat: -8.67049674423244,
-    lng: 115.209545433761,
-    openHour: 9,
-    closeHourWeekday: 22,
-    closeHourSunday: 22,
+    key: "gatot-subroto", name: "Gatot Subroto", region: "Denpasar",
+    address: "Jl. Gatot Subroto Tengah No.60, Dangin Puri Kaja, Kec. Denpasar Utara, Kota Denpasar, Bali 80234",
+    phone: "08133351114", mapUrl: "https://share.google/LvGIBpCNA1VzBTT34",
+    lat: -8.6361525, lng: 115.2205558, schedule: null,
+    googleRatingSnapshot: { rating: 4.9, reviewCount: 61, checkedAt: "2026-10-20", sourceUrl: "https://www.google.com/maps/place/Mobicare+Service+Center+-+Gatot+Subroto/data=!4m2!3m1!1s0x0:0xb733a96a473a7ebb" },
   },
 ];
 
-/** Peta embed tanpa API key — cukup query pencarian (gratis, tanpa konfigurasi). */
-export const mapEmbedUrl = (query: string) =>
-  `https://www.google.com/maps?q=${encodeURIComponent(query)}&z=15&output=embed`;
+// Geographic bounds, not branch locations; includes Bali and Lombok in full.
+export const STORE_OVERVIEW_BOUNDS: [[number, number], [number, number]] = [
+  [-9.05, 114.4], [-8.05, 116.85],
+];
 
-export const mapDirectionsUrl = (query: string) =>
-  `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(query)}`;
+export const storeWhatsAppUrl = (store: Store) =>
+  `https://wa.me/${store.phone.replace(/^0/, "62")}`;
 
-export const mapSearchUrl = (query: string) =>
-  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+export const storeDirectionsUrl = (store: Store) =>
+  `https://www.google.com/maps/dir/?api=1&destination=${store.lat},${store.lng}`;

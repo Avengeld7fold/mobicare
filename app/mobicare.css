@@ -12,7 +12,119 @@
 .mobi-nav { position: relative; z-index: 60; background: var(--mobi-ink); border-bottom: 1px solid #29352d; }
 .mobi-nav__inner { height: 81px; padding: 0 var(--mobi-pad); display: flex; align-items: center; justify-content: space-between; gap: 28px; }
 .mobi-nav__brand { display: flex; align-items: center; width: 240px; min-height: 44px; flex-shrink: 0; }
-.mobi-nav__brand svg { width: 100%; height: 44px; }
+.mobi-nav__brand svg { width: 100%; height: 44px; display: block; overflow: visible; }
+
+/* =========================================================================
+   MobiCare Wordmark: Micro-Interactions & Deno-Style Hover Animation
+   ========================================================================= */
+.mobi-wordmark__m,
+.mobi-wordmark__letter-b,
+.mobi-wordmark__letter-i,
+.mobi-wordmark__letter-c,
+.mobi-wordmark__letter-a,
+.mobi-wordmark__letter-r,
+.mobi-wordmark__letter-e,
+.mobi-wordmark__tagline,
+.mobi-wordmark__phone {
+  transition: fill 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease;
+}
+
+.mobi-wordmark__rotor-group {
+  transform-origin: 407.5px 159.6px;
+  transform-box: view-box;
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.mobi-wordmark__gear {
+  transition: fill 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobi-wordmark__plus {
+  opacity: 0;
+  fill: #00A651;
+  transition: opacity 0.2s ease, fill 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Deno-style blink keyframes for medical plus cross */
+@keyframes mobiPlusDenoBlink {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.15;
+  }
+  75% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.35;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Hover Interaction: Navbar Brand, Footer Brand, & MobiCare Divider Mark */
+.mobi-nav__brand:hover .mobi-wordmark__m,
+.mobi-nav__brand:hover .mobi-wordmark__letter-b,
+.mobi-nav__brand:hover .mobi-wordmark__letter-i,
+.mobi-nav__brand:focus-visible .mobi-wordmark__m,
+.mobi-nav__brand:focus-visible .mobi-wordmark__letter-b,
+.mobi-nav__brand:focus-visible .mobi-wordmark__letter-i,
+.footer-brand:hover .mobi-wordmark__m,
+.footer-brand:hover .mobi-wordmark__letter-b,
+.footer-brand:hover .mobi-wordmark__letter-i,
+.mobi-divider-mark--mobicare:hover .mobi-wordmark__m,
+.mobi-divider-mark--mobicare:hover .mobi-wordmark__letter-b,
+.mobi-divider-mark--mobicare:hover .mobi-wordmark__letter-i {
+  fill: #FFFFFF !important;
+}
+
+.mobi-nav__brand:hover .mobi-wordmark__letter-c,
+.mobi-nav__brand:hover .mobi-wordmark__letter-a,
+.mobi-nav__brand:hover .mobi-wordmark__letter-r,
+.mobi-nav__brand:hover .mobi-wordmark__letter-e,
+.mobi-nav__brand:focus-visible .mobi-wordmark__letter-c,
+.mobi-nav__brand:focus-visible .mobi-wordmark__letter-a,
+.mobi-nav__brand:focus-visible .mobi-wordmark__letter-r,
+.mobi-nav__brand:focus-visible .mobi-wordmark__letter-e,
+.footer-brand:hover .mobi-wordmark__letter-c,
+.footer-brand:hover .mobi-wordmark__letter-a,
+.footer-brand:hover .mobi-wordmark__letter-r,
+.footer-brand:hover .mobi-wordmark__letter-e,
+.mobi-divider-mark--mobicare:hover .mobi-wordmark__letter-c,
+.mobi-divider-mark--mobicare:hover .mobi-wordmark__letter-a,
+.mobi-divider-mark--mobicare:hover .mobi-wordmark__letter-r,
+.mobi-divider-mark--mobicare:hover .mobi-wordmark__letter-e {
+  fill: #00A651 !important;
+}
+
+.mobi-nav__brand:hover .mobi-wordmark__rotor-group,
+.mobi-nav__brand:focus-visible .mobi-wordmark__rotor-group,
+.footer-brand:hover .mobi-wordmark__rotor-group,
+.mobi-divider-mark--mobicare:hover .mobi-wordmark__rotor-group {
+  transform: rotate(45deg);
+}
+
+.mobi-nav__brand:hover .mobi-wordmark__plus,
+.mobi-nav__brand:focus-visible .mobi-wordmark__plus,
+.footer-brand:hover .mobi-wordmark__plus,
+.mobi-divider-mark--mobicare:hover .mobi-wordmark__plus {
+  fill: #00A651 !important;
+  opacity: 1 !important;
+  animation: mobiPlusDenoBlink 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobi-wordmark__rotor-group,
+  .mobi-wordmark__plus {
+    animation: none !important;
+    transform: none !important;
+  }
+}
 .mobi-nav__desktop-links { display: flex; align-items: center; gap: clamp(16px, 2vw, 32px); }
 .mobi-nav a, .mobi-button { text-decoration: none; }
 .mobi-nav__desktop-links > a:not(.mobi-nav__cta) { position: relative; padding: 29px 0; color: #fff; font-size: 14px; font-weight: 700; line-height: 1.58; letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
@@ -22,20 +134,221 @@
 .mobi-nav__cta { width: 208.414px; height: 44px; padding: 14px 18px; flex-shrink: 0; }
 .mobi-nav__cta:hover, .mobi-nav__drawer-cta:hover, .mobi-button--primary:hover { background: #34d67e; border-color: #34d67e; }
 .mobi-nav__menu-button, .mobi-nav__drawer { display: none; }
-.mobi-hero { position: relative; z-index: 20; isolation: isolate; background: #050a07; display: grid; place-items: center; min-height: calc(100vh - 67px); overflow: hidden; }
-.mobi-hero__device, .mobi-hero__wash { position: absolute; inset: 0; }
-.mobi-hero__device img { object-fit: cover; object-position: center 44%; opacity: .9; }
-.mobi-hero__wash { background: radial-gradient(circle, transparent 8%, rgb(0 9 4 / .38) 58%, rgb(0 9 4 / .84)), linear-gradient(transparent 40%, rgb(0 9 4 / .68)); }
-.mobi-hero__content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; width: min(1000px, 88%); padding: 64px 0; text-align: center; }
-.mobi-hero__logo { position: relative; width: clamp(230px, 21vw, 330px); height: clamp(25.156px, 2.297vw, 36.094px); margin-bottom: 26px; }
-/* Preserve the source logo's aspect ratio and full visual width while keeping
-   the measured headline/CTA positions fixed. Taller artwork extends upward. */
-.mobi-hero__logo svg { position: absolute; bottom: 0; left: 0; width: 100%; height: auto; }
-.mobi-hero h1 { display: flex; flex-direction: column; align-items: center; gap: clamp(10px, 1vw, 18px); margin: 0 0 24px; font-family: var(--font-gobold), sans-serif; font-size: clamp(66px, 7vw, 112px); font-weight: 400; line-height: 1; letter-spacing: -.025em; text-transform: uppercase; }
-.mobi-hero h1 span { display: block; color: #fff; white-space: nowrap; }
-.mobi-hero h1 span:last-child { color: #00bb5b; }
-.mobi-hero__content > p { margin: 0 0 30px; max-width: 100%; color: #fff; font-size: 14px; line-height: 1.45; letter-spacing: .18em; text-transform: uppercase; text-wrap: initial; }
-.mobi-hero__actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px; }
+/* ==========================================================================
+   Hero Section — 3D Exploded iPhone Split Editorial Layout (Persis Fixmi)
+   ========================================================================== */
+.mobi-hero {
+  position: relative;
+  z-index: 20;
+  isolation: isolate;
+  background: #050a07;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 81px);
+  overflow: hidden;
+}
+@supports (height: 100svh) {
+  .mobi-hero {
+    min-height: calc(100svh - 81px);
+  }
+}
+
+.mobi-hero__ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.mobi-hero__ambient-glow {
+  width: min(58rem, 90vw);
+  height: min(44rem, 80vh);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 166, 81, 0.16) 0%, rgba(0, 166, 81, 0.04) 50%, transparent 72%);
+  filter: blur(120px);
+}
+
+/* Fullscreen Center Stage Layer untuk 3D iPhone (Persis Fixmi) */
+.mobi-hero__device-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.mobi-hero__device-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+  animation: mobiHeroFloat 7s ease-in-out infinite;
+}
+.mobi-hero__device-img {
+  width: auto;
+  height: 100%;
+  max-height: 86vh;
+  max-width: 95vw;
+  object-fit: contain;
+  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.85));
+}
+@keyframes mobiHeroFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(0.4deg);
+  }
+}
+
+/* Content Overlay — Lebar Persis Mengikuti Rail Navbar MobiCare (var(--mobi-pad)) */
+.mobi-hero__content-overlay {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 24px var(--mobi-pad) clamp(24px, 4vh, 48px);
+  min-height: calc(100vh - 81px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+@supports (height: 100svh) {
+  .mobi-hero__content-overlay {
+    min-height: calc(100svh - 81px);
+  }
+}
+.mobi-hero__top-spacer {
+  height: clamp(8px, 2.5vh, 36px);
+  flex-shrink: 0;
+}
+.mobi-hero__grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: center;
+  width: 100%;
+  gap: 0;
+  margin: auto 0;
+}
+
+/* Kolom Kiri: Self-Start di Atas Kiri Sejajar Logo Navbar */
+.mobi-hero__col-left {
+  grid-column: span 4;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  align-self: flex-start;
+  pointer-events: auto;
+}
+
+/* Kolom Tengah: Ruang Bodi 3D iPhone */
+.mobi-hero__col-center {
+  grid-column: span 4;
+  min-height: clamp(22rem, 45vh, 36rem);
+  pointer-events: none;
+}
+
+/* Kolom Kanan: Shifted Downwards Sejajar CTA Kanan Navbar */
+.mobi-hero__col-right {
+  grid-column: span 4;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  transform: translateY(42px);
+  pointer-events: auto;
+}
+
+.mobi-hero__headline {
+  font-family: var(--font-gobold), sans-serif;
+  font-size: clamp(52px, 5.8vw, 92px);
+  font-weight: 400;
+  line-height: 0.88;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  margin: 0;
+}
+.mobi-hero__line-white {
+  display: block;
+  color: #ffffff;
+  white-space: nowrap;
+}
+.mobi-hero__line-green {
+  display: block;
+  color: var(--mobi-green, #00a651);
+  white-space: nowrap;
+}
+
+.mobi-hero__tagline {
+  margin: 0 0 10px;
+  font-family: var(--mobi-text), sans-serif;
+  font-size: clamp(10.5px, 0.8vw, 13px);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #a0aec0;
+}
+.mobi-hero__brand-mark {
+  width: clamp(210px, 19vw, 290px);
+  height: auto;
+  margin-bottom: 8px;
+  display: block;
+}
+.mobi-hero__brand-mark svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.mobi-hero__socials {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  pointer-events: auto;
+  margin-top: 16px;
+  transform: translateY(-20px);
+}
+.mobi-hero__social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(5, 10, 7, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #ffffff;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease,
+              color 0.2s ease,
+              box-shadow 0.2s ease;
+}
+.mobi-hero__social-btn:hover {
+  transform: translateY(-3px) scale(1.1);
+  border-color: var(--mobi-green, #00a651);
+  color: var(--mobi-green, #00a651);
+  box-shadow: 0 6px 20px rgba(0, 166, 81, 0.35);
+}
+.mobi-hero__social-btn:focus-visible {
+  outline: 2px solid var(--mobi-green, #00a651);
+  outline-offset: 4px;
+}
 .mobi-button { padding: 16px 24px; }
 .mobi-hero .mobi-button--primary { width: 220.414px; height: 48px; }
 .mobi-button--secondary { width: 140.625px; min-height: 44px; padding: 15px 20px; font-size: 13px; line-height: 1.58; border-color: #fff; background: transparent; color: #fff; }
@@ -56,104 +369,186 @@
   .mobi-nav__drawer-links { display: flex; flex-direction: column; gap: 4px; width: 100%; }
   .mobi-nav__drawer-links a { display: flex; align-items: center; min-height: 44px; color: #fff; font-size: 16px; line-height: 1.58; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
   .mobi-nav__drawer-cta { margin-top: 14px; padding: 16px 24px; }
-  .mobi-hero h1 { font-size: clamp(64px, 7vw, 86px); }
+  .mobi-hero { min-height: auto; padding: 24px 0 44px; }
+  .mobi-hero__content-overlay { min-height: auto; padding: 24px var(--mobi-pad) 32px; }
+  .mobi-hero__device-layer { position: relative; inset: auto; width: 100%; height: auto; margin: 16px 0; order: 2; }
+  .mobi-hero__device-stage { position: relative; inset: auto; }
+  .mobi-hero__device-img { width: 88vw; max-width: 440px; height: auto; max-height: 48vh; }
+  .mobi-hero__grid { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .mobi-hero__col-left { align-items: center; text-align: center; align-self: center; order: 1; }
+  .mobi-hero__col-center { display: none; }
+  .mobi-hero__col-right { align-items: center; text-align: center; transform: none; order: 3; margin-top: 16px; }
+  .mobi-hero__headline { font-size: clamp(40px, 9vw, 68px); }
+  .mobi-hero__brand-mark { width: clamp(210px, 45vw, 270px); margin: 0 auto 8px; }
+  .mobi-hero__socials { justify-content: center; margin-top: 28px; transform: none; order: 4; }
 }
 @media (max-width: 720px) {
   .mobi-nav__inner { height: 75px; }
   .mobi-nav__brand { width: 196px; }
   .mobi-nav__drawer.is-open { top: 75px; }
-  .mobi-hero { min-height: calc(100svh - 64px); }
-  .mobi-hero__device img { object-position: 60% center; opacity: .9; }
-  .mobi-hero__content { width: 90%; padding: 52px 0; }
-  .mobi-hero__logo { width: 230px; height: 25.156px; margin-bottom: 22px; }
-  .mobi-hero h1 { gap: 10px; font-size: clamp(54px, 15vw, 62px); }
-  .mobi-hero__content > p { max-width: 310px; margin-bottom: 28px; }
-  .mobi-hero__actions { gap: 8px; }
-  .mobi-hero .mobi-button { padding: 14px 15px; font-size: 12px; }
-  .mobi-hero .mobi-button--primary { width: 180.641px; height: 44px; }
-  .mobi-hero .mobi-button--secondary { width: 123.039px; }
+  .mobi-hero { min-height: auto; padding: 20px 0 36px; }
+  .mobi-hero__content-overlay { padding: 16px 16px 28px; }
+  .mobi-hero__headline { font-size: clamp(34px, 11vw, 48px); }
+  .mobi-hero__tagline { font-size: 11px; letter-spacing: 0.14em; margin-bottom: 8px; }
+  .mobi-hero__brand-mark { width: 195px; }
+  .mobi-hero__device-img { width: 90vw; max-height: 42vh; }
 }
 @media (prefers-reduced-motion: reduce) {
   .mobi-nav *, .mobi-hero *, .mobi-divider *, .about-difference * { transition: none !important; animation: none !important; }
 }
 
 /* ==========================================================================
-   Fastrack-inspired Signature MobiCare Divider
+   Fastrack-inspired Signature MobiCare Animated Running Divider
    ========================================================================== */
-.mobi-divider {
-  isolation: isolate;
-  background: var(--mobi-ink, #050a07);
-  align-items: center;
+.mobi-divider-wrap {
   width: 100%;
-  height: 28px;
-  display: flex;
+  overflow: hidden;
   position: relative;
-  overflow: visible;
   z-index: 30;
-  margin-bottom: 0;
+  height: 56px;
+  background: var(--mobi-ink, #050a07);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  pointer-events: auto;
+  user-select: none;
+}
+
+.mobi-divider {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.mobi-divider__track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  will-change: transform;
+  animation: mobiDividerMarquee 40s linear infinite;
+}
+
+@keyframes mobiDividerMarquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.mobi-divider__segment {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .mobi-divider-stripe {
   background: var(--mobi-green, #00A651);
-  flex: 1;
   height: 8px;
+  flex-shrink: 0;
+}
+
+.mobi-divider-stripe--flow {
+  width: 100vw;
+  min-width: 100vw;
 }
 
 .mobi-divider-mark {
-  z-index: 2;
-  background: var(--mobi-ink, #050a07);
-  flex: 0 0 190px;
-  width: 190px;
-  height: 58px;
-  padding: 6px 16px;
+  background: transparent;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+  border: none;
+  box-shadow: none;
 }
 
-.mobi-divider-mark img {
+.mobi-divider-mark--mobicare {
+  cursor: pointer;
+  padding: 0 14px 0 28px;
+}
+
+.mobi-divider-mark svg {
   width: 156px;
   max-width: 100%;
   height: auto;
   display: block;
 }
 
-.mobi-divider-checks {
-  background-color: var(--mobi-green, #00A651);
-  background-image: conic-gradient(
-    var(--mobi-ink, #050a07) 25%,
-    transparent 0 50%,
-    var(--mobi-ink, #050a07) 0 75%,
-    transparent 0
-  );
-  background-size: 28px 28px;
-  flex: 0 0 112px;
-  width: 112px;
-  height: 28px;
+.mobi-divider-mark--fixmi {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 28px 0 14px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.mobi-divider-fixmi-label {
+  font-family: var(--font-gobold), Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.9);
+  white-space: nowrap;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.mobi-divider-fixmi-logo {
+  height: 25px;
+  width: auto;
+  max-width: none;
+  display: block;
+  object-fit: contain;
 }
 
 @media (max-width: 768px) {
-  .mobi-divider {
-    height: 20px;
-    margin-bottom: 0;
+  .mobi-divider-wrap {
+    height: 44px;
   }
   .mobi-divider-stripe {
     height: 6px;
   }
-  .mobi-divider-mark {
-    flex: 0 0 136px;
-    width: 136px;
-    height: 44px;
-    padding: 4px 8px;
+  .mobi-divider-stripe--flow {
+    width: 100vw;
+    min-width: 100vw;
   }
-  .mobi-divider-mark img {
+  .mobi-divider-mark {
+    height: 44px;
+  }
+  .mobi-divider-mark--mobicare {
+    padding: 0 8px 0 16px;
+  }
+  .mobi-divider-mark svg {
     width: 116px;
   }
-  .mobi-divider-checks {
-    background-size: 20px 20px;
-    flex: 0 0 48px;
-    width: 48px;
-    height: 20px;
+  .mobi-divider-mark--fixmi {
+    gap: 8px;
+    padding: 0 16px 0 8px;
+  }
+  .mobi-divider-fixmi-label {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+  }
+  .mobi-divider-fixmi-logo {
+    height: 19px;
+  }
+  .mobi-divider__track {
+    animation-duration: 18s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobi-divider__track {
+    animation: none !important;
+    transform: none !important;
   }
 }
 
@@ -1117,15 +1512,25 @@
 .smarter-modal {
   position: fixed;
   inset: 0;
-  z-index: 99999;
-  background: rgba(4, 8, 5, 0.94);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  z-index: 99999999;
+  background: rgba(6, 10, 7, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: clamp(16px, 4vw, 32px);
   animation: smarterModalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  overscroll-behavior: contain;
+  touch-action: none;
+}
+
+body.video-modal-active .mobi-signup-wrapper,
+body.video-modal-active .signup-marquee {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
 @keyframes smarterModalFadeIn {
@@ -1202,6 +1607,560 @@
   color: #04170d;
   transform: scale(1.08);
 }
+
+/* ==========================================================================
+   Home Alerts Signup Section ("Be the first to know") — Adapted from Fastrack
+   ========================================================================== */
+
+.mobi-signup-wrapper {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.signup-marquee {
+  width: 100%;
+  background: var(--mobi-green, #00a651);
+  color: #080c09;
+  white-space: nowrap;
+  letter-spacing: 0.16em;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 13px 0;
+  font-family: var(--font-gobold), Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1;
+  overflow: hidden;
+  user-select: none;
+  position: relative;
+  z-index: 5;
+}
+
+.signup-marquee-track {
+  width: max-content;
+  display: flex;
+  animation: mobi-signup-marquee 22s linear infinite;
+  will-change: transform;
+}
+
+.signup-marquee-track span {
+  flex: none;
+  padding-right: 28px;
+  display: block;
+}
+
+@keyframes mobi-signup-marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (max-width: 720px) {
+  .signup-marquee {
+    padding: 11px 0;
+    font-size: 12px;
+  }
+  .signup-marquee-track {
+    animation-duration: 16s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signup-marquee-track {
+    animation: none;
+    transform: none;
+  }
+}
+
+.signup-band {
+  isolation: isolate;
+  width: 100%;
+  max-width: none;
+  background: var(--mobi-green, #00a651);
+  color: #080c09;
+  padding: clamp(64px, 7vw, 108px) clamp(22px, 4.5vw, 76px) 34px;
+  grid-template-columns: minmax(0, 1.35fr) minmax(310px, 0.65fr);
+  align-items: center;
+  gap: clamp(42px, 7vw, 110px);
+  margin: 0 auto;
+  display: grid;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.signup-band *,
+.signup-band *::before,
+.signup-band *::after {
+  box-sizing: border-box;
+}
+
+.signup-band::before {
+  content: "";
+  z-index: 0;
+  background: repeating-conic-gradient(#080c09 0 25%, transparent 0 50%) 50% / 52px 52px;
+  opacity: 0.07;
+  width: 360px;
+  height: 360px;
+  position: absolute;
+  top: -90px;
+  right: -70px;
+  transform: rotate(11deg);
+  pointer-events: none;
+}
+
+.signup-band::after {
+  content: "";
+  background: #080c09;
+  height: 7px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.signup-ghost {
+  z-index: 0;
+  color: #080c09;
+  opacity: 0.055;
+  letter-spacing: -0.08em;
+  font-family: var(--font-gobold), Arial, sans-serif;
+  font-size: clamp(190px, 25vw, 350px);
+  line-height: 0.72;
+  font-weight: 400;
+  position: absolute;
+  bottom: 14px;
+  left: -22px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.signup-copy {
+  z-index: 1;
+  position: relative;
+}
+
+.signup-band .kicker {
+  color: #080c09;
+  text-transform: uppercase;
+  letter-spacing: 0.23em;
+  margin: 0 0 14px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  font-family: var(--font-greycliff), Arial, sans-serif;
+}
+
+.kicker-symbol {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 700;
+  display: inline-block;
+  padding: 0 2px;
+}
+
+.signup-band h2 {
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  margin: 0;
+  font-family: var(--font-gobold), Arial, sans-serif;
+  font-size: clamp(62px, 7vw, 108px);
+  line-height: 0.83;
+  font-weight: 400;
+}
+
+.signup-band h2 span {
+  display: block;
+}
+
+.signup-band h2 span:first-child {
+  color: #080c09;
+}
+
+.signup-band h2 span:last-child {
+  color: #ffffff;
+  text-shadow: none;
+}
+
+.signup-deck {
+  max-width: 650px;
+  margin: 24px 0 0;
+  font-size: clamp(16px, 1.4vw, 20px);
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  color: #080c09;
+  font-family: var(--font-greycliff), Arial, sans-serif;
+}
+
+.signup-action {
+  z-index: 2;
+  color: #ffffff;
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 94% 100%, 0 100%);
+  background: #080c09;
+  grid-template-columns: 58px 1fr;
+  justify-self: stretch;
+  align-items: center;
+  gap: 22px;
+  padding: 30px;
+  display: grid;
+  position: relative;
+  box-shadow: 12px 12px rgba(255, 255, 255, 0.28);
+}
+
+.signup-action-mark {
+  border: 1px solid #333333;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  display: grid;
+  transform: skew(-7deg);
+}
+
+.signup-action-mark img {
+  object-fit: contain;
+  width: 36px;
+  height: auto;
+  max-height: 38px;
+  transform: skew(7deg);
+}
+
+.signup-action p {
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+  margin: 0;
+  display: flex;
+}
+
+.signup-action p strong {
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-family: var(--font-gobold), Arial, sans-serif;
+  font-size: clamp(23px, 2vw, 26px);
+  line-height: 1.1;
+  font-weight: 400;
+  color: #ffffff;
+}
+
+.signup-action p span {
+  color: #e5e7eb;
+  font-size: 15px;
+  line-height: 1.45;
+  font-weight: 500;
+  font-family: var(--font-greycliff), Arial, sans-serif;
+}
+
+.signup-button {
+  grid-column: 1 / -1;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px 22px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #080c09;
+  background: #ffffff;
+  border: 1px solid #ffffff;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-family: var(--font-greycliff), Arial, sans-serif;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+
+.signup-button:hover,
+.signup-button:focus-visible {
+  background: var(--mobi-green, #00a651);
+  border-color: var(--mobi-green, #00a651);
+  color: #080c09;
+}
+
+.signup-benefits {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  border-top: 1px solid rgba(0, 0, 0, 0.24);
+  grid-column: 1 / -1;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  padding-top: 25px;
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  color: #080c09;
+  font-family: var(--font-greycliff), Arial, sans-serif;
+}
+
+.signup-benefits i {
+  background: #080c09;
+  width: 5px;
+  height: 5px;
+  transform: rotate(45deg);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* ── Responsive Behavior ── */
+@media (max-width: 720px) {
+  .signup-band {
+    grid-template-columns: 1fr;
+    padding-bottom: 28px;
+    gap: 36px;
+  }
+  .signup-band h2 {
+    font-size: clamp(54px, 16vw, 62px);
+  }
+  .signup-action {
+    grid-template-columns: 50px 1fr;
+    justify-self: stretch;
+    gap: 16px;
+    padding: 24px;
+  }
+  .signup-action-mark {
+    width: 50px;
+    height: 50px;
+  }
+  .signup-action p strong {
+    font-size: 22px;
+  }
+  .signup-benefits {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 12px 14px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 420px) {
+  .signup-action {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+  .signup-action-mark {
+    display: none;
+  }
+  .signup-action p strong {
+    font-size: 22px;
+  }
+}
+
+/* ==========================================================================
+   MobiCare Site Footer (Inspired directly by fasttracksales.com)
+   ========================================================================== */
+.site-footer {
+  width: 100%;
+  max-width: none;
+  color: #ffffff;
+  background: #060606;
+  padding: 70px clamp(22px, 4.5vw, 76px) 28px;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: var(--font-greycliff), Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.58;
+}
+
+.footer-top {
+  border-bottom: 1px solid #333333;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 50px;
+  padding-bottom: 60px;
+  display: grid;
+  align-items: start;
+}
+
+.footer-brand {
+  align-self: start;
+  align-items: center;
+  width: min(330px, 100%);
+  min-height: 44px;
+  display: flex;
+}
+
+.footer-brand-img {
+  width: auto;
+  max-width: 280px;
+  height: 44px;
+  object-fit: contain;
+  display: block;
+}
+
+.footer-contact,
+.footer-social,
+.footer-apps {
+  flex-direction: column;
+  gap: 8px;
+  font-size: 16px;
+  line-height: 1.58;
+  display: flex;
+}
+
+.footer-label {
+  color: var(--mobi-green, #00a651);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 400;
+  font-family: var(--font-greycliff), Arial, sans-serif;
+}
+
+.footer-contact a,
+.footer-social a,
+.footer-apps a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 1.58;
+  font-weight: 400;
+  transition: color 0.15s ease;
+}
+
+.footer-contact a:hover,
+.footer-social a:hover,
+.footer-apps a:hover {
+  color: var(--mobi-green, #00a651);
+}
+
+.footer-sym {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-style: normal;
+  display: inline-block;
+}
+
+.footer-sym-amp {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-style: normal;
+  display: inline-block;
+  padding: 0 3px;
+}
+
+.footer-copy {
+  color: #a7a7a7;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  padding: 54px 0;
+  font-size: 14px;
+  line-height: 1.72;
+  display: grid;
+}
+
+.footer-copy p {
+  margin: 14px 0;
+  color: #a7a7a7;
+  font-size: 14px;
+  line-height: 1.72;
+  font-weight: 400;
+}
+
+.footer-legal {
+  color: #888888;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-top: 1px solid #333333;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding-top: 24px;
+  font-size: 12px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer-legal a {
+  color: #888888;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.15s ease;
+}
+
+.footer-legal a:hover {
+  color: #ffffff;
+}
+
+.footer-legal-links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+/* Tablet: @media (max-width: 1050px) - persis Fastrack */
+@media (max-width: 1050px) {
+  .footer-top {
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+  }
+  .footer-apps {
+    grid-column: 2 / 4;
+  }
+}
+
+/* Mobile: @media (max-width: 720px) */
+@media (max-width: 720px) {
+  .site-footer {
+    padding-top: 56px;
+  }
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px 24px;
+    padding-bottom: 40px;
+  }
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+  .footer-apps {
+    grid-column: auto;
+  }
+  .footer-copy {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 36px 0;
+  }
+  .footer-legal {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .footer-legal-links {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+}
+
+/* Small mobile: @media (max-width: 420px) */
+@media (max-width: 420px) {
+  .footer-top {
+    gap: 32px 22px;
+  }
+  .footer-contact,
+  .footer-social,
+  .footer-apps {
+    font-size: 15px;
+  }
+  .footer-top a,
+  .footer-legal a {
+    align-items: center;
+    min-height: 36px;
+    display: flex;
+  }
+  .site-footer {
+    padding-top: 56px;
+  }
+}
+
+
 
 
 

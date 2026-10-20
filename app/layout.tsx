@@ -107,6 +107,7 @@ export const metadata: Metadata = {
 };
 
 import { I18nProvider } from "@/lib/i18n/context";
+import Footer from "@/components/Footer";
 
 export default function RootLayout({
   children,
@@ -124,6 +125,7 @@ export default function RootLayout({
             <SmoothScrolling>
               <MobiCareNavbar />
               <main className="flex-1">{children}</main>
+              <Footer />
             </SmoothScrolling>
           </I18nProvider>
         </LoadingGate>

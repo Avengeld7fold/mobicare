@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation";
 const links = [
   { href: "/", label: "Home" },
   { href: "/pricelist", label: "Price List" },
+  { href: "/our-store", label: "Our Store" },
   { href: "/promo", label: "Promo" },
   { href: "/gallery", label: "Galeri" },
   { href: "/about", label: "Tentang" },
@@ -41,10 +42,16 @@ export default function MobiCareNavbar() {
 
   const activePath = pathname.replace(/^\/en(?=\/|$)/, "") || "/";
 
+  const isEn = pathname.startsWith("/en");
+  const getHref = (href: string) => {
+    if (!isEn) return href;
+    return href === "/" ? "/en" : `/en${href}`;
+  };
+
   return (
     <header className="mobi-nav">
       <nav className="mobi-nav__inner" aria-label="Navigasi utama">
-        <Link className="mobi-nav__brand" href="/" aria-label="MobiCare home">
+        <Link className="mobi-nav__brand" href={getHref("/")} aria-label="MobiCare home">
           <MobiCareWordmark />
         </Link>
 
@@ -52,15 +59,16 @@ export default function MobiCareNavbar() {
           {links.map((link) => (
             <Link
               className={activePath === link.href ? "is-active" : undefined}
-              href={link.href}
+              href={getHref(link.href)}
               key={link.href}
             >
               {link.label}
             </Link>
           ))}
-        <Link className="mobi-nav__cta mobi-nav__desktop-cta" href="/contact">
-          Konsultasi <ArrowUpRight aria-hidden="true" size={18} strokeWidth={1.5} />
-        </Link>
+          <Link className="mobi-nav__cta mobi-nav__desktop-cta" href={getHref("/contact")}>
+            {isEn ? "Consultation" : "Konsultasi"}{" "}
+            <ArrowUpRight aria-hidden="true" size={18} strokeWidth={1.5} />
+          </Link>
         </div>
 
         <button
@@ -80,13 +88,14 @@ export default function MobiCareNavbar() {
       <div className={`mobi-nav__drawer ${menuOpen ? "is-open" : ""}`} id="mobi-mobile-menu" aria-hidden={!menuOpen} inert={!menuOpen}>
         <div className="mobi-nav__drawer-links">
           {links.map((link) => (
-            <Link href={link.href} key={link.href} onClick={() => closeMenu()}>
+            <Link href={getHref(link.href)} key={link.href} onClick={() => closeMenu()}>
               {link.label}
             </Link>
           ))}
         </div>
-        <Link className="mobi-nav__drawer-cta" href="/contact" onClick={() => closeMenu()}>
-          Mulai konsultasi <ArrowUpRight aria-hidden="true" size={18} strokeWidth={1.5} />
+        <Link className="mobi-nav__drawer-cta" href={getHref("/contact")} onClick={() => closeMenu()}>
+          {isEn ? "Start consultation" : "Mulai konsultasi"}{" "}
+          <ArrowUpRight aria-hidden="true" size={18} strokeWidth={1.5} />
         </Link>
       </div>
     </header>

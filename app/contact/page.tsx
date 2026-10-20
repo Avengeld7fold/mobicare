@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
-import MobiCarePlaceholder from "@/components/MobiCarePlaceholder";
+import ContactPageContent from "@/components/contact/ContactPageContent";
+import { idDictionary } from "@/lib/i18n/dictionaries/id";
 
 export const metadata: Metadata = {
-  title: "Konsultasi MobiCare",
-  description: "Halaman konsultasi MobiCare sedang disiapkan.",
+  title: idDictionary.contact.metaTitle,
+  description: idDictionary.contact.metaDescription,
   alternates: {
     canonical: "/contact",
   },
   openGraph: {
-    title: "Konsultasi MobiCare",
-    description: "Halaman konsultasi MobiCare sedang disiapkan.",
+    title: idDictionary.contact.metaTitle,
+    description: idDictionary.contact.metaDescription,
     url: "/contact",
     images: [
       {
@@ -23,6 +24,5 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  return <MobiCarePlaceholder title="MULAI KONSULTASI" description="Kanal konsultasi MobiCare sedang disiapkan. Sementara itu, Anda dapat melihat estimasi melalui Price List." action="Cek harga" />;
+  return <ContactPageContent />;
 }
-
