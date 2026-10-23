@@ -44,9 +44,10 @@ export const STORES: Store[] = [
   },
 ];
 
-// Geographic bounds, not branch locations; includes Bali and Lombok in full.
+// South Bali overview keeps the island context visible while all branches
+// remain individually legible in the initial map view.
 export const STORE_OVERVIEW_BOUNDS: [[number, number], [number, number]] = [
-  [-9.05, 114.4], [-8.05, 116.85],
+  [-8.84, 115.04], [-8.45, 115.35],
 ];
 
 export const storeWhatsAppUrl = (store: Store) =>

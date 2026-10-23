@@ -5,9 +5,9 @@ import GalleryPage from "../../gallery/page";
 export const revalidate = 30;
 
 export const metadata: Metadata = {
-  title: "Repair Showcase & Workbench Gallery — FIXMI Service Center",
+  title: "Repair Gallery — MobiCare Service Center",
   description:
-    "Explore genuine repair documentation from FIXMI Service Center: screen reconditioning, battery renewals, motherboard micro-soldering, and hardware restorations.",
+    "Explore verified repair documentation and technician activity from MobiCare Service Center.",
   alternates: {
     canonical: "/en/gallery",
   },

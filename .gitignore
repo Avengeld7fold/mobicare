@@ -77,3 +77,4 @@ skills-lock.json
 # Dev-only scripts (allow production build scripts)
 scripts/*
 !scripts/prepare-map-worker.mjs
+!scripts/check-admin-parity.mjs

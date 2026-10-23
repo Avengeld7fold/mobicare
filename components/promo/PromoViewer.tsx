@@ -1,248 +1,115 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { X, ChevronLeft, ChevronRight, ZoomIn, MessageCircle, ArrowRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowRight, ChevronLeft, ChevronRight, MessageCircle, X, ZoomIn } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
 import { whatsappUrl } from "@/lib/constants";
 import type { PromoImageItem } from "@/lib/promo-server";
 
-interface PromoViewerProps {
-  promos: PromoImageItem[];
-}
+interface PromoViewerProps { promos: PromoImageItem[]; }
 
 export default function PromoViewer({ promos }: PromoViewerProps) {
   const { dict, locale } = useI18n();
   const isEn = locale === "en";
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const triggerRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const selectedPromo = selectedIndex === null ? null : promos[selectedIndex];
 
-  const selectedPromo = selectedIndex !== null ? promos[selectedIndex] : null;
-
-  const handleOpen = (index: number) => {
-    setSelectedIndex(index);
-  };
-
-  const handleClose = () => {
+  const close = () => {
+    const returnIndex = selectedIndex;
     setSelectedIndex(null);
+    if (returnIndex !== null) requestAnimationFrame(() => triggerRefs.current[returnIndex]?.focus());
   };
+  const previous = () => setSelectedIndex((current) => current === null ? null : current > 0 ? current - 1 : promos.length - 1);
+  const next = () => setSelectedIndex((current) => current === null ? null : current < promos.length - 1 ? current + 1 : 0);
 
-  const handlePrev = () => {
-    if (selectedIndex === null) return;
-    setSelectedIndex((prev) => (prev! > 0 ? prev! - 1 : promos.length - 1));
-  };
-
-  const handleNext = () => {
-    if (selectedIndex === null) return;
-    setSelectedIndex((prev) => (prev! < promos.length - 1 ? prev! + 1 : 0));
-  };
-
-  // Keyboard navigation for lightbox
   useEffect(() => {
     if (selectedIndex === null) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setSelectedIndex(null);
-      if (e.key === "ArrowLeft") {
-        setSelectedIndex((prev) => (prev === null ? null : prev > 0 ? prev - 1 : promos.length - 1));
-      }
-      if (e.key === "ArrowRight") {
-        setSelectedIndex((prev) => (prev === null ? null : prev < promos.length - 1 ? prev + 1 : 0));
-      }
+    closeButtonRef.current?.focus();
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") close();
+      if (event.key === "ArrowLeft") previous();
+      if (event.key === "ArrowRight") next();
     };
-
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", onKeyDown);
     document.body.style.overflow = "hidden";
-
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = "";
     };
+  // Handlers use current state via functional setters.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [promos.length, selectedIndex]);
 
-  // Ultra-Clean Snug Banner (adopted from Pricelist empty card pattern)
-  if (!promos || promos.length === 0) {
+  if (promos.length === 0) {
     return (
-      <div className="relative overflow-hidden rounded-[16px] lg:rounded-[20px] border border-panel-border bg-panel p-5 sm:p-6 lg:py-7 lg:px-8 transition-colors duration-200">
-        <div className="flex flex-col items-start gap-5 lg:flex-row lg:items-center lg:justify-between">
-          <div className="max-w-2xl">
-            {/* Status Pill Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-2.5 py-0.5 text-[0.6875rem] font-mono tracking-wider text-neutral-300 uppercase mb-2.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-              <span>{isEn ? "Offers & Promo Information" : "Informasi Penawaran & Promo"}</span>
-            </div>
-
-            <h3
-              className="font-display text-xl sm:text-2xl lg:text-[1.75rem] text-white uppercase tracking-tight leading-tight"
-              style={{ fontFamily: "var(--font-gobold), sans-serif" }}
-            >
-              {isEn ? (
-                <>
-                  Exclusive Offers{" "}
-                  <span className="text-primary">Coming Soon</span>
-                </>
-              ) : (
-                <>
-                  Promo & Penawaran Khusus{" "}
-                  <span className="text-primary">Segera Hadir</span>
-                </>
-              )}
-            </h3>
-
-            <p
-              className="mt-2 text-xs sm:text-sm leading-relaxed text-text-secondary max-w-xl"
-              style={{ fontFamily: "var(--font-greycliff), sans-serif" }}
-            >
-              {dict.promo.emptyPromo}
-            </p>
-          </div>
-
-          {/* Direct WhatsApp Action Button */}
-          <a
-            href={whatsappUrl(
-              isEn
-                ? "Halo FIXMI Service Center, saya ingin menanyakan penawaran menarik dan promo servis untuk gadget saya."
-                : "Halo FIXMI Service Center, saya ingin menanyakan penawaran menarik dan promo servis untuk gadget saya."
-            )}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative inline-flex w-full sm:w-auto shrink-0 items-center justify-center gap-2.5 rounded-xl bg-primary px-5 sm:px-6 py-3 text-xs sm:text-sm font-semibold text-white tracking-[-0.01em] transition-all duration-150 ease-out hover:bg-primary-light hover:brightness-105 active:scale-[0.98] shadow-[0_4px_16px_rgba(255,107,0,0.2)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
-          >
-            <MessageCircle className="h-4 w-4 text-white stroke-[2]" aria-hidden="true" />
-            <span>{isEn ? "Inquire on WhatsApp" : "Hubungi via WhatsApp"}</span>
-            <ArrowRight
-              className="h-3.5 w-3.5 text-white/80 transition-transform duration-150 ease-out group-hover:translate-x-0.5 group-hover:text-white"
-              strokeWidth={2}
-              aria-hidden="true"
-            />
-          </a>
+      <div className="media-empty">
+        <span className="media-empty-index" aria-hidden="true">00</span>
+        <div>
+          <h3>{isEn ? "No active offers" : "Belum ada promo"}<span>{isEn ? " right now." : " aktif saat ini."}</span></h3>
+          <p>{dict.promo.emptyPromo}</p>
         </div>
+        <a
+          className="media-primary-action"
+          href={whatsappUrl(isEn
+            ? "Hello MobiCare Service Center, I would like to ask about current service offers for my device."
+            : "Halo MobiCare Service Center, saya ingin menanyakan penawaran servis untuk perangkat saya.")}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <MessageCircle size={18} aria-hidden="true" />
+          {isEn ? "Ask on WhatsApp" : "Tanya via WhatsApp"}
+          <ArrowRight size={17} aria-hidden="true" />
+        </a>
       </div>
     );
   }
 
   return (
     <>
-      {/* ── Promo Image Cards Grid ── */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      <div className="promo-grid">
         {promos.map((item, index) => (
-          <div
+          <button
+            ref={(element) => { triggerRefs.current[index] = element; }}
+            type="button"
             key={item.id || index}
-            onClick={() => handleOpen(index)}
-            className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-panel transition-all duration-300 hover:border-primary/50 hover:shadow-[0_16px_40px_rgba(255,107,0,0.16)] cursor-pointer"
+            className="promo-item"
+            onClick={() => setSelectedIndex(index)}
+            aria-label={`${isEn ? "Open promo" : "Buka promo"} ${item.Title || index + 1}`}
           >
-            {/* Promo Card Image */}
-            <div className="relative w-full overflow-hidden bg-neutral-900/80">
+            <span className="media-image-wrap">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={item.Image}
-                alt={item.altText || item.Title || `Promo FIXMI ${index + 1}`}
-                loading={index < 3 ? "eager" : "lazy"}
-                className="w-full h-auto block object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-              />
-
-              {/* Hover Overlay with Zoom indicator */}
-              <div className="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center pointer-events-none">
-                <div className="rounded-full bg-primary/90 text-white p-3 shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                  <ZoomIn className="h-5 w-5 stroke-[2.5]" />
-                </div>
-              </div>
-
-              {/* Optional Top Badge Tag */}
-              {item.badge && (
-                <div className="absolute top-3.5 left-3.5 rounded-full border border-white/20 bg-black/60 px-3 py-1 font-mono text-[0.6875rem] font-semibold tracking-wider text-primary backdrop-blur-md">
-                  {item.badge}
-                </div>
-              )}
-            </div>
-
-            {/* Optional Card Bottom Info */}
+              <img src={item.Image} alt={item.altText || item.Title || `Promo MobiCare ${index + 1}`} loading={index < 2 ? "eager" : "lazy"} />
+              <span className="media-zoom" aria-hidden="true"><ZoomIn size={20} /></span>
+              {item.badge && <span className="promo-badge">{item.badge}</span>}
+            </span>
             {(item.Title || item.validUntil) && (
-              <div className="p-4 sm:p-5 border-t border-white/[0.06] flex items-center justify-between gap-3">
-                {item.Title && (
-                  <h4 className="text-sm sm:text-base font-bold text-white tracking-tight truncate">
-                    {item.Title}
-                  </h4>
-                )}
-                {item.validUntil && (
-                  <span className="font-mono text-xs text-neutral-400 shrink-0">
-                    {item.validUntil}
-                  </span>
-                )}
-              </div>
+              <span className="promo-meta">
+                <span className="promo-meta-index">{String(index + 1).padStart(2, "0")}</span>
+                <strong>{item.Title || (isEn ? "MobiCare offer" : "Penawaran MobiCare")}</strong>
+                {item.validUntil && <time>{item.validUntil}</time>}
+              </span>
             )}
-          </div>
+          </button>
         ))}
       </div>
 
-      {/* ── Fullscreen Interactive Lightbox Modal ── */}
       {selectedPromo && selectedIndex !== null && (
-        <div
-          onClick={handleClose}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-3 sm:p-6 backdrop-blur-2xl transition-all duration-300 animate-in fade-in"
-        >
-          {/* Close Button */}
-          <button
-            type="button"
-            onClick={handleClose}
-            aria-label={dict.common.close}
-            className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 rounded-full bg-white/10 p-2.5 sm:p-3 text-white backdrop-blur-md transition-colors hover:bg-white/20 active:scale-95"
-          >
-            <X className="h-5 w-5 sm:h-6 sm:w-6" />
-          </button>
-
-          {/* Prev Button */}
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              handlePrev();
-            }}
-            aria-label={isEn ? "Previous promo" : "Promo Sebelumnya"}
-            className="absolute left-2 sm:left-6 z-50 rounded-full bg-white/10 p-2 sm:p-3 text-white backdrop-blur-md transition-colors hover:bg-white/20 active:scale-95"
-          >
-            <ChevronLeft className="h-6 w-6 sm:h-7 sm:w-7" />
-          </button>
-
-          {/* Next Button */}
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleNext();
-            }}
-            aria-label={isEn ? "Next promo" : "Promo Berikutnya"}
-            className="absolute right-2 sm:right-6 z-50 rounded-full bg-white/10 p-2 sm:p-3 text-white backdrop-blur-md transition-colors hover:bg-white/20 active:scale-95"
-          >
-            <ChevronRight className="h-6 w-6 sm:h-7 sm:w-7" />
-          </button>
-
-          {/* Modal Content */}
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="relative flex flex-col items-center max-w-5xl max-h-[90vh] w-full select-none"
-          >
-            <div className="relative flex items-center justify-center max-h-[78vh] w-auto max-w-full overflow-hidden rounded-2xl border border-white/15 bg-black shadow-2xl">
+        <div className="media-lightbox" role="dialog" aria-modal="true" aria-label={isEn ? "Promo preview" : "Pratinjau promo"} onClick={close}>
+          <button ref={closeButtonRef} type="button" className="media-lightbox-close" onClick={close} aria-label={dict.common.close}><X size={22} /></button>
+          {promos.length > 1 && <button type="button" className="media-lightbox-nav media-lightbox-nav--prev" onClick={(event) => { event.stopPropagation(); previous(); }} aria-label={isEn ? "Previous promo" : "Promo sebelumnya"}><ChevronLeft size={24} /></button>}
+          <div className="media-lightbox-shell" onClick={(event) => event.stopPropagation()}>
+            <div className="media-lightbox-image">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={selectedPromo.Image}
-                alt={selectedPromo.altText || selectedPromo.Title || (isEn ? "FIXMI Promo Banner" : "Banner Promo FIXMI")}
-                className="max-h-[78vh] max-w-full object-contain block"
-              />
+              <img src={selectedPromo.Image} alt={selectedPromo.altText || selectedPromo.Title || (isEn ? "MobiCare promo" : "Promo MobiCare")} />
             </div>
-
-            {/* Bottom Caption */}
-            <div className="mt-3.5 flex items-center justify-between w-full max-w-2xl px-3">
-              <span className="text-xs sm:text-sm font-mono text-neutral-400">
-                {isEn
-                  ? `Promo ${selectedIndex + 1} of ${promos.length}`
-                  : `Promo ${selectedIndex + 1} dari ${promos.length}`}
-              </span>
-              {selectedPromo.Title && (
-                <span className="text-xs sm:text-sm font-medium text-neutral-300 tracking-wide truncate max-w-[65%] text-right">
-                  {selectedPromo.Title}
-                </span>
-              )}
+            <div className="media-lightbox-caption">
+              <span>{String(selectedIndex + 1).padStart(2, "0")} / {String(promos.length).padStart(2, "0")}</span>
+              {selectedPromo.Title && <span>{selectedPromo.Title}</span>}
             </div>
           </div>
+          {promos.length > 1 && <button type="button" className="media-lightbox-nav media-lightbox-nav--next" onClick={(event) => { event.stopPropagation(); next(); }} aria-label={isEn ? "Next promo" : "Promo berikutnya"}><ChevronRight size={24} /></button>}
         </div>
       )}
     </>

@@ -3,6 +3,8 @@
 import { useI18n } from "@/lib/i18n/context";
 import GalleryViewer from "@/components/gallery/GalleryViewer";
 import type { GalleryImage } from "@/lib/gallery-server";
+import { ArrowDownRight } from "lucide-react";
+import "../media-pages.css";
 
 interface GalleryPageContentProps {
   images: GalleryImage[];
@@ -13,49 +15,26 @@ export default function GalleryPageContent({ images }: GalleryPageContentProps) 
   const isEn = locale === "en";
 
   return (
-    <main className="min-h-screen bg-[#121212] text-foreground pt-12 sm:pt-16 md:pt-20 pb-20 sm:pb-28">
-      <div className="mobi-container">
-        {/* ── Header Section ── */}
-        <header className="mb-12 lg:mb-16">
-          <div className="mb-5 flex items-center gap-2.5">
-            <span
-              className="inline-block h-1.5 w-1.5 rounded-full bg-primary"
-              aria-hidden="true"
-            />
-            <span className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-text-muted">
-              {dict.gallery.badge}
-            </span>
+    <main className="media-page">
+      <header className="media-intro mobi-container">
+        <h1>{isEn ? "Real process." : "Proses nyata."}<span>{isEn ? "Visible results." : "Hasil terlihat."}</span></h1>
+        <div className="media-intro-copy">
+          <p>{dict.gallery.subtitle}</p>
+          <a href="#gallery-list">
+            {isEn ? "View documentation" : "Lihat dokumentasi"}
+            <ArrowDownRight size={18} aria-hidden="true" />
+          </a>
+        </div>
+      </header>
+      <section className="media-surface" id="gallery-list" aria-label={isEn ? "MobiCare repair documentation" : "Dokumentasi servis MobiCare"}>
+        <div className="mobi-container">
+          <div className="media-heading">
+            <h2>{isEn ? "Service documentation" : "Dokumentasi servis"}</h2>
+            <span>{String(images.length).padStart(2, "0")} {isEn ? "photos" : "foto"}</span>
           </div>
-
-          <h1
-            style={{
-              fontFamily: "var(--font-gobold), sans-serif",
-              fontWeight: 400,
-              lineHeight: 0.95,
-              letterSpacing: "-0.02em",
-              color: "var(--mobi-paper)",
-              textTransform: "uppercase" as const,
-            }}
-            className="text-[clamp(2.25rem,7vw,3.125rem)] md:text-[clamp(3.125rem,5.5vw,4rem)] lg:text-[clamp(4rem,5vw,4.75rem)]"
-          >
-            {isEn ? "REPAIR SHOWCASE" : "GALERI REPAIR"}
-            <br />
-            <span style={{ color: "var(--mobi-green)" }}>
-              {isEn ? "WORKBENCH GALLERY" : "DOKUMENTASI SERVIS"}
-            </span>
-          </h1>
-
-          <p
-            className="mt-6 max-w-[46ch] text-sm md:text-base leading-relaxed text-text-secondary"
-            style={{ fontFamily: "var(--font-greycliff), sans-serif" }}
-          >
-            {dict.gallery.subtitle}
-          </p>
-        </header>
-
-        {/* ── Dynamic Photo-Only Gallery Grid ── */}
-        <GalleryViewer images={images} />
-      </div>
+          <GalleryViewer images={images} />
+        </div>
+      </section>
     </main>
   );
 }

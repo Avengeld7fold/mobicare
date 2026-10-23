@@ -194,8 +194,8 @@ export const idDictionary: Dictionary = {
       "Jangan khawatir. Hubungi teknisi kami untuk cek ketersediaan sparepart, diagnosa kerusakan, dan estimasi biaya perbaikan secara transparan.",
     unlistedCtaBtn: "Chat Teknisi via WhatsApp",
     unlistedBadge: "KONSULTASI GRATIS & CEK SPAREPART",
-    warrantyModalTitle: "Ketentuan Garansi Resmi FIXMI",
-    warrantyModalSubtitle: "Komitmen kami untuk memberikan rasa aman dan jaminan kualitas terbaik bagi setiap pelanggan.",
+    warrantyModalTitle: "Ketentuan Garansi Resmi MobiCare",
+    warrantyModalSubtitle: "Masa dan cakupan garansi mengikuti detail yang tercantum pada invoice servis Anda.",
     warrantyItems: [
       {
         title: "Cakupan Garansi Penuh",
@@ -213,17 +213,17 @@ export const idDictionary: Dictionary = {
   },
   promo: {
     badge: "PENAWARAN SPESIAL",
-    title: "PROMO & PENAWARAN KHUSUS",
-    subtitle: "Dapatkan potongan harga dan keuntungan ekstra untuk perbaikan perangkat kesayangan Anda di FIXMI Service Center.",
+    title: "Promo Servis Gadget — MobiCare Service Center",
+    subtitle: "Temukan penawaran servis MobiCare yang sedang tersedia untuk perangkat Anda. Detail promo akan ditampilkan apa adanya saat program berlangsung.",
     claimBtn: "Klaim Promo via WhatsApp",
-    emptyPromo: "Saat ini belum ada promo aktif. Hubungi kami untuk penawaran menarik!",
+    emptyPromo: "Saat ini belum ada program promo yang aktif. Anda tetap dapat menghubungi tim MobiCare untuk berkonsultasi mengenai kebutuhan servis.",
   },
   gallery: {
     badge: "DOKUMENTASI REPAIR",
-    title: "GALERI PORTOFOLIO SERVIS",
-    subtitle: "Dokumentasi nyata proses perbaikan di laboratorium dan meja kerja teknisi FIXMI Service Center.",
+    title: "Galeri Servis — MobiCare Service Center",
+    subtitle: "Ruang dokumentasi proses perbaikan dan aktivitas teknisi MobiCare. Foto akan ditampilkan setelah materi terverifikasi tersedia.",
     allFilter: "Semua Foto",
-    emptyGallery: "Belum ada foto dokumentasi di kategori ini.",
+    emptyGallery: "Belum ada foto dokumentasi yang dipublikasikan. Sementara itu, Anda dapat melihat daftar layanan yang tersedia.",
   },
   about: {
     metaTitle: "Tentang MobiCare — Solusi Perbaikan Gadget & Layanan Profesional",

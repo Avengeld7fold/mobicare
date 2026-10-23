@@ -53,27 +53,29 @@
 }
 
 @theme inline {
-  --color-background: var(--mobi-ink);
-  --color-foreground: var(--mobi-muted);
-  --color-primary: var(--mobi-green);
-  --color-primary-light: var(--mobi-green-hover);
-  --color-primary-dark: var(--mobi-green);
-  --color-accent: var(--mobi-green-bright);
-  --color-accent-light: var(--mobi-green-hover);
-  --color-surface: var(--mobi-surface);
-  --color-surface-alt: var(--mobi-surface-raised);
-  --color-surface-elevated: var(--mobi-surface-raised);
-  --color-text-secondary: var(--mobi-muted);
-  --color-text-muted: var(--mobi-muted);
-  --color-border: var(--mobi-line);
-  --color-border-light: var(--mobi-line);
-  --color-divider: var(--mobi-line);
-  --color-panel: var(--mobi-surface);
-  --color-panel-raised: var(--mobi-surface-raised);
-  --color-panel-border: var(--mobi-line);
-  --font-display: var(--font-gobold), sans-serif;
-  --font-sans: var(--mobi-text);
-  --font-mono: var(--mobi-text);
+  --color-background: var(--admin-background, var(--mobi-ink));
+  --color-foreground: var(--admin-foreground, var(--mobi-muted));
+  --color-primary: var(--admin-primary, var(--mobi-green));
+  --color-primary-light: var(--admin-primary-light, var(--mobi-green-hover));
+  --color-primary-dark: var(--admin-primary-dark, var(--mobi-green));
+  --color-accent: var(--admin-primary, var(--mobi-green-bright));
+  --color-accent-light: var(--admin-primary-light, var(--mobi-green-hover));
+  --color-surface: var(--admin-surface, var(--mobi-surface));
+  --color-surface-alt: var(--admin-surface-alt, var(--mobi-surface-raised));
+  --color-surface-elevated: var(--admin-surface-elevated, var(--mobi-surface-raised));
+  --color-text-secondary: var(--admin-text-secondary, var(--mobi-muted));
+  --color-text-muted: var(--admin-text-muted, var(--mobi-muted));
+  --color-border: var(--admin-border, var(--mobi-line));
+  --color-border-light: var(--admin-divider, var(--mobi-line));
+  --color-divider: var(--admin-divider, var(--mobi-line));
+  --color-panel: var(--admin-panel, var(--mobi-surface));
+  --color-panel-raised: var(--admin-panel-raised, var(--mobi-surface-raised));
+  --color-panel-border: var(--admin-panel-border, var(--mobi-line));
+  --font-display: var(--admin-font-body, var(--font-gobold)), sans-serif;
+  --font-sans: var(--admin-font-body, var(--mobi-text));
+  --font-mono: var(--admin-font-mono, var(--mobi-text));
+  --font-bayon: var(--admin-font-display, var(--font-gobold));
+  --font-instrument: var(--admin-font-data, var(--mobi-text));
   --font-mobicare-display: var(--font-gobold), Arial, sans-serif;
   --font-mobicare-sans: var(--mobi-text);
 }
@@ -302,42 +304,42 @@ input[type="search"]::-webkit-search-results-decoration {
 
 /* Status utilities stay inside the MobiCare palette, including admin states. */
 @layer utilities {
-  .text-amber-300, .text-amber-400, .text-amber-500,
+  body:not(:has(.admin-shell)) :is(.text-amber-300, .text-amber-400, .text-amber-500,
   .text-emerald-300, .text-emerald-400, .text-emerald-500,
-  .text-green-300, .text-green-400, .text-green-500 {
+  .text-green-300, .text-green-400, .text-green-500) {
     color: var(--mobi-green-hover) !important;
   }
-  .text-red-300, .text-red-400, .text-rose-300, .text-rose-400 {
+  body:not(:has(.admin-shell)) :is(.text-red-300, .text-red-400, .text-rose-300, .text-rose-400) {
     color: var(--mobi-danger) !important;
   }
-  .bg-amber-500, .bg-emerald-500, .bg-emerald-600, .bg-green-500 {
+  body:not(:has(.admin-shell)) :is(.bg-amber-500, .bg-emerald-500, .bg-emerald-600, .bg-green-500) {
     background-color: color-mix(in srgb, var(--mobi-green) 85%, transparent) !important;
   }
-  .bg-red-500, .bg-rose-500, .bg-rose-600 {
+  body:not(:has(.admin-shell)) :is(.bg-red-500, .bg-rose-500, .bg-rose-600) {
     background-color: color-mix(in srgb, var(--mobi-danger) 85%, transparent) !important;
   }
-  .border-amber-500, .border-emerald-500, .border-green-500 {
+  body:not(:has(.admin-shell)) :is(.border-amber-500, .border-emerald-500, .border-green-500) {
     border-color: color-mix(in srgb, var(--mobi-green) 65%, transparent) !important;
   }
-  .border-red-500, .border-rose-500 {
+  body:not(:has(.admin-shell)) :is(.border-red-500, .border-rose-500) {
     border-color: color-mix(in srgb, var(--mobi-danger) 65%, transparent) !important;
   }
-  [class*="text-amber-"], [class*="text-emerald-"], [class*="text-green-"] {
+  body:not(:has(.admin-shell)) :is([class*="text-amber-"], [class*="text-emerald-"], [class*="text-green-"]) {
     color: var(--mobi-green-hover) !important;
   }
-  [class*="text-red-"], [class*="text-rose-"] {
+  body:not(:has(.admin-shell)) :is([class*="text-red-"], [class*="text-rose-"]) {
     color: var(--mobi-danger) !important;
   }
-  [class*="bg-amber-"], [class*="bg-emerald-"], [class*="bg-green-"] {
+  body:not(:has(.admin-shell)) :is([class*="bg-amber-"], [class*="bg-emerald-"], [class*="bg-green-"]) {
     background-color: color-mix(in srgb, var(--mobi-green) 22%, transparent) !important;
   }
-  [class*="bg-red-"], [class*="bg-rose-"] {
+  body:not(:has(.admin-shell)) :is([class*="bg-red-"], [class*="bg-rose-"]) {
     background-color: color-mix(in srgb, var(--mobi-danger) 22%, transparent) !important;
   }
-  [class*="border-amber-"], [class*="border-emerald-"], [class*="border-green-"] {
+  body:not(:has(.admin-shell)) :is([class*="border-amber-"], [class*="border-emerald-"], [class*="border-green-"]) {
     border-color: color-mix(in srgb, var(--mobi-green) 40%, transparent) !important;
   }
-  [class*="border-red-"], [class*="border-rose-"] {
+  body:not(:has(.admin-shell)) :is([class*="border-red-"], [class*="border-rose-"]) {
     border-color: color-mix(in srgb, var(--mobi-danger) 40%, transparent) !important;
   }
   .scrollbar-none::-webkit-scrollbar {

@@ -5,68 +5,7 @@ import { X, ShieldCheck, ArrowRight } from "lucide-react";
 import { useLenis } from "lenis/react";
 import { useI18n } from "@/lib/i18n/context";
 import { whatsappUrl } from "@/lib/constants";
-
-interface TermItem {
-  id: string;
-  title: string;
-  desc: string;
-}
-
-const ID_TERMS: TermItem[] = [
-  {
-    id: "01",
-    title: "Suku Cadang & Jasa Teknisi",
-    desc: "Mencakup 100% suku cadang yang diganti serta biaya pengerjaan teknisi terkait tanpa biaya tambahan.",
-  },
-  {
-    id: "02",
-    title: "Klaim Praktis Paperless",
-    desc: "Cukup tunjukkan invoice digital atau nomor WhatsApp yang terdaftar saat servis, tanpa perlu nota fisik.",
-  },
-  {
-    id: "03",
-    title: "Keamanan & Kerahasiaan Data",
-    desc: "Data pribadi aman dan terlindungi. Kami sarankan mencadangkan data sebelum perbaikan bila memungkinkan.",
-  },
-  {
-    id: "04",
-    title: "Integritas Segel Garansi",
-    desc: "Garansi gugur bila segel fisik FIXMI rusak, dilepas, atau unit dibongkar oleh pihak ketiga.",
-  },
-  {
-    id: "05",
-    title: "Pengecualian Kerusakan Fisik & Cairan",
-    desc: "Kerusakan akibat kelalaian (terjatuh, retak, tertindih, atau terkena air) berada di luar perlindungan garansi.",
-  },
-];
-
-const EN_TERMS: TermItem[] = [
-  {
-    id: "01",
-    title: "Parts & Labor Coverage",
-    desc: "Covers 100% replacement parts and associated technician workbench labor with zero hidden fees.",
-  },
-  {
-    id: "02",
-    title: "Paperless Digital Claim",
-    desc: "Simply present your digital receipt or registered WhatsApp number — no paper receipts required.",
-  },
-  {
-    id: "03",
-    title: "Data & Privacy Security",
-    desc: "Your device data is strictly confidential. We advise backing up personal files prior to intake if possible.",
-  },
-  {
-    id: "04",
-    title: "Tamper Seal Integrity",
-    desc: "Warranty is void if the official FIXMI security seal is broken, removed, or dismantled by external parties.",
-  },
-  {
-    id: "05",
-    title: "Physical & Liquid Exclusions",
-    desc: "Accidental damage from user negligence (drops, cracked glass, pressure, or liquid ingress) is excluded.",
-  },
-];
+import { getWarrantyTerms } from "@/lib/warranty";
 
 export default function WarrantyModal({
   open,
@@ -78,7 +17,7 @@ export default function WarrantyModal({
   const lenis = useLenis();
   const { dict, locale } = useI18n();
   const isEn = locale === "en";
-  const terms = isEn ? EN_TERMS : ID_TERMS;
+  const terms = getWarrantyTerms(locale);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -165,7 +104,7 @@ export default function WarrantyModal({
                 {isEn ? "Period" : "Masa Garansi"}
               </span>
               <span className="mt-0.5 block text-xs sm:text-sm font-bold text-white">
-                {isEn ? "Up to 365 Days" : "Hingga 365 Hari"}
+                {isEn ? "As Invoiced" : "Sesuai Invoice"}
               </span>
             </div>
             <div className="px-1">
@@ -198,7 +137,7 @@ export default function WarrantyModal({
                     {item.title}
                   </h3>
                   <p className="text-xs leading-relaxed text-neutral-400">
-                    {item.desc}
+                    {item.description}
                   </p>
                 </div>
               </div>
@@ -216,8 +155,8 @@ export default function WarrantyModal({
           <a
             href={whatsappUrl(
               isEn
-                ? "Hello FIXMI Service Center, I would like to ask about warranty terms and claims."
-                : "Halo FIXMI Service Center, saya ingin bertanya tentang ketentuan dan klaim garansi servis."
+                ? "Hello MobiCare Service Center, I would like to ask about warranty terms and claims."
+                : "Halo MobiCare Service Center, saya ingin bertanya tentang ketentuan dan klaim garansi servis."
             )}
             target="_blank"
             rel="noopener noreferrer"

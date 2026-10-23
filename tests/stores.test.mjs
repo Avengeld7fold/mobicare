@@ -17,9 +17,10 @@ test("only the three confirmed Bali branches are listed in approved order", () =
   }
 });
 
-test("overview covers Bali and Lombok, not only the current stores", () => {
+test("overview focuses on South Bali and includes every current branch", () => {
   const [[south, west], [north, east]] = STORE_OVERVIEW_BOUNDS;
-  for (const [lat, lng] of [[-8.4, 114.6], [-8.6, 116.5], ...STORES.map(s => [s.lat, s.lng])]) {
+  assert.ok(west >= 115 && east < 116, "overview must not include Lombok");
+  for (const [lat, lng] of STORES.map(s => [s.lat, s.lng])) {
     assert.ok(lat >= south && lat <= north && lng >= west && lng <= east);
   }
 });

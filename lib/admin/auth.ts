@@ -4,7 +4,7 @@
  * memakai Web Crypto API + process.env. Jangan import fs/node:crypto di sini.
  */
 
-export const SESSION_COOKIE = "fixmi_admin";
+export const SESSION_COOKIE = "mobicare_admin";
 export const SESSION_MAX_AGE_S = 7 * 24 * 60 * 60; // 7 hari
 
 const encoder = new TextEncoder();

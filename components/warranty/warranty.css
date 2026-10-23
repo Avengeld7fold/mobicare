@@ -1,0 +1,112 @@
+.mobi-warranty {
+  --warranty-ink: #102619;
+  --warranty-muted: #4c6052;
+  background: #080c09;
+  color: #fff;
+  font-family: var(--mobi-text);
+}
+.mobi-warranty *, .mobi-warranty *::before, .mobi-warranty *::after { box-sizing: border-box; }
+.mobi-warranty ::selection { background: #cce5d4; color: var(--warranty-ink); }
+.mobi-warranty-hero { display: grid; grid-template-columns: 1.35fr 1fr; align-items: end; gap: 48px; padding-block: clamp(48px, 5vw, 80px) 52px; }
+.mobi-warranty-title { margin: 0; font: 400 clamp(48px, 5.8vw, 88px)/1.14 var(--font-gobold), sans-serif; letter-spacing: -.025em; text-transform: uppercase; }
+.mobi-warranty-title span { display: block; color: #00bb5b; }
+.mobi-warranty-intro { margin: 0; padding-bottom: 4px; max-width: 540px; color: #d3dfd5; font-size: 18px; line-height: 1.7; }
+.mobi-warranty-surface { background: #edf1eb; color: var(--warranty-ink); padding-block: 52px 68px; }
+.mobi-warranty-kicker { margin: 0 0 10px; color: #007c3c; font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.mobi-warranty-section-head { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: end; padding-bottom: 30px; border-bottom: 1px solid #9eb09f; }
+.mobi-warranty-section-head h2, .mobi-warranty-cta h2, .mobi-claim-step-copy h2 { margin: 0; color: var(--warranty-ink); font: 400 clamp(28px, 3vw, 44px)/1.15 var(--font-gobold), sans-serif; text-transform: uppercase; }
+.mobi-warranty-section-head > p { margin: 0; max-width: 52ch; color: var(--warranty-muted); font-size: 15px; line-height: 1.65; }
+.mobi-warranty-rules { margin: 0; padding: 0; list-style: none; }
+.mobi-warranty-rules li { display: grid; grid-template-columns: 72px minmax(210px, .72fr) minmax(0, 1.28fr); gap: 26px; align-items: start; padding-block: 28px; border-bottom: 1px solid #bdccbe; }
+.mobi-warranty-index { color: #007c3c; font: 400 24px/1 var(--font-gobold), sans-serif; }
+.mobi-warranty-rules h3 { margin: 0; color: var(--warranty-ink); font-size: 17px; line-height: 1.45; }
+.mobi-warranty-rules p { margin: 0; max-width: 70ch; color: var(--warranty-muted); font-size: 15px; line-height: 1.7; }
+.mobi-warranty-guidance { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 42px; border-block: 1px solid #9eb09f; }
+.mobi-warranty-guidance-item { display: grid; grid-template-columns: 28px 1fr; gap: 16px; padding: 28px 30px 28px 0; }
+.mobi-warranty-guidance-item + .mobi-warranty-guidance-item { border-left: 1px solid #9eb09f; padding-inline: 30px 0; }
+.mobi-warranty-guidance-item svg { width: 22px; height: 22px; color: #007c3c; }
+.mobi-warranty-guidance-item h3 { margin: 0 0 7px; font-size: 16px; }
+.mobi-warranty-guidance-item p { margin: 0; color: var(--warranty-muted); font-size: 14px; line-height: 1.65; }
+.mobi-warranty-cta { display: flex; align-items: center; justify-content: space-between; gap: 32px; margin-top: 52px; padding: 34px 36px; background: #102619; color: #fff; border-radius: 4px; }
+.mobi-warranty-cta h2 { color: #fff; font-size: clamp(28px, 3vw, 42px); }
+.mobi-warranty-cta .mobi-warranty-kicker { color: #55de91; }
+.mobi-warranty-primary-link { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 48px; padding: 12px 18px; border: 1px solid #00bb5b; border-radius: 4px; background: #00bb5b; color: #04170d; font-size: 14px; font-weight: 800; text-decoration: none; transition: background-color .18s; }
+.mobi-warranty-primary-link:hover { background: #34d67e; }
+.mobi-warranty-primary-link svg { width: 16px; height: 16px; }
+
+.mobi-claim-form { margin: 0; }
+.mobi-claim-ready { display: flex; gap: 14px; margin-bottom: 36px; padding: 20px; border: 1px solid #829686; border-radius: 4px; background: #dceadd; }
+.mobi-claim-ready > svg { width: 18px; height: 18px; margin-top: 4px; color: #007c3c; flex: 0 0 auto; }
+.mobi-claim-ready h2 { margin: 0 0 4px; font-size: 18px; }
+.mobi-claim-ready p { margin: 0; color: var(--warranty-muted); font-size: 14px; line-height: 1.6; }
+.mobi-claim-ready a { display: inline-flex; align-items: center; min-height: 44px; color: #17452b; font-size: 14px; font-weight: 800; text-underline-offset: 4px; }
+.mobi-claim-step { display: grid; grid-template-columns: minmax(0, .65fr) minmax(0, 1.35fr); gap: clamp(32px, 4vw, 72px); }
+.mobi-claim-step-copy > p:last-child { margin: 12px 0 0; max-width: 38ch; color: var(--warranty-muted); font-size: 15px; line-height: 1.65; }
+.mobi-claim-step-copy h2 { font-size: clamp(24px, 2.2vw, 32px); }
+.mobi-claim-fields { display: grid; gap: 20px; min-width: 0; }
+.mobi-claim-grid-2 { grid-template-columns: 1fr 1fr; }
+.mobi-claim-field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.mobi-claim-field > label { color: var(--warranty-ink); font-size: 14px; font-weight: 800; }
+.mobi-claim-field > label span { color: #a52222; }
+.mobi-claim-field input, .mobi-claim-field textarea { width: 100%; min-height: 48px; padding: 12px 14px; border: 1px solid #829686; border-radius: 4px; background: #fff; color: var(--warranty-ink); caret-color: #007c3c; font: 400 16px/1.5 var(--mobi-text); transition: border-color .18s, background-color .18s; }
+.mobi-claim-field textarea { min-height: 144px; resize: vertical; }
+.mobi-claim-field input::placeholder, .mobi-claim-field textarea::placeholder { color: #526658; opacity: 1; }
+.mobi-claim-field input:hover, .mobi-claim-field textarea:hover { border-color: #17452b; }
+.mobi-claim-field input[aria-invalid="true"], .mobi-claim-field textarea[aria-invalid="true"] { border-color: #a52222; }
+.mobi-claim-error { margin: 0; color: #a52222; font-size: 13px; line-height: 1.5; }
+.mobi-claim-upload-note { margin: -8px 0 0; color: var(--warranty-muted); font-size: 13px; line-height: 1.6; }
+.mobi-claim-divider { height: 1px; margin-block: 36px; background: #bdccbe; }
+.mobi-claim-consent { padding-left: calc(32% + 48px); }
+.mobi-claim-consent label { display: flex; align-items: flex-start; gap: 12px; max-width: 70ch; color: var(--warranty-muted); font-size: 14px; line-height: 1.65; cursor: pointer; }
+.mobi-claim-consent input { width: 20px; height: 20px; margin: 1px 0 0; flex: 0 0 auto; accent-color: #007c3c; }
+.mobi-claim-consent a { color: #17452b; font-weight: 800; text-underline-offset: 3px; }
+.mobi-claim-consent .mobi-claim-error { margin: 6px 0 0 32px; }
+.mobi-claim-actions { display: flex; align-items: center; justify-content: space-between; gap: 28px; margin-top: 36px; padding-top: 28px; border-top: 1px solid #bdccbe; }
+.mobi-claim-actions p, .mobi-claim-actions span { margin: 0; color: var(--warranty-muted); font-size: 14px; line-height: 1.6; }
+.mobi-claim-actions > div > span { display: block; font-size: 13px; }
+.mobi-claim-buttons { display: flex; gap: 10px; flex: 0 0 auto; }
+.mobi-claim-submit, .mobi-claim-reset { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 12px 20px; border: 1px solid transparent; border-radius: 4px; font: 800 14px/1.4 var(--mobi-text); cursor: pointer; transition: background-color .18s, border-color .18s; }
+.mobi-claim-submit { background: #00a651; color: #04170d; }
+.mobi-claim-submit:hover { background: #34d67e; }
+.mobi-claim-reset { border-color: #a8baaa; background: transparent; color: var(--warranty-ink); }
+.mobi-claim-reset:hover { background: #cce5d4; }
+.mobi-claim-submit svg, .mobi-claim-reset svg { width: 16px; height: 16px; }
+.mobi-warranty :is(input, textarea, button, a):focus-visible { outline: 2px solid #007c3c; outline-offset: 3px; }
+
+@media (max-width: 1050px) {
+  .mobi-warranty-hero { grid-template-columns: 1.2fr 1fr; gap: 28px; }
+  .mobi-warranty-title { font-size: clamp(44px, 5.8vw, 64px); }
+  .mobi-warranty-intro { font-size: 16px; }
+  .mobi-warranty-rules li { grid-template-columns: 52px minmax(190px, .8fr) minmax(0, 1.2fr); gap: 20px; }
+  .mobi-claim-step { grid-template-columns: 1fr; gap: 24px; }
+  .mobi-claim-step-copy > p:last-child { max-width: 65ch; }
+  .mobi-claim-consent { padding-left: 0; }
+  .mobi-claim-actions { align-items: flex-start; flex-direction: column; gap: 18px; }
+}
+@media (max-width: 720px) {
+  .mobi-warranty-hero { grid-template-columns: 1fr; gap: 24px; padding-block: 40px 32px; }
+  .mobi-warranty-title { font-size: clamp(38px, 8.6vw, 58px); }
+  .mobi-warranty-surface { padding-block: 32px 44px; }
+  .mobi-warranty-section-head { grid-template-columns: 1fr; gap: 18px; }
+  .mobi-warranty-rules li { grid-template-columns: 40px 1fr; gap: 12px 16px; padding-block: 22px; }
+  .mobi-warranty-rules p { grid-column: 2; }
+  .mobi-warranty-index { font-size: 20px; }
+  .mobi-warranty-guidance { grid-template-columns: 1fr; }
+  .mobi-warranty-guidance-item { padding: 24px 0; }
+  .mobi-warranty-guidance-item + .mobi-warranty-guidance-item { border-top: 1px solid #9eb09f; border-left: 0; padding: 24px 0; }
+  .mobi-warranty-cta { align-items: flex-start; flex-direction: column; padding: 26px 22px; }
+  .mobi-warranty-primary-link { width: 100%; }
+  .mobi-claim-grid-2 { grid-template-columns: 1fr; }
+  .mobi-claim-divider { margin-block: 28px; }
+  .mobi-claim-buttons, .mobi-claim-submit { width: 100%; }
+  .mobi-claim-reset { flex: 1; }
+}
+@media (max-width: 390px) {
+  .mobi-warranty-title { font-size: 36px; }
+  .mobi-warranty-rules li { grid-template-columns: 34px 1fr; }
+  .mobi-claim-buttons { flex-direction: column-reverse; }
+  .mobi-claim-reset { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mobi-warranty *, .mobi-warranty *::before, .mobi-warranty *::after { transition: none !important; scroll-behavior: auto !important; }
+}

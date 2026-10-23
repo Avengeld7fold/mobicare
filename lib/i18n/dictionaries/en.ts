@@ -194,8 +194,8 @@ export const enDictionary: Dictionary = {
       "Don't worry. Contact our certified technicians to verify spare part availability, receive a free diagnostic, and get a transparent cost estimate.",
     unlistedCtaBtn: "Chat Technician via WhatsApp",
     unlistedBadge: "FREE DIAGNOSTIC & PART INQUIRY",
-    warrantyModalTitle: "FIXMI Official Warranty Policy",
-    warrantyModalSubtitle: "Our commitment to delivering peace of mind and the highest quality standards for every client.",
+    warrantyModalTitle: "MobiCare Official Warranty Terms",
+    warrantyModalSubtitle: "The warranty period and coverage follow the details stated on your service invoice.",
     warrantyItems: [
       {
         title: "Comprehensive Part Coverage",
@@ -213,17 +213,17 @@ export const enDictionary: Dictionary = {
   },
   promo: {
     badge: "SPECIAL OFFERS",
-    title: "PROMOS & EXCLUSIVE DEALS",
-    subtitle: "Enjoy exclusive discounts and complimentary services for your smart devices at FIXMI Service Center.",
+    title: "Device Repair Offers — MobiCare Service Center",
+    subtitle: "Browse current MobiCare service offers for your device. Promotion details will appear here whenever a verified programme is available.",
     claimBtn: "Claim Offer via WhatsApp",
-    emptyPromo: "No active promotions at this time. Contact us for our best direct rates!",
+    emptyPromo: "There are no active promotions right now. You can still contact the MobiCare team to discuss your repair needs.",
   },
   gallery: {
     badge: "REPAIR SHOWCASE",
-    title: "PORTFOLIO & WORKBENCH GALLERY",
-    subtitle: "Real photographic documentation from our certified technicians and cleanroom laboratory in Bali.",
+    title: "Repair Gallery — MobiCare Service Center",
+    subtitle: "A visual record of MobiCare repair work and technician activity. Photos will appear after verified material is available.",
     allFilter: "All Photos",
-    emptyGallery: "No showcase photos available in this category yet.",
+    emptyGallery: "No service documentation has been published yet. In the meantime, you can explore our available services.",
   },
   about: {
     metaTitle: "About MobiCare — Professional Gadget Repair & Technical Solutions",

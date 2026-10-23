@@ -112,7 +112,7 @@ export default function OurStoreContent({ isEnglish = false }: { isEnglish?: boo
 
           <div className="store-map-column">
             <div className="store-map-toolbar">
-              <p aria-live="polite" aria-atomic="true">{activeStore ? activeStore.name : (isEnglish ? "Explore Bali & Lombok" : "Jelajahi Bali & Lombok")}</p>
+              <p aria-live="polite" aria-atomic="true">{activeStore ? activeStore.name : (isEnglish ? "Explore our Bali branches" : "Jelajahi cabang kami di Bali")}</p>
               <button type="button" onClick={resetMap}><RotateCcw size={16} aria-hidden="true" />{isEnglish ? "View all" : "Lihat semua"}</button>
             </div>
             <div id="store-map" className="store-map-frame">
@@ -120,8 +120,8 @@ export default function OurStoreContent({ isEnglish = false }: { isEnglish?: boo
             </div>
             {detailOpen && activeStore && <div className="store-mobile-details"><StoreDetails store={activeStore} isEnglish={isEnglish} onClose={closeDetails} /></div>}
             <p className="store-map-caption">{isEnglish
-              ? "Choose a pin or a branch to see its location. There are no MobiCare branches in Lombok yet."
-              : "Pilih pin atau cabang untuk melihat lokasinya. Saat ini belum ada cabang MobiCare di Lombok."}</p>
+              ? "All three MobiCare branches are shown in the Bali overview. Choose a pin or branch for details."
+              : "Ketiga cabang MobiCare tampil langsung di peta Bali. Pilih pin atau cabang untuk melihat detail."}</p>
           </div>
         </div>
       </section>

@@ -3,6 +3,8 @@
 import { useI18n } from "@/lib/i18n/context";
 import PromoViewer from "@/components/promo/PromoViewer";
 import type { PromoImageItem } from "@/lib/promo-server";
+import { ArrowDownRight } from "lucide-react";
+import "../media-pages.css";
 
 interface PromoPageContentProps {
   promos: PromoImageItem[];
@@ -13,49 +15,26 @@ export default function PromoPageContent({ promos }: PromoPageContentProps) {
   const isEn = locale === "en";
 
   return (
-    <main className="min-h-screen bg-[#121212] text-foreground pt-12 sm:pt-16 md:pt-20 pb-20 sm:pb-28">
-      <div className="mobi-container">
-        {/* ── Header Section ── */}
-        <header className="mb-12 lg:mb-16">
-          <div className="mb-5 flex items-center gap-2.5">
-            <span
-              className="inline-block h-1.5 w-1.5 rounded-full bg-primary"
-              aria-hidden="true"
-            />
-            <span className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-text-muted">
-              {dict.promo.badge}
-            </span>
+    <main className="media-page">
+      <header className="media-intro mobi-container">
+        <h1>{isEn ? "Offers for" : "Promo untuk"}<span>{isEn ? "your device." : "gadgetmu."}</span></h1>
+        <div className="media-intro-copy">
+          <p>{dict.promo.subtitle}</p>
+          <a href="#promo-list">
+            {isEn ? "See current offers" : "Lihat penawaran"}
+            <ArrowDownRight size={18} aria-hidden="true" />
+          </a>
+        </div>
+      </header>
+      <section className="media-surface" id="promo-list" aria-label={isEn ? "MobiCare offers" : "Penawaran MobiCare"}>
+        <div className="mobi-container">
+          <div className="media-heading">
+            <h2>{isEn ? "Current offers" : "Daftar penawaran"}</h2>
+            <span>{String(promos.length).padStart(2, "0")} {isEn ? "offers" : "promo"}</span>
           </div>
-
-          <h1
-            style={{
-              fontFamily: "var(--font-gobold), sans-serif",
-              fontWeight: 400,
-              lineHeight: 0.95,
-              letterSpacing: "-0.02em",
-              color: "var(--mobi-paper)",
-              textTransform: "uppercase" as const,
-            }}
-            className="text-[clamp(2.25rem,7vw,3.125rem)] md:text-[clamp(3.125rem,5.5vw,4rem)] lg:text-[clamp(4rem,5vw,4.75rem)]"
-          >
-            {isEn ? "EXCLUSIVE PROMOS" : "PROMO EKSKLUSIF"}
-            <br />
-            <span style={{ color: "var(--mobi-green)" }}>
-              {isEn ? "SPECIAL OFFERS" : "LAYANAN SERVICE"}
-            </span>
-          </h1>
-
-          <p
-            className="mt-6 max-w-[46ch] text-sm md:text-base leading-relaxed text-text-secondary"
-            style={{ fontFamily: "var(--font-greycliff), sans-serif" }}
-          >
-            {dict.promo.subtitle}
-          </p>
-        </header>
-
-        {/* ── Dynamic Photo-Only Promo Grid ── */}
-        <PromoViewer promos={promos} />
-      </div>
+          <PromoViewer promos={promos} />
+        </div>
+      </section>
     </main>
   );
 }

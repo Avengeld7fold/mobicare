@@ -98,11 +98,11 @@ export default function Footer() {
       <div className="footer-legal">
         <span><span className="footer-sym">©</span> 2026 MOBICARE SERVICE CENTER</span>
         <div className="footer-legal-links">
-          <Link href={getLocalizedPath("/about")}>
-            {isEn ? "Privacy" : "Privasi"}
+          <Link href={getLocalizedPath("/warranty-claim")}>
+            {isEn ? "Warranty Claim" : "Klaim Garansi"}
           </Link>
-          <Link href={getLocalizedPath("/pricelist")}>
-            {isEn ? "Terms" : "Ketentuan"}
+          <Link href={getLocalizedPath("/terms")}>
+            {isEn ? "Terms & Conditions" : "Syarat & Ketentuan"}
           </Link>
           <Link href={getLocalizedPath("/contact")}>
             {isEn ? "Accessibility" : "Aksesibilitas"}

@@ -5,9 +5,9 @@ import PromoPage from "../../promo/page";
 export const revalidate = 30;
 
 export const metadata: Metadata = {
-  title: "Special Offers & Promos — FIXMI Service Center",
+  title: "Device Repair Offers — MobiCare Service Center",
   description:
-    "Enjoy exclusive discounts and complimentary repair services for your smart devices at FIXMI Service Center. Official store warranty & free diagnostics.",
+    "Browse current MobiCare service offers for your device and contact our team for repair consultation.",
   alternates: {
     canonical: "/en/promo",
   },

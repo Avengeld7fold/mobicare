@@ -17,6 +17,19 @@ interface Props {
   onCloseDetails: () => void;
 }
 
+function fitOverview(map: L.Map, animate: boolean) {
+  const mobile = window.matchMedia("(max-width: 720px)").matches;
+  const bounds = mobile
+    ? L.latLngBounds(STORES.map((store) => [store.lat, store.lng]))
+    : L.latLngBounds(STORE_OVERVIEW_BOUNDS);
+  map.fitBounds(bounds, {
+    padding: mobile ? [52, 52] : [18, 18],
+    maxZoom: mobile ? 12 : 11,
+    animate,
+    duration: 0.45,
+  });
+}
+
 export default function StoreMap({ activeKey, viewRequest, isEnglish, onSelect, detailOpen, onCloseDetails }: Props) {
   const container = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
@@ -35,7 +48,6 @@ export default function StoreMap({ activeKey, viewRequest, isEnglish, onSelect, 
     mapRef.current = map;
     map.attributionControl.setPrefix(false);
     const markerRegistry = markers.current;
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const zoom = L.control.zoom({
       position: "bottomright",
       zoomInTitle: isEnglish ? "Zoom in" : "Perbesar",
@@ -63,8 +75,6 @@ export default function StoreMap({ activeKey, viewRequest, isEnglish, onSelect, 
       setTileError(false);
     });
     const layer = L.layerGroup().addTo(map);
-    const bounds = L.latLngBounds(STORES.map((store) => [store.lat, store.lng]));
-    let clustered: boolean | null = null;
     function keyboardActivate(marker: L.Marker, activate: () => void) {
       marker.getElement()?.addEventListener("keydown", (event) => {
         if (event.key === "Enter" || event.key === " ") {
@@ -75,56 +85,26 @@ export default function StoreMap({ activeKey, viewRequest, isEnglish, onSelect, 
       });
     }
 
-    function drawMarkers() {
-      const nextClustered = map.getZoom() < 12;
-      if (clustered === nextClustered) return;
-      clustered = nextClustered;
-      const restoreFocus = container.current?.contains(document.activeElement)
-        && document.activeElement?.classList.contains("store-pin");
-      layer.clearLayers();
-      markerRegistry.clear();
-      if (clustered) {
-        const label = isEnglish ? "Show 3 branches in Bali" : "Lihat 3 cabang di Bali";
-        const icon = L.divIcon({ className: "store-pin store-cluster", html: "<span>3</span>", iconSize: [48, 48], iconAnchor: [24, 24] });
-        const cluster = L.marker(bounds.getCenter(), { icon, title: label, alt: label });
-        const expand = () => map.fitBounds(bounds, { padding: [60, 60], maxZoom: 14, animate: !reducedMotion.matches, duration: 0.45 });
-        cluster.on("add", () => {
-          cluster.getElement()?.setAttribute("aria-label", label);
-          keyboardActivate(cluster, expand);
-        });
-        cluster.addTo(layer);
-        cluster.on("click", expand);
-        cluster.getElement()?.setAttribute("aria-label", label);
-      } else {
-        STORES.forEach((store, index) => {
-          const icon = L.divIcon({
-            className: "store-pin",
-            html: `<svg viewBox="0 0 44 52" aria-hidden="true"><path d="M22 50C18 44 3 32 3 22a19 19 0 0 1 38 0c0 10-15 22-19 28Z"/><text x="22" y="27" text-anchor="middle">${String(index + 1).padStart(2, "0")}</text></svg>`,
-            iconSize: [44, 52], iconAnchor: [22, 50],
-          });
-          const marker = L.marker([store.lat, store.lng], { icon, title: store.name, alt: store.name });
-          marker.on("add", () => {
-            keyboardActivate(marker, () => onSelect(store.key));
-            const element = marker.getElement();
-            element?.setAttribute("aria-label", `${isEnglish ? "Select" : "Pilih"} ${store.name}`);
-            element?.setAttribute("aria-pressed", String(selection.current === store.key));
-            element?.classList.toggle("is-selected", selection.current === store.key);
-          });
-          marker.addTo(layer);
-          marker.on("click", () => onSelect(store.key));
-          const element = marker.getElement();
-          element?.setAttribute("aria-label", `${isEnglish ? "Select" : "Pilih"} ${store.name}`);
-          element?.setAttribute("aria-pressed", String(selection.current === store.key));
-          element?.classList.toggle("is-selected", selection.current === store.key);
-          markerRegistry.set(store.key, marker);
-        });
-      }
-      if (restoreFocus) container.current?.querySelector<HTMLElement>(".store-pin")?.focus({ preventScroll: true });
-    }
+    STORES.forEach((store) => {
+      const icon = L.divIcon({
+        className: "store-pin",
+        html: `<svg viewBox="0 0 48 60" aria-hidden="true"><path d="M24 58C22 48 19 42 13 34C8 27.5 6 24 6 19C6 9.1 14.1 1 24 1S42 9.1 42 19C42 24 40 27.5 35 34C29 42 26 48 24 58Z"/><circle cx="24" cy="19" r="9.5"/></svg>`,
+        iconSize: [48, 60], iconAnchor: [24, 58],
+      });
+      const marker = L.marker([store.lat, store.lng], { icon, title: store.name, alt: store.name });
+      marker.on("add", () => {
+        keyboardActivate(marker, () => onSelect(store.key));
+        const element = marker.getElement();
+        element?.setAttribute("aria-label", `${isEnglish ? "Select" : "Pilih"} ${store.name}`);
+        element?.setAttribute("aria-pressed", String(selection.current === store.key));
+        element?.classList.toggle("is-selected", selection.current === store.key);
+      });
+      marker.addTo(layer);
+      marker.on("click", () => onSelect(store.key));
+      markerRegistry.set(store.key, marker);
+    });
 
-    map.on("zoomend", drawMarkers);
-    map.fitBounds(STORE_OVERVIEW_BOUNDS, { padding: [24, 24], animate: false });
-    drawMarkers();
+    fitOverview(map, false);
     timeout = window.setTimeout(fallback, 15000);
     void Promise.all([import("maplibre-gl"), import("@maplibre/maplibre-gl-leaflet")]).then(([gl, binding]) => {
       if (disposed || fallbackActive) return;
@@ -145,6 +125,7 @@ export default function StoreMap({ activeKey, viewRequest, isEnglish, onSelect, 
     }).catch(fallback);
     const observer = new ResizeObserver(() => {
       map.invalidateSize({ pan: false });
+      if (!selection.current) fitOverview(map, false);
     });
     observer.observe(container.current);
     return () => {
@@ -168,7 +149,7 @@ export default function StoreMap({ activeKey, viewRequest, isEnglish, onSelect, 
     if (store) {
       map.flyTo([store.lat, store.lng], 16, { animate, duration: 0.65 });
     } else {
-      map.fitBounds(STORE_OVERVIEW_BOUNDS, { padding: [24, 24], animate, duration: 0.45 });
+      fitOverview(map, animate);
     }
     markers.current.forEach((marker, key) => {
       marker.getElement()?.classList.toggle("is-selected", key === activeKey);

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { MoveLeft, MoveRight, Search, X, MessageCircle } from "lucide-react";
+import { MoveLeft, MoveRight, X, MessageCircle } from "lucide-react";
 import type { ServiceType } from "@/lib/data";
 import { whatsappUrl } from "@/lib/constants";
 import { useI18n } from "@/lib/i18n/context";
@@ -193,8 +193,13 @@ export default function PriceTable({ service, categoryName, sub = false }: Price
       {/* Pencarian + penghitung model */}
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <div className="relative w-full max-w-[22rem]">
-          <Search
-            className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted"
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/icons/magnifying.png"
+            alt=""
+            width={16}
+            height={16}
+            className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 object-contain"
             aria-hidden="true"
           />
           <input
