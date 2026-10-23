@@ -97,13 +97,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  icons: {
-    icon: [
-      { url: "/mobicare-mark.png", type: "image/png" },
-    ],
-    shortcut: "/mobicare-mark.png",
-    apple: "/mobicare-mark.png",
-  },
 };
 
 import { I18nProvider } from "@/lib/i18n/context";

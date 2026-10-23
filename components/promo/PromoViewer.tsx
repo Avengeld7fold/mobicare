@@ -99,7 +99,7 @@ export default function PromoViewer({ promos }: PromoViewerProps) {
         <div className="media-lightbox" role="dialog" aria-modal="true" aria-label={isEn ? "Promo preview" : "Pratinjau promo"} onClick={close}>
           <button ref={closeButtonRef} type="button" className="media-lightbox-close" onClick={close} aria-label={dict.common.close}><X size={22} /></button>
           {promos.length > 1 && <button type="button" className="media-lightbox-nav media-lightbox-nav--prev" onClick={(event) => { event.stopPropagation(); previous(); }} aria-label={isEn ? "Previous promo" : "Promo sebelumnya"}><ChevronLeft size={24} /></button>}
-          <div className="media-lightbox-shell" onClick={(event) => event.stopPropagation()}>
+          <div className={`media-lightbox-shell${selectedPromo.waNote ? " media-lightbox-shell--whatsapp" : ""}`} onClick={(event) => event.stopPropagation()}>
             <div className="media-lightbox-image">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={selectedPromo.Image} alt={selectedPromo.altText || selectedPromo.Title || (isEn ? "MobiCare promo" : "Promo MobiCare")} />
@@ -108,6 +108,19 @@ export default function PromoViewer({ promos }: PromoViewerProps) {
               <span>{String(selectedIndex + 1).padStart(2, "0")} / {String(promos.length).padStart(2, "0")}</span>
               {selectedPromo.Title && <span>{selectedPromo.Title}</span>}
             </div>
+            {selectedPromo.waNote && (
+              <a
+                className="media-lightbox-whatsapp"
+                href={whatsappUrl(selectedPromo.waNote)}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(event) => event.stopPropagation()}
+              >
+                <MessageCircle size={17} aria-hidden="true" />
+                {isEn ? "Ask about this offer on WhatsApp" : "Tanyakan promo ini via WhatsApp"}
+                <ArrowRight size={16} aria-hidden="true" />
+              </a>
+            )}
           </div>
           {promos.length > 1 && <button type="button" className="media-lightbox-nav media-lightbox-nav--next" onClick={(event) => { event.stopPropagation(); next(); }} aria-label={isEn ? "Next promo" : "Promo berikutnya"}><ChevronRight size={24} /></button>}
         </div>

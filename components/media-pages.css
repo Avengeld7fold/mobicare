@@ -206,6 +206,8 @@
   background: #080c09f5;
 }
 .media-lightbox-shell { width: min(1120px, 100%); min-width: 0; }
+.media-lightbox-shell--whatsapp .media-lightbox-image { max-height: min(62dvh, calc(100vh - 230px)); }
+.media-lightbox-shell--whatsapp .media-lightbox-image img { max-height: min(62dvh, calc(100vh - 232px)); }
 .media-lightbox-image {
   display: grid;
   place-items: center;
@@ -227,6 +229,9 @@
 }
 .media-lightbox-caption span:first-child { color: #65f5a1; font-variant-numeric: tabular-nums; }
 .media-lightbox-caption span:last-child { max-width: 70%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.media-lightbox-whatsapp { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; margin: 12px auto 0; padding: 10px 16px; border: 1px solid rgba(255,255,255,.24); color: #fff; font-size: 14px; font-weight: 650; text-decoration: none; transition: background-color .18s ease, border-color .18s ease; }
+.media-lightbox-whatsapp:hover { border-color: #00bb5b; background: #17452b; }
+.media-lightbox-whatsapp:focus-visible { outline: 2px solid #65f5a1; outline-offset: 3px; }
 .media-lightbox-close,
 .media-lightbox-nav {
   position: absolute;
@@ -278,6 +283,8 @@
   .media-lightbox { align-items: center; padding: 76px 12px 84px; }
   .media-lightbox-image { max-height: calc(100dvh - 190px); }
   .media-lightbox-image img { max-height: calc(100dvh - 192px); }
+  .media-lightbox-shell--whatsapp .media-lightbox-image { max-height: min(52dvh, calc(100dvh - 300px)); }
+  .media-lightbox-shell--whatsapp .media-lightbox-image img { max-height: min(52dvh, calc(100dvh - 302px)); }
   .media-lightbox-close { top: 14px; right: 14px; }
   .media-lightbox-nav { bottom: 18px; top: auto; }
   .media-lightbox-nav--prev { left: calc(50% - 56px); }
