@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   description: idDictionary.contact.metaDescription,
   alternates: {
     canonical: "/contact",
+    languages: { id: "/contact", en: "/en/contact" },
   },
   openGraph: {
     title: idDictionary.contact.metaTitle,

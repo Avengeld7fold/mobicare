@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useI18n } from "@/lib/i18n/context";
-import { SOCIAL_LINKS } from "@/lib/constants";
+import { SOCIAL_LINKS, whatsappUrl } from "@/lib/constants";
 import MobiCareWordmark from "./MobiCareWordmark";
 
 export default function Footer() {
@@ -26,23 +26,30 @@ export default function Footer() {
           <MobiCareWordmark className="footer-brand-img" />
         </Link>
 
-        {/* Kolom 2: Contact */}
+        {/* Kolom 2: Kontak */}
         <div className="footer-contact">
           <span className="footer-label">{isEn ? "contact" : "kontak"}</span>
           <a href="tel:081999336722">
             0819<span className="footer-sym">-</span>9933<span className="footer-sym">-</span>6722
           </a>
+          <a
+            href={whatsappUrl("Halo MobiCare, saya ingin konsultasi perbaikan gadget.")}
+            target="_blank"
+            rel="noreferrer"
+          >
+            WhatsApp Chat
+          </a>
           <a href="mailto:team@mobicare.id">
             team<span className="footer-sym">@</span>mobicare.id
           </a>
-          <Link href={getLocalizedPath("/contact")}>
-            {isEn ? "Ask A Question" : "Tanya Teknisi"}
+          <Link href={getLocalizedPath("/our-store")}>
+            {isEn ? "Store Locations" : "Lokasi Workshop"}
           </Link>
         </div>
 
-        {/* Kolom 3: Follow */}
+        {/* Kolom 3: Media Sosial */}
         <div className="footer-social">
-          <span className="footer-label">{isEn ? "follow" : "ikuti"}</span>
+          <span className="footer-label">{isEn ? "social media" : "media sosial"}</span>
           <a
             href={SOCIAL_LINKS.instagram}
             target="_blank"
@@ -51,46 +58,55 @@ export default function Footer() {
             Instagram
           </a>
           <a
-            href={SOCIAL_LINKS.facebook}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Facebook
-          </a>
-          <a
             href={SOCIAL_LINKS.tiktok}
             target="_blank"
             rel="noreferrer"
           >
             TikTok
           </a>
+          <a
+            href={SOCIAL_LINKS.facebook}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Facebook
+          </a>
         </div>
 
-        {/* Kolom 4: Services */}
+        {/* Kolom 4: Layanan Servis Spesialis */}
         <div className="footer-apps">
           <span className="footer-label">
             {isEn ? "repair services" : "layanan servis"}
           </span>
-          <Link href={getLocalizedPath("/pricelist")}>
-            Apple iPhone<span className="footer-sym-amp">&amp;</span>iPad
+          <Link href={getLocalizedPath("/pricelist/iphone")}>
+            {isEn ? "iPhone Repair" : "Servis iPhone"}
+          </Link>
+          <Link href={getLocalizedPath("/pricelist/ipad")}>
+            {isEn ? "iPad Repair" : "Servis iPad"}
+          </Link>
+          <Link href={getLocalizedPath("/pricelist/macbook")}>
+            {isEn ? "MacBook Repair" : "Servis MacBook"}
+          </Link>
+          <Link href={getLocalizedPath("/pricelist/android")}>
+            {isEn ? "Android Smartphone" : "Servis Android"}
           </Link>
           <Link href={getLocalizedPath("/pricelist")}>
-            MacBook<span className="footer-sym-amp">&amp;</span>Android
+            {isEn ? "All Price Lists" : "Semua Biaya Servis"}
           </Link>
         </div>
       </div>
 
-      {/* Bagian Copywriting Editorial Dua Kolom */}
+      {/* Bagian Copywriting Editorial Dua Kolom: Ringkas, Padat, & Selaras Company Profile */}
       <div className="footer-copy">
         <p>
           {isEn
-            ? "MobiCare Service Center is redefining modern gadget repair by combining professional presentation, precision laboratory technology, and comprehensive service reach. Our digital platform makes it easy to service smartphones and laptops with confidence through transparent diagnostics, premium components, and clear upfront pricing. Whether you're looking for fast same-day screen replacements or advanced logic board microsoldering, MobiCare connects you with premier technical care. For customers, our streamlined workflow keeps every phase, from initial inspection to final quality assurance, clear and efficient."
-            : "MobiCare Service Center mendefinisikan ulang perbaikan gadget modern dengan memadukan standar kerja profesional, teknologi lab presisi, dan jangkauan layanan menyeluruh. Layanan digital kami memudahkan Anda memperbaiki smartphone dan laptop dengan penuh keyakinan melalui diagnosa terbuka, suku cadang berkualitas tinggi, dan informasi biaya yang transparan. Baik Anda membutuhkan perbaikan kilat di hari yang sama maupun penanganan mikrosolder logic board tingkat lanjut, MobiCare menghadirkan solusi servis terbaik secara cepat dan terpercaya. Bagi pelanggan, alur kerja terstruktur kami menjaga setiap tahapan, mulai dari inspeksi hingga uji kendali mutu, tetap transparan dan efisien."}
+            ? "MobiCare Service Center delivers professional device repairs with dedicated workbench standards, open diagnostics, and transparent upfront estimates. From screen and battery replacements to advanced logic board microsoldering, every device is handled directly by trained technicians using verified premium parts."
+            : "MobiCare Service Center menghadirkan layanan perbaikan gadget profesional dengan standar meja servis teruji, diagnosa terbuka, dan estimasi biaya transparan tanpa biaya tersembunyi. Dari penggantian layar dan baterai hingga penanganan mikrosolder logic board, setiap perangkat ditangani langsung oleh teknisi terlatih dengan suku cadang berkualitas tinggi."}
         </p>
         <p>
           {isEn
-            ? "For device owners, every repair comes with an official store warranty of up to 90 days and real-time live service tracking, giving you total peace of mind in every visit. MobiCare Service Center delivers what the modern tech industry needs: speed, technical precision, and proven results."
-            : "Bagi setiap pemilik gadget, setiap pengerjaan servis disertai garansi resmi toko hingga 90 hari dan pemantauan progres pengerjaan secara langsung, memberikan rasa tenang dalam setiap layanan. MobiCare Service Center menghadirkan apa yang dibutuhkan dunia teknologi modern: kecepatan, ketelitian teknis, dan hasil nyata."}
+            ? "Every repair is backed by an official store warranty of up to 90 days, rigorous multi-point functional verification before handover, and strict protection for your personal data. We ensure your device returns to peak performance through a clear, dependable, and efficient workflow."
+            : "Setiap perbaikan dilindungi garansi resmi toko hingga 90 hari, pengujian fungsional menyeluruh sebelum serah terima, serta komitmen ketat menjaga kerahasiaan data pribadi pelanggan. Kami memastikan perangkat Anda kembali beroperasi optimal dengan alur kerja yang jelas, cepat, dan terpercaya."}
         </p>
       </div>
 
@@ -105,7 +121,7 @@ export default function Footer() {
             {isEn ? "Terms & Conditions" : "Syarat & Ketentuan"}
           </Link>
           <Link href={getLocalizedPath("/contact")}>
-            {isEn ? "Accessibility" : "Aksesibilitas"}
+            {isEn ? "Support & Contact" : "Pusat Bantuan"}
           </Link>
         </div>
       </div>

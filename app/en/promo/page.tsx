@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     "Browse current MobiCare service offers for your device and contact our team for repair consultation.",
   alternates: {
     canonical: "/en/promo",
+    languages: { id: "/promo", en: "/en/promo" },
   },
 };
 

@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
 import SmoothScrolling from "@/components/SmoothScrolling";
 import LoadingGate from "@/components/loader/LoadingGate";
 import HtmlLanguage from "@/components/HtmlLanguage";
@@ -11,36 +10,10 @@ import "./mobicare.css";
 import "./pricelist.css";
 import "./price-opening.css";
 
-const gobold = localFont({
-  src: "../public/fonts/mobicare/Gobold-Regular.otf",
-  variable: "--font-gobold",
-  weight: "400",
-  display: "swap",
-});
-
-const greycliff = localFont({
-  src: [
-    {
-      path: "../public/fonts/mobicare/Greycliff-Regular.otf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/mobicare/Greycliff-Medium.otf",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/mobicare/Greycliff-Bold.otf",
-      weight: "700",
-      style: "normal",
-    },
-  ],
-  variable: "--font-greycliff",
-  display: "swap",
-});
-
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://mobicare.example";
+
+const SITE_DESCRIPTION =
+  "Pusat servis gadget profesional & presisi di Bali untuk iPhone, iPad, MacBook, dan Android. Diagnosa terbuka di meja servis, estimasi transparan, suku cadang berkualitas, dan garansi resmi toko.";
 
 export const viewport: Viewport = {
   themeColor: "#080c09",
@@ -51,8 +24,8 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: "MobiCare Service Center", template: "%s | MobiCare" },
-  description: "MobiCare Service Center.",
+  title: { default: "MobiCare Service Center Bali", template: "%s | MobiCare" },
+  description: SITE_DESCRIPTION,
   authors: [{ name: "MobiCare", url: SITE_URL }],
   creator: "MobiCare",
   publisher: "MobiCare",
@@ -69,8 +42,8 @@ export const metadata: Metadata = {
     locale: "id_ID",
     url: SITE_URL,
     siteName: "MobiCare",
-    title: "MobiCare Service Center",
-    description: "MobiCare Service Center.",
+    title: "MobiCare Service Center Bali — Servis iPhone, iPad, MacBook & Android",
+    description: SITE_DESCRIPTION,
     images: [
       {
         url: "/images/iphone.webp",
@@ -82,8 +55,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "MobiCare Service Center",
-    description: "MobiCare Service Center.",
+    title: "MobiCare Service Center Bali — Servis iPhone, iPad, MacBook & Android",
+    description: SITE_DESCRIPTION,
     images: ["/images/iphone.webp"],
   },
   robots: {
@@ -102,15 +75,47 @@ export const metadata: Metadata = {
 import { I18nProvider } from "@/lib/i18n/context";
 import Footer from "@/components/Footer";
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "MobiCare Service Center",
+  image: `${SITE_URL}/images/logo.svg`,
+  description: SITE_DESCRIPTION,
+  telephone: "+6281999336722",
+  priceRange: "$$",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Jl. Teuku Umar No.57, Dauh Puri Kauh",
+    addressLocality: "Denpasar",
+    addressRegion: "Bali",
+    postalCode: "80113",
+    addressCountry: "ID",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: -8.6705254,
+    longitude: 115.2095412,
+  },
+  url: SITE_URL,
+  sameAs: [
+    "https://www.instagram.com/fixmi_id/",
+    "https://www.tiktok.com/@fixmiservicecenter",
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <HtmlLanguage
-      className={`${gobold.variable} ${greycliff.variable} antialiased`}
-    >
+    <HtmlLanguage className="antialiased">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="min-h-screen flex flex-col bg-background text-foreground" suppressHydrationWarning>
         <ImageProtection />
         <LoadingGate>

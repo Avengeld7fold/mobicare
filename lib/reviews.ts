@@ -20,7 +20,7 @@ export interface GooglePlaceData {
 
 // Fallback data otentik sesuai bahasa asli yang diketik reviewer
 export const FALLBACK_REVIEWS: GooglePlaceData = {
-  name: "FIXMI SERVICE CENTER",
+  name: "MobiCare Service Center",
   rating: 4.8,
   totalRatings: 404,
   mapsUrl: "https://maps.google.com/?cid=4655164056963224271",

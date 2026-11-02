@@ -4,7 +4,7 @@ import { whatsappUrl } from "@/lib/constants";
 
 export const metadata = {
   title: "404 — Halaman Tidak Ditemukan",
-  description: "Halaman yang Anda cari tidak tersedia di FIXMI Service Center.",
+  description: "Halaman yang Anda cari tidak tersedia di situs MobiCare Service Center.",
 };
 
 export default function NotFound() {
@@ -45,7 +45,7 @@ export default function NotFound() {
         </Link>
 
         <a
-          href={whatsappUrl("Halo FIXMI, saya mengalami kendala pada website / ingin tanya info servis.")}
+          href={whatsappUrl("Halo MobiCare Service Center, saya mengalami kendala pada website / ingin tanya info servis.")}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(255,107,0,0.25)] transition-all hover:bg-primary-light hover:brightness-105 active:scale-[0.98]"

@@ -9,8 +9,8 @@ export default function HomeAlertsSignup() {
   const isEn = locale === "en";
 
   const marqueeItem = isEn
-    ? "MOBICARE SERVICE CENTER  ◆  PRECISION GADGET REPAIR  ◆  TRANSPARENT DIAGNOSTICS  ◆  IPHONE IPAD MACBOOK ANDROID  ◆  OFFICIAL WARRANTY  ◆  "
-    : "MOBICARE SERVICE CENTER  ◆  SERVIS GADGET PRESISI  ◆  DIAGNOSA TERBUKA  ◆  SPESIALIS IPHONE IPAD MACBOOK  ◆  GARANSI RESMI  ◆  ";
+    ? "MOBICARE SERVICE CENTER  ◆  DIRECT CONSULTATION  ◆  OPEN DIAGNOSTICS  ◆  TRANSPARENT ESTIMATES  ◆  FAST WHATSAPP RESPONSE  ◆  "
+    : "MOBICARE SERVICE CENTER  ◆  KONSULTASI LANGSUNG  ◆  DIAGNOSA TERBUKA  ◆  ESTIMASI TRANSPARAN  ◆  RESPON WHATSAPP CEPAT  ◆  ";
 
   return (
     <div className="mobi-signup-wrapper">
@@ -33,26 +33,18 @@ export default function HomeAlertsSignup() {
       {/* Left Column: Heading and Editorial Deck */}
       <div className="signup-copy">
         <p className="kicker kicker-light">
-          {isEn ? (
-            <>
-              text <span className="kicker-symbol">+</span> email alerts
-            </>
-          ) : (
-            <>
-              whatsapp <span className="kicker-symbol">+</span> email alerts
-            </>
-          )}
+          {isEn ? "direct consultation" : "konsultasi langsung"}
         </p>
 
         <h2 id="signup-heading">
-          <span>Be the first</span>
-          <span>to know.</span>
+          <span>{isEn ? "Talk to us" : "Konsultasi"}</span>
+          <span>{isEn ? "directly." : "langsung."}</span>
         </h2>
 
         <p className="signup-deck">
           {isEn
-            ? "Open diagnostics. Upfront pricing. Live repair progress. Exclusive perks. Every critical update delivered straight to your screen."
-            : "Diagnosa terbuka. Biaya pasti. Progres pengerjaan live. Promo eksklusif. Semua info penting langsung ke genggaman Anda."}
+            ? "Tell us what's wrong with your device and get clear next steps, transparent estimates, and the right service options before any work begins."
+            : "Ceritakan kendala perangkatmu dan dapatkan langkah selanjutnya yang jelas, estimasi transparan, serta opsi servis yang tepat sebelum pengerjaan dimulai."}
         </p>
       </div>
 
@@ -71,12 +63,12 @@ export default function HomeAlertsSignup() {
 
         <p>
           <strong>
-            {isEn ? "REAL-TIME UPDATES. RIGHT ON TIME." : "PROGRES LIVE. TEPAT WAKTU."}
+            {isEn ? "TALK FIRST. REPAIR WITH CONFIDENCE." : "KONSULTASI DULU. SERVIS TENANG."}
           </strong>
           <span>
             {isEn
-              ? "Follow every step of your device repair directly via WhatsApp or email."
-              : "Pantau setiap tahap perbaikan gadget Anda langsung via WhatsApp atau email."}
+              ? "Chat our team on WhatsApp or head to the contact page to describe your device problem."
+              : "Ngobrol dengan tim kami via WhatsApp atau buka halaman kontak untuk menjelaskan kendala perangkatmu."}
           </span>
         </p>
 
@@ -84,18 +76,18 @@ export default function HomeAlertsSignup() {
           href={getLocalizedPath("/contact")}
           className="button button-white signup-button"
         >
-          <span>{isEn ? "Get MobiCare Alerts" : "Aktifkan Notifikasi Servis"}</span>
+          <span>{isEn ? "Start a consultation" : "Mulai Konsultasi"}</span>
           <span aria-hidden="true">→</span>
         </Link>
       </div>
 
       {/* Bottom Ticker / Benefits Bar */}
       <div className="signup-benefits" aria-hidden="true">
-        <span>{isEn ? "Live Repair Progress" : "Progres Servis Live"}</span>
-        <i />
         <span>{isEn ? "Open Diagnostics" : "Diagnosa Terbuka"}</span>
         <i />
-        <span>{isEn ? "90-Day Warranty" : "Garansi 90 Hari"}</span>
+        <span>{isEn ? "Transparent Estimates" : "Estimasi Transparan"}</span>
+        <i />
+        <span>{isEn ? "Fast WhatsApp Response" : "Respon WhatsApp Cepat"}</span>
         <i />
       </div>
     </section>

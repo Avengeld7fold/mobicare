@@ -55,6 +55,7 @@ next-env.d.ts
 
 # Scratch / testing artifacts
 scratch/
+.hallmark/
 public/lottie/*.png
 public/lottie/*.svg
 

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96">
+  <defs>
+    <filter id="globe-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000000" flood-opacity="0.35" />
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.2" />
+    </filter>
+    <linearGradient id="globe-body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.65" />
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.40" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.20" />
+    </linearGradient>
+    <linearGradient id="globe-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="35%" stop-color="#ffffff" stop-opacity="0.75" />
+      <stop offset="70%" stop-color="#ffffff" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.55" />
+    </linearGradient>
+    <linearGradient id="globe-gloss" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85" />
+      <stop offset="60%" stop-color="#ffffff" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.0" />
+    </linearGradient>
+    <linearGradient id="globe-emboss" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.75" />
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#globe-shadow)">
+    <!-- Globe Sphere Body -->
+    <circle cx="48" cy="48" r="36"
+            fill="url(#globe-body)"
+            stroke="url(#globe-rim)"
+            stroke-width="2.2" />
+
+    <!-- Sphere Top-Left Convex Gloss Curve -->
+    <ellipse cx="38" cy="30" rx="24" ry="14" transform="rotate(-25 38 30)"
+             fill="url(#globe-gloss)" />
+
+    <!-- Equator Line -->
+    <line x1="12" y1="48" x2="84" y2="48"
+          stroke="url(#globe-emboss)"
+          stroke-width="2.2" />
+
+    <!-- Center Longitude Line -->
+    <line x1="48" y1="12" x2="48" y2="84"
+          stroke="url(#globe-emboss)"
+          stroke-width="1.8" />
+
+    <!-- Meridian Ellipse -->
+    <ellipse cx="48" cy="48" rx="18" ry="36"
+             fill="none"
+             stroke="url(#globe-emboss)"
+             stroke-width="2" />
+  </g>
+</svg>

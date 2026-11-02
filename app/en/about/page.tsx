@@ -2,16 +2,17 @@ import type { Metadata } from "next";
 import AboutPageContent from "@/components/about/AboutPageContent";
 
 export const metadata: Metadata = {
-  title: "About MobiCare — Professional Gadget Repair & Technical Solutions",
+  title: "About MobiCare — Company Profile",
   description:
-    "Official profile of MobiCare Service Center: Digital device repair solutions with professional service, clear communication, and customer trust.",
+    "Meet MobiCare Service Center, our vision, values, service process, and commitment to clear communication and customer trust.",
   alternates: {
     canonical: "/en/about",
+    languages: { id: "/about", en: "/en/about" },
   },
   openGraph: {
-    title: "About MobiCare — Professional Gadget Repair & Technical Solutions",
+    title: "About MobiCare — Company Profile",
     description:
-      "Official profile of MobiCare Service Center: Digital device repair solutions with professional service, clear communication, and customer trust.",
+      "Meet MobiCare Service Center, our vision, values, service process, and commitment to clear communication and customer trust.",
     url: "/en/about",
     images: [
       {

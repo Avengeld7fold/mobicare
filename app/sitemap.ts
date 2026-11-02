@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://fixmibali.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://mobicare.example";
   const now = new Date();
 
   const categories = ["iphone", "ipad", "macbook", "iwatch", "android"];
@@ -70,6 +70,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.8,
+    },
+    {
+      url: `${siteUrl}/our-store`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${siteUrl}/en/our-store`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
     },
     {
       url: `${siteUrl}/about`,

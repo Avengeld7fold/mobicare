@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96">
+  <defs>
+    <filter id="eye-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000000" flood-opacity="0.35" />
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.2" />
+    </filter>
+    <linearGradient id="eye-body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.65" />
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.40" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.20" />
+    </linearGradient>
+    <linearGradient id="eye-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="35%" stop-color="#ffffff" stop-opacity="0.75" />
+      <stop offset="70%" stop-color="#ffffff" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.55" />
+    </linearGradient>
+    <linearGradient id="eye-gloss" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85" />
+      <stop offset="60%" stop-color="#ffffff" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.0" />
+    </linearGradient>
+    <linearGradient id="eye-emboss" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.75" />
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#eye-shadow)">
+    <!-- Eye Contour -->
+    <path d="M10 48 C20 28, 38 20, 48 20 C58 20, 76 28, 86 48 C76 68, 58 76, 48 76 C38 76, 20 68, 10 48 Z"
+          fill="url(#eye-body)"
+          stroke="url(#eye-rim)"
+          stroke-width="2.2" />
+
+    <!-- Top Brow Gloss Sweep -->
+    <path d="M12 46 C20 30, 36 22, 48 22 C60 22, 76 30, 84 46 C74 36, 60 30, 48 30 C36 30, 22 36, 12 46 Z"
+          fill="url(#eye-gloss)" />
+
+    <!-- Iris Ring -->
+    <circle cx="48" cy="48" r="16"
+            fill="rgba(255,255,255,0.25)"
+            stroke="url(#eye-rim)"
+            stroke-width="2.2" />
+
+    <!-- Pupil -->
+    <circle cx="48" cy="48" r="9"
+            fill="url(#eye-emboss)" />
+
+    <!-- Specular Catchlight Gleam -->
+    <circle cx="44.5" cy="44.5" r="3" fill="#ffffff" />
+  </g>
+</svg>

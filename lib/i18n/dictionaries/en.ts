@@ -27,15 +27,15 @@ export const enDictionary: Dictionary = {
     admin: "Admin",
   },
   hero: {
-    badge: "FIXMI SERVICE CENTER",
+    badge: "MOBICARE SERVICE CENTER",
     titleBroken: "DEVICE BROKEN?",
     subtitlePrefix: "YOUR TRUSTED",
     subtitleMiddle: "SMART DEVICE REPAIR",
     subtitleSuffix: "SERVICE!",
-    titleSolusinya1: "FIXMI SERVICE CENTER",
+    titleSolusinya1: "MOBICARE SERVICE CENTER",
     titleSolusinya2: "SOLVES IT!",
     taglineDescription:
-      "Bali's premier certified repair laboratory for iPhone, iPad, MacBook, Apple Watch, and Android devices with transparent diagnostics & warranty.",
+      "Bali's premier repair service for iPhone, iPad, MacBook, Apple Watch, and Android devices with transparent diagnostics & warranty.",
     consultationCta: "Diagnose My Device Issue",
     checkPricingCta: "Check Repair Prices",
     diagnosticNotice: "Live open-bench diagnostics without surrendering your passcode",
@@ -43,9 +43,9 @@ export const enDictionary: Dictionary = {
   whyUs: {
     badge: "HIGH QUALITY STANDARDS",
     heading1: "WHY THOUSANDS OF CLIENTS",
-    heading2: "TRUST FIXMI SERVICE CENTER?",
+    heading2: "TRUST MOBICARE SERVICE CENTER?",
     description:
-      "Setting the benchmark for smart device repairs in Bali with 100% transparency, OEM-certified components, and micro-soldering specialists.",
+      "Setting the benchmark for smart device repairs in Bali with 100% transparency, quality components, and micro-soldering specialists.",
     pillar1Value: "IDR 0,-",
     pillar1Label: "Free Diagnostic",
     pillar1Desc: "Open-bench assessment right before your eyes at no cost if you choose not to proceed.",
@@ -80,12 +80,12 @@ export const enDictionary: Dictionary = {
   teardown: {
     badge: "MULTI-LAYER DIAGNOSTICS",
     heading: "PRECISION REPAIR ANATOMY",
-    subheading: "Select any component layer to inspect common fault symptoms and FIXMI certified solutions.",
+    subheading: "Select any component layer to inspect common fault symptoms and MobiCare solutions.",
     scrollHint: "SCROLL HERE",
     modalEstimate: "ESTIMATED TIME",
     modalWarranty: "WARRANTY COVERAGE",
     modalSymptoms: "Common Issue Symptoms",
-    modalFixmiSolution: "FIXMI Certified Solution",
+    modalFixmiSolution: "MobiCare Solution",
     modalConsultBtn: "Inquire About This Component via WhatsApp",
   },
   journey: {
@@ -113,7 +113,7 @@ export const enDictionary: Dictionary = {
   reviews: {
     badge: "OFFICIAL GOOGLE MAPS REVIEWS",
     heading: "CLIENT SATISFACTION IS OUR FOREMOST PRIORITY.",
-    subheading: "Authentic, unedited reviews from travelers, digital nomads, and local residents who trust FIXMI Service Center.",
+    subheading: "Authentic, unedited reviews from travelers, digital nomads, and local residents who trust MobiCare Service Center.",
     filterRelevant: "Most Relevant",
     filterNewest: "Newest",
     readMore: "Read more",
@@ -148,7 +148,7 @@ export const enDictionary: Dictionary = {
         id: "faq-3",
         question: "What are the terms of the post-repair warranty?",
         answer:
-          "Every service at FIXMI includes an official store warranty of up to 365 days (1 year). Making a warranty claim is seamless: if any replaced component shows defects during the coverage period, we replace it with a brand new unit at no extra charge.",
+          "Every service at MobiCare includes an official store warranty of up to 90 days. Making a warranty claim is seamless: if any replaced component shows defects during the coverage period, we replace it with a brand new unit at no extra charge.",
       },
       {
         id: "faq-4",
@@ -160,19 +160,19 @@ export const enDictionary: Dictionary = {
         id: "faq-5",
         question: "Are the replacement parts genuine and high quality?",
         answer:
-          "Yes, FIXMI exclusively uses Original Equipment Manufacturer (OEM) and top-tier Premium Grade components that pass strict quality control (QC) testing prior to installation.",
+          "Yes, MobiCare exclusively uses top-tier Premium Grade and OEM components that pass strict quality control (QC) testing prior to installation.",
       },
       {
         id: "faq-6",
         question: "Do you offer courier pick-up & delivery service across Bali?",
         answer:
-          "Yes. We offer device pick-up and delivery across Kuta, Jimbaran, Nusa Dua, Seminyak, Canggu, Denpasar, and neighboring areas. Please message our WhatsApp concierge to arrange a courier.",
+          "Yes. We offer device pick-up and delivery across Denpasar, Canggu, Badung, and neighboring areas. Please message our WhatsApp concierge to arrange a courier.",
       },
       {
         id: "faq-7",
-        question: "Can FIXMI handle severe motherboard or water damage?",
+        question: "Can MobiCare handle severe motherboard or water damage?",
         answer:
-          "Yes. Our technical laboratory is outfitted with stereo microscopes, thermal imaging equipment, and advanced micro-soldering stations to resolve logic board shorts, power IC faults, and ultrasonic corrosion cleaning.",
+          "Yes. Our technical workshop is outfitted with stereo microscopes, heating equipment, and advanced micro-soldering stations to resolve logic board shorts, power IC faults, and ultrasonic corrosion cleaning.",
       },
     ],
   },
@@ -342,7 +342,7 @@ export const enDictionary: Dictionary = {
     ],
     ctaHeadline: "Consult Your Device Issue With Our Technicians",
     ctaDescription:
-      "Visit our main workshop at Jalan Raya Uluwatu No. 79, Kedonganan, Kuta, or message our technicians via WhatsApp for an immediate free initial diagnosis.",
+      "Visit our MobiCare workshop branches in Teuku Umar, Canggu, and Gatot Subroto, or message our technicians via WhatsApp for an immediate consultation.",
     ctaBtn: "Chat Technician via WhatsApp",
   },
   contact: {

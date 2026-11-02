@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, X } from "lucide-react";
+import { ArrowRight, Play, X } from "lucide-react";
 import { useLenis } from "lenis/react";
 import { useI18n } from "@/lib/i18n/context";
 
@@ -86,16 +86,7 @@ export default function HomeSmarterWay() {
         {/* Right Column: Workshop Cinematic Showcase */}
         <div
           className="smarter-poster"
-          role="button"
-          tabIndex={0}
-          aria-label={isEn ? "Play MobiCare Workshop Standard Video" : "Putar Video Standar Workshop MobiCare"}
           onClick={() => setIsVideoOpen(true)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              setIsVideoOpen(true);
-            }
-          }}
         >
           <Image
             src="/images/mobi-team.webp"
@@ -110,13 +101,17 @@ export default function HomeSmarterWay() {
           <button
             type="button"
             className="smarter-play-btn"
-            aria-label={isEn ? "Play Video" : "Putar Video"}
+            aria-label={
+              isEn
+                ? "Play video: WORKSHOP REPAIR STANDARD MobiCare Service Center Bali"
+                : "Putar video: STANDAR KERJA WORKSHOP MobiCare Service Center Bali"
+            }
             onClick={(e) => {
               e.stopPropagation();
               setIsVideoOpen(true);
             }}
           >
-            &#9654;
+            <Play size={20} fill="currentColor" aria-hidden="true" />
           </button>
 
           {/* Poster Badge */}

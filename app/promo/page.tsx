@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   description: idDictionary.promo.subtitle,
   alternates: {
     canonical: "/promo",
+    languages: { id: "/promo", en: "/en/promo" },
   },
   openGraph: {
     title: idDictionary.promo.title,

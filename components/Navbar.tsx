@@ -115,11 +115,11 @@ export default function Navbar() {
         <Link
           href={getLocalizedPath("/")}
           className="group flex items-center no-underline shrink-0 active:scale-[0.97] transition-transform duration-150 ease-out"
-          aria-label="FIXMI"
+          aria-label="MobiCare"
         >
           <Image
             src="/images/logo.svg"
-            alt="FIXMI Service Center"
+            alt="MobiCare Service Center"
             width={172}
             height={44}
             priority

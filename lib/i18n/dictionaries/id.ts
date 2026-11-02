@@ -27,25 +27,25 @@ export const idDictionary: Dictionary = {
     admin: "Admin",
   },
   hero: {
-    badge: "FIXMI SERVICE CENTER",
+    badge: "MOBICARE SERVICE CENTER",
     titleBroken: "HP KAMU RUSAK?",
     subtitlePrefix: "YOUR TRUSTED",
     subtitleMiddle: "SMART DEVICE REPAIR",
     subtitleSuffix: "SERVICE!",
-    titleSolusinya1: "FIXMI SERVICE CENTER",
+    titleSolusinya1: "MOBICARE SERVICE CENTER",
     titleSolusinya2: "SOLUSINYA!",
     taglineDescription:
-      "FIXMI hadir sejak 2014 sebagai laboratorium perbaikan Apple dan Android di Bali — dengan standar diagnosa terbuka, komponen bersertifikasi, dan garansi resmi yang terdokumentasi.",
+      "MobiCare hadir didukung pengalaman teknis terpercaya di Bali — dengan standar diagnosa terbuka, komponen berkualitas, dan garansi resmi toko.",
     consultationCta: "Konsultasi Kerusakan Perangkat",
     checkPricingCta: "Cek Biaya Servis",
     diagnosticNotice: "Diagnosa tanpa biaya. Privasi perangkat sepenuhnya terjaga.",
   },
   whyUs: {
     badge: "STANDAR KUALITAS TINGGI",
-    heading1: "STANDAR YANG TELAH KAMI JAGA",
-    heading2: "SELAMA LEBIH DARI SATU DEKADE",
+    heading1: "STANDAR LAYANAN PRESISI",
+    heading2: "KOMITMEN KEPERCAYAAN & TRANSPARANSI",
     description:
-      "Setiap perbaikan di FIXMI mengikuti prosedur yang konsisten: diagnosa terbuka di hadapan pelanggan, penetapan biaya sebelum pengerjaan dimulai, dan garansi resmi yang dapat dipertanggungjawabkan. Standar ini berlaku sejak hari pertama kami berdiri.",
+      "Setiap perbaikan di MobiCare mengikuti prosedur yang konsisten: diagnosa terbuka di meja servis, penetapan estimasi sebelum pengerjaan dimulai, dan garansi resmi toko yang terjamin.",
     pillar1Value: "Rp 0,-",
     pillar1Label: "Pengecekan Gratis",
     pillar1Desc: "Setiap sesi diagnosa dilakukan secara terbuka di hadapan pelanggan, tanpa biaya dan tanpa kewajiban untuk melanjutkan perbaikan.",
@@ -80,12 +80,12 @@ export const idDictionary: Dictionary = {
   teardown: {
     badge: "DIAGNOSTIK MULTI-LAYER",
     heading: "ANATOMI PERBAIKAN PRESISI",
-    subheading: "Klik komponen untuk melihat gejala kerusakan dan solusi perbaikan profesional FIXMI.",
+    subheading: "Klik komponen untuk melihat gejala kerusakan dan solusi perbaikan profesional MobiCare.",
     scrollHint: "SCROLL DISINI",
     modalEstimate: "ESTIMASI WAKTU",
     modalWarranty: "JAMINAN GARANSI",
     modalSymptoms: "Gejala Kerusakan Umum",
-    modalFixmiSolution: "Solusi Servis FIXMI",
+    modalFixmiSolution: "Solusi Servis MobiCare",
     modalConsultBtn: "Konsultasi Komponen Ini via WhatsApp",
   },
   journey: {
@@ -148,7 +148,7 @@ export const idDictionary: Dictionary = {
         id: "faq-3",
         question: "Bagaimana ketentuan garansi setelah perbaikan selesai?",
         answer:
-          "Setiap perbaikan di FIXMI dilindungi garansi resmi hingga 365 hari (1 tahun). Klaim garansi sangat mudah dan transparan: jika terdapat kendala pada suku cadang yang diganti dalam masa garansi, kami akan mengganti unit part baru tanpa biaya tambahan.",
+          "Setiap perbaikan di MobiCare dilindungi garansi resmi toko hingga 90 hari. Klaim garansi sangat mudah dan transparan: jika terdapat kendala pada suku cadang yang diganti dalam masa garansi, kami akan mengganti unit part baru tanpa biaya tambahan.",
       },
       {
         id: "faq-4",
@@ -160,19 +160,19 @@ export const idDictionary: Dictionary = {
         id: "faq-5",
         question: "Apakah suku cadang yang digunakan original dan berkualitas?",
         answer:
-          "Ya, FIXMI hanya menggunakan suku cadang kualitas Original Equipment Manufacturer (OEM) dan Premium Grade tertinggi yang telah melewati uji kontrol kualitas (QC) ketat sebelum dipasang pada perangkat Anda.",
+          "Ya, MobiCare hanya menggunakan suku cadang kualitas Premium Grade tertinggi dan OEM yang telah melewati uji kontrol kualitas (QC) ketat sebelum dipasang pada perangkat Anda.",
       },
       {
         id: "faq-6",
         question: "Apakah melayani pick-up / delivery service di area Bali?",
         answer:
-          "Tentu. Kami menyediakan layanan antar-jemput perangkat untuk wilayah Kuta, Jimbaran, Nusa Dua, Seminyak, Denpasar, dan sekitarnya. Silakan hubungi admin WhatsApp kami untuk reservasi kurir.",
+          "Tentu. Kami menyediakan layanan antar-jemput perangkat untuk wilayah Denpasar, Canggu, Badung, dan sekitarnya. Silakan hubungi admin WhatsApp kami untuk reservasi kurir.",
       },
       {
         id: "faq-7",
-        question: "Apakah FIXMI dapat menangani kerusakan parah seperti mati total atau terkena air?",
+        question: "Apakah MobiCare dapat menangani kerusakan parah seperti mati total atau terkena air?",
         answer:
-          "Bisa. Laboratorium teknis kami dilengkapi dengan mikroskop stereo, mesin thermal imager, dan peralatan micro-soldering mutakhir untuk menangani perbaikan level mesin/motherboard, short circuit, hingga pembersihan korosi akibat cairan.",
+          "Bisa. Workshop teknis kami dilengkapi dengan mikroskop stereo, mesin pemanas presisi, dan peralatan micro-soldering mutakhir untuk menangani perbaikan level mesin/motherboard, short circuit, hingga pembersihan korosi akibat cairan.",
       },
     ],
   },
@@ -342,7 +342,7 @@ export const idDictionary: Dictionary = {
     ],
     ctaHeadline: "Konsultasikan Masalah Perangkat Anda Bersama Kami",
     ctaDescription:
-      "Kunjungi workshop resmi FIXMI di Jalan Raya Uluwatu No. 79, Kedonganan, Kuta, atau hubungi teknisi kami via WhatsApp untuk diagnosa awal tanpa biaya.",
+      "Kunjungi cabang workshop resmi MobiCare di Teuku Umar, Canggu, dan Gatot Subroto, atau hubungi teknisi kami via WhatsApp untuk konsultasi awal.",
     ctaBtn: "Chat Teknisi via WhatsApp",
   },
   contact: {

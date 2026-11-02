@@ -1,5 +1,5 @@
 /**
- * Sistem Status Operasional Real-Time Gerai FIXMI (WITA / UTC+8)
+ * Sistem Status Operasional Real-Time Gerai MobiCare (WITA / UTC+8)
  *
  * Mengkalkulasi status Buka, Segera Tutup, Tutup, dan Libur Hari Raya
  * secara akurat mengikuti zona waktu Bali dan kalender operasional Google Maps.
@@ -55,7 +55,7 @@ export function getWitaDate(customDate?: Date): Date {
 }
 
 /**
- * Mengkalkulasi status live gerai FIXMI.
+ * Mengkalkulasi status live gerai MobiCare.
  */
 export function getStoreLiveStatus(
   config: StoreHoursConfig = { openHour: 9, closeHourWeekday: 21, closeHourSunday: 0 },

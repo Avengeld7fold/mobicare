@@ -5,11 +5,12 @@ import PricelistPage from "../../pricelist/page";
 export const revalidate = 30;
 
 export const metadata: Metadata = {
-  title: "iPhone, iPad, MacBook & Android Repair Price List — FIXMI Service Center",
+  title: "iPhone, iPad, MacBook & Android Repair Price List — MobiCare Service Center Bali",
   description:
-    "Transparent & certified repair pricing with official warranty for iPhone, iPad, MacBook, Apple Watch, and Android at FIXMI Service Center. Instant walk-in LCD, battery, and motherboard repair.",
+    "Check transparent repair price estimates for iPhone, iPad, MacBook, Apple Watch, and Android at MobiCare Service Center in Bali. LCD, battery, camera, and more.",
   alternates: {
     canonical: "/en/pricelist",
+    languages: { id: "/pricelist", en: "/en/pricelist" },
   },
 };
 

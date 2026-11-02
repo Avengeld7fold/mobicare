@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Home from "../page";
 
 export const metadata: Metadata = {
-  title: "FIXMI — Premier iPhone, iPad, MacBook & Android Repair Center in Bali",
+  title: "MobiCare Service Center Bali — iPhone, iPad, MacBook & Android Repair",
   description:
-    "Bali's premier smart device repair center since August 2014. Certified specialists in screen replacement, battery renewal, camera repair, and motherboard micro-soldering for iPhone, iPad, MacBook & Android. 3 branches in Kedonganan, Jimbaran, and Denpasar.",
+    "Gadget service center in Bali. Check transparent repair price lists for iPhone, iPad, MacBook & Android, find a MobiCare branch near you, and start a WhatsApp consultation.",
   alternates: {
     canonical: "/en",
+    languages: { id: "/" },
   },
 };
 

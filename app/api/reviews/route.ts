@@ -103,7 +103,7 @@ export async function GET() {
 
     return NextResponse.json(
       {
-        name: baseResult.name || "FIXMI SERVICE CENTER",
+        name: baseResult.name || "MOBICARE SERVICE CENTER",
         rating: baseResult.rating || 4.8,
         totalRatings: baseResult.user_ratings_total || 404,
         mapsUrl:

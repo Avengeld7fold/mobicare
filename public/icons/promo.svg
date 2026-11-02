@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96">
+  <defs>
+    <filter id="promo-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000000" flood-opacity="0.35" />
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.2" />
+    </filter>
+    <linearGradient id="promo-body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.65" />
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.40" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.20" />
+    </linearGradient>
+    <linearGradient id="promo-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="35%" stop-color="#ffffff" stop-opacity="0.75" />
+      <stop offset="70%" stop-color="#ffffff" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.55" />
+    </linearGradient>
+    <linearGradient id="promo-gloss" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85" />
+      <stop offset="60%" stop-color="#ffffff" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.0" />
+    </linearGradient>
+    <linearGradient id="promo-emboss" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.75" />
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#promo-shadow)">
+    <!-- 12-Lobed Scalloped Rosette Badge -->
+    <path d="M48 12 C52 12, 55 15, 59 17 C63 19, 67 19, 71 22 C75 25, 77 29, 79 33 C81 37, 84 40, 84 45 C84 50, 81 54, 79 58 C77 62, 75 66, 71 69 C67 72, 63 72, 59 75 C55 77, 52 80, 48 80 C44 80, 41 77, 37 75 C33 72, 29 72, 25 69 C21 66, 19 62, 17 58 C15 54, 12 50, 12 45 C12 40, 15 37, 17 33 C19 29, 21 25, 25 22 C29 19, 33 19, 37 17 C41 15, 44 12, 48 12 Z"
+          fill="url(#promo-body)"
+          stroke="url(#promo-rim)"
+          stroke-width="2" />
+
+    <!-- Top Gloss Arc -->
+    <path d="M25 22 C29 19, 33 19, 37 17 C41 15, 44 12, 48 12 C52 12, 55 15, 59 17 C63 19, 67 19, 71 22 C60 30, 36 30, 25 22 Z"
+          fill="url(#promo-gloss)" />
+
+    <!-- Embossed Percent Symbol % -->
+    <circle cx="38" cy="38" r="5"
+            fill="none"
+            stroke="url(#promo-emboss)"
+            stroke-width="2.5" />
+    <circle cx="58" cy="56" r="5"
+            fill="none"
+            stroke="url(#promo-emboss)"
+            stroke-width="2.5" />
+    <line x1="62" y1="32" x2="34" y2="62"
+          stroke="url(#promo-emboss)"
+          stroke-width="3"
+          stroke-linecap="round" />
+  </g>
+</svg>

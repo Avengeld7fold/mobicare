@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   description: idDictionary.gallery.subtitle,
   alternates: {
     canonical: "/gallery",
+    languages: { id: "/gallery", en: "/en/gallery" },
   },
   openGraph: {
     title: idDictionary.gallery.title,

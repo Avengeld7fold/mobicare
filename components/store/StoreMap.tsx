@@ -30,6 +30,64 @@ function fitOverview(map: L.Map, animate: boolean) {
   });
 }
 
+// Binding maplibre-gl-leaflet punya `_transitionEnd` yang menjadwalkan
+// requestAnimationFrame tanpa guard null di dalam body-nya. Ketika peta
+// dihapus saat navigasi antar halaman, frame itu berjalan setelah
+// `onRemove` menetapkan `_map = null` dan melempar
+// "Cannot read properties of null (reading 'getZoom')".
+// Patch lifecycle di sini agar handler aman ketika layer sudah dilepas.
+let maplibreLifecyclePatched = false;
+
+type MaplibreGlMap = {
+  _actualCanvas: HTMLElement;
+  once(event: string, handler: () => void): unknown;
+  jumpTo(options: { center: L.LatLng; zoom: number }): unknown;
+};
+
+type MaplibreLayer = {
+  _map: L.Map | null;
+  _glMap: MaplibreGlMap | null;
+  _resizeContainer(): void;
+  _zoomEnd(): void;
+};
+
+type MaplibreLayerPrototype = MaplibreLayer & {
+  _transitionEnd(event?: unknown): void;
+  _pinchZoom(event?: unknown): void;
+};
+
+function patchMaplibreLifecycle() {
+  if (maplibreLifecyclePatched) return;
+  maplibreLifecyclePatched = true;
+  const MaplibreClass = (L as unknown as { MaplibreGL?: { prototype: MaplibreLayerPrototype } }).MaplibreGL;
+  if (!MaplibreClass) return;
+  const proto = MaplibreClass.prototype;
+  proto._transitionEnd = function (this: MaplibreLayer) {
+    L.Util.requestAnimFrame(function (this: MaplibreLayer) {
+      if (!this._map || !this._glMap) return;
+      const zoom = this._map.getZoom();
+      const center = this._map.getCenter();
+      const offset = this._map.latLngToContainerPoint(this._map.getBounds().getNorthWest());
+      this._resizeContainer();
+      L.DomUtil.setTransform(this._glMap._actualCanvas, offset, 1);
+      this._glMap.once("moveend", L.Util.bind(function (this: MaplibreLayer) {
+        this._zoomEnd();
+      }, this));
+      this._glMap.jumpTo({ center, zoom: zoom - 1 });
+    }, this);
+  };
+  const origZoomEnd = proto._zoomEnd;
+  proto._zoomEnd = function (this: MaplibreLayer) {
+    if (!this._map) return;
+    origZoomEnd.call(this);
+  };
+  const origPinchZoom = proto._pinchZoom;
+  proto._pinchZoom = function (this: MaplibreLayer) {
+    if (!this._map) return;
+    origPinchZoom.call(this);
+  };
+}
+
 export default function StoreMap({ activeKey, viewRequest, isEnglish, onSelect, detailOpen, onCloseDetails }: Props) {
   const container = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
@@ -89,7 +147,9 @@ export default function StoreMap({ activeKey, viewRequest, isEnglish, onSelect, 
       const icon = L.divIcon({
         className: "store-pin",
         html: `<svg viewBox="0 0 48 60" aria-hidden="true"><path d="M24 58C22 48 19 42 13 34C8 27.5 6 24 6 19C6 9.1 14.1 1 24 1S42 9.1 42 19C42 24 40 27.5 35 34C29 42 26 48 24 58Z"/><circle cx="24" cy="19" r="9.5"/></svg>`,
-        iconSize: [48, 60], iconAnchor: [24, 58],
+        // Kotak ikon tetap 44x48 untuk touch target yang nyaman; visual pin
+        // di-downscale via CSS agar proporsional seperti marker Google Maps.
+        iconSize: [44, 48], iconAnchor: [22, 48],
       });
       const marker = L.marker([store.lat, store.lng], { icon, title: store.name, alt: store.name });
       marker.on("add", () => {
@@ -108,6 +168,7 @@ export default function StoreMap({ activeKey, viewRequest, isEnglish, onSelect, 
     timeout = window.setTimeout(fallback, 15000);
     void Promise.all([import("maplibre-gl"), import("@maplibre/maplibre-gl-leaflet")]).then(([gl, binding]) => {
       if (disposed || fallbackActive) return;
+      patchMaplibreLifecycle();
       gl.setWorkerUrl("/maps/worker/maplibre-gl-worker.mjs");
       vector = binding.maplibreGL({
         style: "/maps/mobicare-light.json",
@@ -124,6 +185,7 @@ export default function StoreMap({ activeKey, viewRequest, isEnglish, onSelect, 
       renderer.on("webglcontextlost", fallback);
     }).catch(fallback);
     const observer = new ResizeObserver(() => {
+      if (disposed) return;
       map.invalidateSize({ pan: false });
       if (!selection.current) fitOverview(map, false);
     });

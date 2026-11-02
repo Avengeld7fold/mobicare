@@ -45,7 +45,7 @@ export default function ErrorBoundary({
         </button>
 
         <a
-          href={whatsappUrl("Halo FIXMI, saya mengalami error saat mengakses website.")}
+          href={whatsappUrl("Halo MobiCare Service Center, saya mengalami error saat mengakses website.")}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(255,107,0,0.25)] transition-all hover:bg-primary-light hover:brightness-105 active:scale-[0.98]"

@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     "Explore verified repair documentation and technician activity from MobiCare Service Center.",
   alternates: {
     canonical: "/en/gallery",
+    languages: { id: "/gallery", en: "/en/gallery" },
   },
 };
 

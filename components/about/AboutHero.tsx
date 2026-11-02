@@ -16,17 +16,17 @@ export default function AboutHero({ imageSrc = "/images/mobi-team.webp" }: About
       {/* Background Team Photo */}
       <Image
         src={imageSrc}
-        alt={isEn ? "MobiCare Service Center Master Technicians Team" : "Tim Teknisi Ahli MobiCare Service Center Bali"}
+        alt={isEn ? "MobiCare Service Center Master Technicians Team" : "Tim Teknisi Ahli MobiCare Service Center"}
         fill
         priority
         sizes="100vw"
         className="object-cover"
       />
 
-      {/* Dark Gradient Overlay Shade */}
+      {/* Dark Gradient Overlay Shade — murni atmosferik gelap, tanpa gradasi hijau cahaya */}
       <div className="about-hero-shade" aria-hidden="true" />
 
-      {/* Hero Typography & Kicker */}
+      {/* Hero Typography & Kicker persis Fastrack */}
       <div className="about-hero-copy">
         <p className="kicker">
           {isEn ? "about mobicare" : "tentang mobicare"}
@@ -40,7 +40,7 @@ export default function AboutHero({ imageSrc = "/images/mobi-team.webp" }: About
         </h1>
 
         <p className="about-hero-sub">
-          {isEn ? "Your Device. Our Expertise. Your Trust." : "Your Device. Our Expertise. Your Trust."}
+          {isEn ? "Your Device. Our Expertise. Your Trust." : "Dedikasi untuk presisi."}
         </p>
       </div>
     </section>

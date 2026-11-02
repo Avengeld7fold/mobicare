@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { MoveLeft, MoveRight, X, MessageCircle } from "lucide-react";
+import { MoveLeft, MoveRight, Search, X, MessageCircle } from "lucide-react";
 import type { ServiceType } from "@/lib/data";
 import { whatsappUrl } from "@/lib/constants";
 import { useI18n } from "@/lib/i18n/context";
@@ -193,13 +193,8 @@ export default function PriceTable({ service, categoryName, sub = false }: Price
       {/* Pencarian + penghitung model */}
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <div className="relative w-full max-w-[22rem]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/icons/magnifying.png"
-            alt=""
-            width={16}
-            height={16}
-            className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 object-contain"
+          <Search
+            className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted"
             aria-hidden="true"
           />
           <input
@@ -208,7 +203,7 @@ export default function PriceTable({ service, categoryName, sub = false }: Price
             onChange={(e) => setQuery(e.target.value)}
             placeholder={isEn ? "Search device model..." : "Cari model perangkat..."}
             aria-label={dict.pricelist.searchPlaceholder}
-            className={`w-full rounded-[12px] border py-2.5 pl-9 pr-9 text-sm text-foreground placeholder:text-text-muted outline-none transition-[border-color,box-shadow] duration-200 focus:border-primary focus:ring-2 focus:ring-primary/20 [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden ${
+            className={`w-full rounded-[12px] border py-2.5 pl-9 pr-9 text-sm text-foreground placeholder:text-text-muted outline-none transition-[border-color,box-shadow] duration-200 focus:border-[var(--mobi-green)] focus:ring-2 focus:ring-[var(--mobi-green)]/20 [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden ${
               sub ? "border-[#282828] bg-[#121212]" : "border-panel-border bg-background"
             }`}
           />
@@ -232,7 +227,7 @@ export default function PriceTable({ service, categoryName, sub = false }: Price
           ter-mount selama tabel bisa digeser (dua arah) — unmount saat mentok
           membuat tabel lompat/berkedip. Mentok kanan → hint berbalik arah (←). */}
       {(canRight || canLeft) && (
-        <p className="mb-2 flex items-center justify-end text-right ml-auto w-full gap-1.5 font-mono text-[0.625rem] sm:text-[0.6875rem] uppercase tracking-widest text-primary">
+        <p className="mb-2 flex items-center justify-end text-right ml-auto w-full gap-1.5 font-mono text-[0.625rem] sm:text-[0.6875rem] uppercase tracking-widest text-[var(--mobi-green-bright)]">
           {canRight ? (
             <>
               {isEn ? "Swipe table for details" : "Geser tabel untuk detail"}
@@ -256,7 +251,7 @@ export default function PriceTable({ service, categoryName, sub = false }: Price
           tabIndex={0}
           aria-label={`${getLocalizedServiceName(service, locale)} - ${categoryName}`}
           style={{ overscrollBehaviorY: "auto" }}
-          className="max-h-[35rem] overflow-auto [overscroll-behavior-x:contain] [touch-action:pan-x_pan-y] [scrollbar-width:thin] focus-visible:outline-2 focus-visible:outline-primary"
+          className="max-h-[35rem] overflow-auto [overscroll-behavior-x:contain] [touch-action:pan-x_pan-y] [scrollbar-width:thin] focus-visible:outline-2 focus-visible:outline-[var(--mobi-green)]"
         >
           <table
             className="w-full table-fixed border-separate border-spacing-0 text-left"
@@ -321,7 +316,7 @@ export default function PriceTable({ service, categoryName, sub = false }: Price
                     }`}
                   >
                     <td
-                      className={`sticky left-0 z-10 w-[10rem] sm:w-[11rem] lg:w-[14.5rem] min-w-[10rem] sm:min-w-[11rem] lg:min-w-[14.5rem] max-w-[10rem] sm:max-w-[11rem] lg:max-w-[14.5rem] border-b border-r border-l-2 border-l-transparent px-2.5 sm:px-3 lg:px-4 py-[10px] sm:py-[11px] lg:py-3.5 text-[12px] sm:text-[14px] font-medium text-foreground leading-snug break-words transition-[colors,border-color] duration-200 group-hover:border-l-primary ${
+                      className={`sticky left-0 z-10 w-[10rem] sm:w-[11rem] lg:w-[14.5rem] min-w-[10rem] sm:min-w-[11rem] lg:min-w-[14.5rem] max-w-[10rem] sm:max-w-[11rem] lg:max-w-[14.5rem] border-b border-r border-l-2 border-l-transparent px-2.5 sm:px-3 lg:px-4 py-[10px] sm:py-[11px] lg:py-3.5 text-[12px] sm:text-[14px] font-medium text-foreground leading-snug break-words transition-[colors,border-color] duration-200 group-hover:border-l-[var(--mobi-green)] ${
                         sub
                           ? "border-[#262626] bg-[#161616] group-hover:bg-[#1E1E1E]"
                           : "border-panel-border/60 border-r-panel-border bg-panel group-hover:bg-panel-raised"
@@ -386,12 +381,12 @@ export default function PriceTable({ service, categoryName, sub = false }: Price
               <a
                 href={whatsappUrl(
                   isEn
-                    ? `Hello FIXMI, I would like to ask for an estimated repair quote for ${getLocalizedServiceName(service, "en")} (${categoryName}).`
-                    : `Halo FIXMI, saya ingin konsultasi estimasi biaya ${getLocalizedServiceName(service, "id")} (${categoryName}).`
+                    ? `Hello MobiCare, I would like to ask for an estimated repair quote for ${getLocalizedServiceName(service, "en")} (${categoryName}).`
+                    : `Halo MobiCare, saya ingin konsultasi estimasi biaya ${getLocalizedServiceName(service, "id")} (${categoryName}).`
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex max-w-full items-center gap-2 rounded-xl bg-primary/10 border border-primary/20 px-4 py-2 text-xs font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white active:scale-95"
+                className="price-table-wa-btn"
               >
                 <MessageCircle className="h-4 w-4 shrink-0" />
                 <span>{isEn ? "Ask Price Quote via WhatsApp" : "Tanya Estimasi Biaya via WhatsApp"}</span>

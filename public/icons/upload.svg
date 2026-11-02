@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96">
+  <defs>
+    <filter id="up-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000000" flood-opacity="0.35" />
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.2" />
+    </filter>
+    <linearGradient id="up-body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.65" />
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.40" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.20" />
+    </linearGradient>
+    <linearGradient id="up-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="35%" stop-color="#ffffff" stop-opacity="0.75" />
+      <stop offset="70%" stop-color="#ffffff" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.55" />
+    </linearGradient>
+    <linearGradient id="up-gloss" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85" />
+      <stop offset="60%" stop-color="#ffffff" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.0" />
+    </linearGradient>
+    <linearGradient id="up-emboss" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.75" />
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#up-shadow)">
+    <!-- Liquid Glass Tray Base -->
+    <path d="M18 54 L18 72 C18 78, 22 82, 28 82 L68 82 C74 82, 78 78, 78 72 L78 54 L68 54 L68 70 C68 72, 66 74, 64 74 L32 74 C30 74, 28 72, 28 70 L28 54 Z"
+          fill="url(#up-body)"
+          stroke="url(#up-rim)"
+          stroke-width="2" />
+
+    <!-- Top Gloss Sweep on Tray Base -->
+    <path d="M20 56 L76 56 L74 64 L22 64 Z"
+          fill="url(#up-gloss)" />
+
+    <!-- Upward Flying Arrow Stem -->
+    <line x1="48" y1="18" x2="48" y2="58"
+          stroke="url(#up-emboss)"
+          stroke-width="5"
+          stroke-linecap="round" />
+
+    <!-- Upward Flying Chevron Head -->
+    <polyline points="28,36 48,16 68,36"
+              fill="none"
+              stroke="url(#up-emboss)"
+              stroke-width="5"
+              stroke-linecap="round"
+              stroke-linejoin="round" />
+
+    <!-- Specular Highlight Tip -->
+    <circle cx="48" cy="16" r="2.5" fill="#ffffff" />
+  </g>
+</svg>

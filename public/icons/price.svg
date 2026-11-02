@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96">
+  <defs>
+    <filter id="price-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000000" flood-opacity="0.35" />
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.2" />
+    </filter>
+    <linearGradient id="price-body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.65" />
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.40" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.20" />
+    </linearGradient>
+    <linearGradient id="price-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="35%" stop-color="#ffffff" stop-opacity="0.75" />
+      <stop offset="70%" stop-color="#ffffff" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.55" />
+    </linearGradient>
+    <linearGradient id="price-gloss" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85" />
+      <stop offset="60%" stop-color="#ffffff" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.0" />
+    </linearGradient>
+    <linearGradient id="price-emboss" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.75" />
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#price-shadow)">
+    <!-- 45-degree Angled Tag Body -->
+    <path d="M18 52 L52 18 C55 15, 60 13, 65 13 L81 13 C85 13, 88 16, 88 20 L88 36 C88 41, 86 46, 83 49 L49 83 C45 87, 39 87, 35 83 L18 66 C14 62, 14 56, 18 52 Z"
+          fill="url(#price-body)"
+          stroke="url(#price-rim)"
+          stroke-width="2" />
+
+    <!-- Diagonal Top-Edge Gloss -->
+    <path d="M54 18 L65 14 L86 14 L86 35 L81 44 C81 44, 76 28, 54 18 Z"
+          fill="url(#price-gloss)" />
+
+    <!-- Lanyard Eyelet Ring -->
+    <circle cx="73" cy="27" r="5.5"
+            fill="none"
+            stroke="url(#price-rim)"
+            stroke-width="2.5" />
+
+    <!-- Dollar Sign Glyph in Tag -->
+    <path d="M47 38 C49 38, 52 39, 53 41 C54 43, 53 45, 51 46 L46 48 C43 49, 41 51, 42 54 C43 57, 46 59, 49 59 C52 59, 54 58, 56 56 M49 34 L49 63"
+          fill="none"
+          stroke="url(#price-emboss)"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round" />
+  </g>
+</svg>

@@ -18,7 +18,13 @@ const links = [
 export default function MobiCareNavbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const menuOpenRef = useRef(menuOpen);
+
+  useEffect(() => {
+    menuOpenRef.current = menuOpen;
+  }, [menuOpen]);
 
   const closeMenu = (returnFocus = false) => {
     setMenuOpen(false);
@@ -38,6 +44,38 @@ export default function MobiCareNavbar() {
     };
   }, [menuOpen]);
 
+  // Navbar tersembunyi saat scroll turun dan muncul lagi saat scroll naik,
+  // sehingga navigasi selalu bisa diakses tanpa harus kembali ke atas.
+  useEffect(() => {
+    let lastY = window.scrollY;
+    let ticking = false;
+
+    const update = () => {
+      const y = window.scrollY;
+      const delta = y - lastY;
+      if (menuOpenRef.current || y <= 90) {
+        setHidden(false);
+      } else if (delta > 6) {
+        setHidden(true);
+      } else if (delta < -6) {
+        setHidden(false);
+      }
+      lastY = y;
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
   if (pathname.startsWith("/admin")) return null;
 
   const activePath = pathname.replace(/^\/en(?=\/|$)/, "") || "/";
@@ -49,7 +87,7 @@ export default function MobiCareNavbar() {
   };
 
   return (
-    <header className="mobi-nav">
+    <header className={`mobi-nav ${hidden ? "is-hidden" : ""}`}>
       <nav className="mobi-nav__inner" aria-label="Navigasi utama">
         <Link className="mobi-nav__brand" href={getHref("/")} aria-label="MobiCare home">
           <MobiCareWordmark />
@@ -78,7 +116,7 @@ export default function MobiCareNavbar() {
           aria-expanded={menuOpen}
           aria-controls="mobi-mobile-menu"
           aria-label={menuOpen ? "Tutup menu" : "Buka menu"}
-          onClick={() => (menuOpen ? closeMenu() : setMenuOpen(true))}
+          onClick={() => (menuOpen ? closeMenu() : (setMenuOpen(true), setHidden(false)))}
         >
           <span />
           <span />

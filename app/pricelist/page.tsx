@@ -6,23 +6,24 @@ import { getPricelistView } from "@/lib/pricelist-server";
 export const revalidate = 30;
 
 export const metadata: Metadata = {
-  title: "Daftar Harga Service iPhone, iPad, MacBook & Android — FIXMI Service Center",
+  title: "Daftar Harga Servis iPhone, iPad, MacBook & Android — MobiCare Service Center Bali",
   description:
-    "Estimasi harga service transparan & bergaransi resmi untuk iPhone, iPad, MacBook, Apple Watch, dan Android di FIXMI Service Center. Cek biaya ganti LCD, baterai, kamera, dan perbaikan motherboard.",
+    "Cek estimasi harga servis iPhone, iPad, MacBook, Apple Watch, dan Android di MobiCare Service Center Bali. Daftar harga transparan untuk ganti LCD, baterai, kamera, dan lainnya.",
   alternates: {
     canonical: "/pricelist",
+    languages: { id: "/pricelist", en: "/en/pricelist" },
   },
   openGraph: {
-    title: "Daftar Harga Service iPhone, iPad, MacBook & Android — FIXMI Service Center",
+    title: "Daftar Harga Servis iPhone, iPad, MacBook & Android — MobiCare Service Center Bali",
     description:
-      "Cek biaya perbaikan perangkat Apple & Android di FIXMI Service Center. Transparan, bergaransi resmi, tanpa biaya tersembunyi.",
+      "Cek biaya perbaikan perangkat Apple & Android di MobiCare Service Center Bali. Estimasi transparan dan tanpa biaya tersembunyi.",
     url: "/pricelist",
     images: [
       {
         url: "/images/iphone.webp",
         width: 1200,
         height: 630,
-        alt: "Daftar Harga Service FIXMI Service Center",
+        alt: "Daftar Harga Servis MobiCare Service Center",
       },
     ],
   },

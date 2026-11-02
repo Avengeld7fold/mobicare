@@ -68,17 +68,12 @@ export default function HomeDeviceSpecialties() {
               href={getLocalizedPath(category.href)}
               className="device-gallery-card"
               data-device={category.slug}
-              aria-label={
-                isEn
-                  ? `View ${category.name} repair services`
-                  : `Lihat layanan perbaikan ${category.name}`
-              }
             >
               <span className="device-gallery-name">{category.name}</span>
               <span className="device-gallery-image">
                 <Image
                   src={category.image}
-                  alt={category.alt}
+                  alt=""
                   fill
                   sizes="(max-width: 720px) 180px, 240px"
                   className="object-contain"

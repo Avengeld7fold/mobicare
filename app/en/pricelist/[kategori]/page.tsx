@@ -24,9 +24,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const category = categories.find((c) => c.Slug.toLowerCase() === kategori.toLowerCase());
 
   const categoryName = category?.Name || (kategori.charAt(0).toUpperCase() + kategori.slice(1));
-  const title = `${categoryName} Repair Price List — FIXMI Service Center`;
+  const title = `${categoryName} Repair Price List — MobiCare Service Center Bali`;
   const description =
-    `Official repair price list and genuine spare parts for ${categoryName} (Screen, Battery, Camera, Logic Board) at FIXMI Service Center. Certified warranty & transparent walk-in service.`;
+    `Repair price list for ${categoryName} at MobiCare Service Center in Bali. Transparent estimates for screen, battery, camera, and more.`;
   const image = category?.Image || "/images/iphone.webp";
 
   return {
@@ -34,6 +34,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description,
     alternates: {
       canonical: `/en/pricelist/${kategori.toLowerCase()}`,
+      languages: {
+        id: `/pricelist/${kategori.toLowerCase()}`,
+        en: `/en/pricelist/${kategori.toLowerCase()}`,
+      },
     },
     openGraph: {
       title,
@@ -44,7 +48,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           url: image,
           width: 1200,
           height: 630,
-          alt: `${categoryName} Repair Price List FIXMI Service Center`,
+          alt: `${categoryName} Repair Price List MobiCare Service Center`,
         },
       ],
     },

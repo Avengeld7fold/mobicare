@@ -24,9 +24,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const category = categories.find((c) => c.Slug.toLowerCase() === kategori.toLowerCase());
 
   const categoryName = category?.Name || (kategori.charAt(0).toUpperCase() + kategori.slice(1));
-  const title = `Daftar Harga Service ${categoryName} — FIXMI Service Center`;
+  const title = `Daftar Harga Servis ${categoryName} — MobiCare Service Center Bali`;
   const description = category?.description ||
-    `Estimasi biaya perbaikan & harga sparepart resmi ${categoryName} (LCD, Baterai, Kamera, Logicboard) di FIXMI Service Center. Bergaransi resmi & transparan.`;
+    `Estimasi harga servis ${categoryName} di MobiCare Service Center Bali. Daftar harga transparan untuk LCD, baterai, kamera, dan lainnya.`;
   const image = category?.Image || "/images/iphone.webp";
 
   return {
@@ -34,6 +34,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description,
     alternates: {
       canonical: `/pricelist/${kategori.toLowerCase()}`,
+      languages: {
+        id: `/pricelist/${kategori.toLowerCase()}`,
+        en: `/en/pricelist/${kategori.toLowerCase()}`,
+      },
     },
     openGraph: {
       title,
@@ -44,7 +48,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           url: image,
           width: 1200,
           height: 630,
-          alt: `Daftar Harga Service ${categoryName} FIXMI Service Center`,
+          alt: `Daftar Harga Servis ${categoryName} MobiCare Service Center`,
         },
       ],
     },

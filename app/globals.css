@@ -20,6 +20,11 @@
   --mobi-warning: #b7e86a;
   --mobi-page-pad: clamp(22px, 4.5vw, 76px);
   --mobi-text: "MobiCareTextLetters", system-ui, sans-serif;
+  /* Font lokal hanya mengklaim glyph huruf (unicode-range). Simbol seperti
+     &, angka, dan tanda baca selalu jatuh ke font sistem yang lengkap,
+     menghindari glyph rusak dari file font demo. */
+  --font-gobold: "MobiCareGobold", Arial, sans-serif;
+  --font-greycliff: "MobiCareTextLetters", Arial, sans-serif;
 
 }
 
@@ -32,6 +37,16 @@
   font-weight: 400;
   font-display: swap;
   unicode-range: U+0041-005A, U+0061-007A, U+00C0-00D6, U+00D8-00F6, U+00F8-00FF, U+0100-024F;
+}
+
+/* Gobold dipakai penuh (tanpa unicode-range) agar glyph tanda baca seperti
+   "?" dan "!" tetap memakai desain asli font display, bukan font sistem. */
+@font-face {
+  font-family: "MobiCareGobold";
+  src: url("/fonts/mobicare/Gobold-Regular.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
 }
 
 @font-face {

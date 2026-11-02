@@ -8,7 +8,7 @@ export const SOCIAL_LINKS = {
   facebook: "https://facebook.com/fixmibali",
 };
 
-export const DEFAULT_WA_MESSAGE = `Halo FIXMI Service Center, saya mau konsultasi perbaikan gadget:
+export const DEFAULT_WA_MESSAGE = `Halo MobiCare Service Center, saya mau konsultasi perbaikan gadget:
 
 • Tipe Gadget: 
 • Kendala / Kerusakan: `;
