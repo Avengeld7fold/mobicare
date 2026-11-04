@@ -1,5 +1,5 @@
-import Image from "next/image";
 import MobiCareWordmark from "./MobiCareWordmark";
+import HeroDeviceSlider from "./home/HeroDeviceSlider";
 import { SOCIAL_LINKS, whatsappUrl } from "@/lib/constants";
 
 const SOCIAL_ITEMS = [
@@ -42,18 +42,10 @@ export default function MobiCareHero() {
         <div className="mobi-hero__ambient-glow" />
       </div>
 
-      {/* 3D Exploded iPhone Stage Layer — Fullscreen Center Stage persis Fixmi */}
-      <div className="mobi-hero__device-layer" aria-hidden="true">
+      {/* Interactive Device Before/After Stage Layer */}
+      <div className="mobi-hero__device-layer">
         <div className="mobi-hero__device-stage">
-          <Image
-            src="/images/iphone-broken-2000.webp"
-            alt=""
-            width={2000}
-            height={1500}
-            priority
-            sizes="(max-width: 767px) 100vw, min(100vw, 133.333vh)"
-            className="mobi-hero__device-img"
-          />
+          <HeroDeviceSlider />
         </div>
       </div>
 
