@@ -260,17 +260,17 @@
   position: absolute;
   top: 4%;
   bottom: 4%;
-  width: 1.5px;
+  width: 2px;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.85) 12%,
-    #ffffff 50%,
-    rgba(255, 255, 255, 0.85) 88%,
-    rgba(255, 255, 255, 0) 100%
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(57, 224, 123, 0.7) 20%,
+    #39e07b 50%,
+    rgba(0, 166, 81, 0.7) 80%,
+    rgba(255, 255, 255, 0.05) 100%
   );
   transform: translateX(-50%);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 2px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 16px rgba(0, 166, 81, 0.6);
   pointer-events: none;
   z-index: 5;
 }
@@ -283,24 +283,17 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: rgba(14, 18, 15, 0.72);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.38);
-  box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.55),
-    0 2px 6px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  background: rgba(8, 12, 9, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.65), 0 0 14px rgba(0, 166, 81, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #ffffff;
   cursor: grab;
-  transition:
-    transform 0.24s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    background-color 0.2s ease;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
   pointer-events: auto;
   touch-action: none;
 }
@@ -308,39 +301,93 @@
 .mobi-hero__slider-handle:hover,
 .mobi-hero__slider-handle:focus-visible,
 .mobi-hero__slider-container.is-dragging .mobi-hero__slider-handle {
-  transform: translate(-50%, -50%) scale(1.09);
-  background: rgba(18, 26, 20, 0.9);
-  border-color: rgba(255, 255, 255, 0.75);
-  box-shadow:
-    0 12px 32px rgba(0, 0, 0, 0.7),
-    0 0 16px rgba(255, 255, 255, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  transform: translate(-50%, -50%) scale(1.14);
+  background: rgba(10, 20, 14, 0.95);
+  border-color: #39e07b;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.75), 0 0 22px rgba(57, 224, 123, 0.75);
   cursor: grabbing;
   outline: none;
 }
 
 .mobi-hero__slider-icon {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   stroke: #ffffff;
-  opacity: 0.92;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: stroke 0.2s ease;
 }
 
 .mobi-hero__slider-handle:hover .mobi-hero__slider-icon,
 .mobi-hero__slider-container.is-dragging .mobi-hero__slider-icon {
-  opacity: 1;
-  transform: scale(1.05);
+  stroke: #39e07b;
 }
 
-@media (max-width: 768px) {
+.mobi-hero__slider-tag {
+  position: absolute;
+  top: clamp(18px, 3.5vh, 36px);
+  z-index: 6;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  background: rgba(8, 12, 9, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font-family: var(--font-greycliff), var(--mobi-text);
+  font-size: clamp(9.5px, 1.1vw, 11px);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #f2f2f2;
+  pointer-events: none;
+  user-select: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.25s ease;
+}
+
+.mobi-hero__slider-tag--before {
+  left: clamp(14px, 3vw, 32px);
+}
+
+.mobi-hero__slider-tag--after {
+  right: clamp(14px, 3vw, 32px);
+}
+
+.mobi-hero__slider-tag-idx {
+  font-size: clamp(9px, 1vw, 10px);
+  font-weight: 800;
+  color: #39e07b;
+  letter-spacing: 0.06em;
+}
+
+.mobi-hero__slider-tag-divider {
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.28);
+}
+
+@media (max-width: 720px) {
   .mobi-hero__slider-handle {
     width: 38px;
     height: 38px;
   }
   .mobi-hero__slider-icon {
-    width: 16px;
-    height: 16px;
+    width: 17px;
+    height: 17px;
+  }
+  .mobi-hero__slider-tag {
+    top: 6px;
+    padding: 3px 7px;
+    gap: 4px;
+    letter-spacing: 0.08em;
+    font-size: 8.5px;
+  }
+  .mobi-hero__slider-tag--before {
+    left: 6px;
+  }
+  .mobi-hero__slider-tag--after {
+    right: 6px;
   }
 }
 
@@ -557,7 +604,13 @@
   }
   .mobi-hero__brand-mark { width: clamp(176px, 51vw, 210px); margin: 0 auto 6px; }
   .mobi-hero__device-stage { inset: clamp(76px, 12svh, 104px) 0 clamp(142px, 23svh, 184px); }
-  .mobi-hero__device-img { width: auto; height: auto; max-width: min(90vw, 430px); max-height: 42svh; }
+  .mobi-hero__device-img,
+  .mobi-hero__slider-container {
+    width: auto;
+    height: 100%;
+    max-width: min(90vw, 430px);
+    max-height: 42svh;
+  }
   .mobi-hero__socials {
     justify-content: center;
     align-self: center;
@@ -577,7 +630,8 @@
   .mobi-hero__tagline { margin-bottom: 4px; font-size: 9px; }
   .mobi-hero__brand-mark { width: 164px; margin-bottom: 3px; }
   .mobi-hero__device-stage { inset: 58px 0 176px; }
-  .mobi-hero__device-img { max-width: min(76vw, 310px); max-height: 30svh; }
+  .mobi-hero__device-img,
+  .mobi-hero__slider-container { width: auto; height: 100%; max-width: min(76vw, 310px); max-height: 30svh; }
   .mobi-hero__socials { margin-top: 10px; }
   .mobi-hero__social-btn { width: 40px; height: 40px; }
 }
