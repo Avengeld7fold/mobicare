@@ -134,11 +134,15 @@
   }
 }
 
+html,
+body {
+  overflow-x: clip;
+}
+
 body {
   background: var(--mobi-ink);
   color: var(--mobi-muted);
   font-family: var(--mobi-text);
-  overflow-x: hidden;
 }
 
 /* One content rail for public pages and admin surfaces, aligned with the navbar. */

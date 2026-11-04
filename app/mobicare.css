@@ -478,6 +478,10 @@
   animation: mobiDividerMarquee 40s linear infinite;
 }
 
+.mobi-divider-wrap:hover .mobi-divider__track {
+  animation-play-state: paused;
+}
+
 @keyframes mobiDividerMarquee {
   0% {
     transform: translate3d(0, 0, 0);
@@ -500,8 +504,8 @@
 }
 
 .mobi-divider-stripe--flow {
-  width: 100vw;
-  min-width: 100vw;
+  width: 100svw;
+  min-width: 100svw;
 }
 
 .mobi-divider-mark {
@@ -1109,13 +1113,14 @@
   width: 28%;
   height: 100%;
   background: var(--mobi-green, #00A651);
-  transform: skew(-28deg);
+  will-change: transform;
+  transform: translate3d(-128%, 0, 0) skew(-28deg);
   animation: 4s cubic-bezier(0.65, 0, 0.35, 1) infinite smarter-speed-line;
 }
 
 @keyframes smarter-speed-line {
-  0% { left: -28%; }
-  55%, 100% { left: 128%; }
+  0% { transform: translate3d(-128%, 0, 0) skew(-28deg); }
+  55%, 100% { transform: translate3d(460%, 0, 0) skew(-28deg); }
 }
 
 .smarter-copy {
@@ -1192,7 +1197,6 @@
   position: relative;
   overflow: hidden;
   display: block;
-  cursor: pointer;
 }
 
 .smarter-poster img {
@@ -1248,6 +1252,13 @@
 @keyframes smarter-play-pulse {
   0%, 55%, 100% { box-shadow: 0 0 rgba(0, 166, 81, 0.34); }
   75% { box-shadow: 0 0 0 20px rgba(0, 166, 81, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .smarter-speed-line::after,
+  .smarter-play-btn {
+    animation: none !important;
+  }
 }
 
 .smarter-poster:hover .smarter-play-btn,
@@ -1566,6 +1577,10 @@ body.video-modal-active .signup-marquee {
   display: flex;
   animation: mobi-signup-marquee 22s linear infinite;
   will-change: transform;
+}
+
+.signup-marquee:hover .signup-marquee-track {
+  animation-play-state: paused;
 }
 
 .signup-marquee-track span {

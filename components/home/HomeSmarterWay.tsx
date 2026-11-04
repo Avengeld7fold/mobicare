@@ -84,10 +84,7 @@ export default function HomeSmarterWay() {
         </div>
 
         {/* Right Column: Workshop Cinematic Showcase */}
-        <div
-          className="smarter-poster"
-          onClick={() => setIsVideoOpen(true)}
-        >
+        <div className="smarter-poster">
           <Image
             src="/images/mobi-team.webp"
             alt={isEn ? "MobiCare Workshop Team in Bali" : "Tim Teknisi MobiCare Service Center Bali"}
@@ -106,10 +103,7 @@ export default function HomeSmarterWay() {
                 ? "Play video: WORKSHOP REPAIR STANDARD MobiCare Service Center Bali"
                 : "Putar video: STANDAR KERJA WORKSHOP MobiCare Service Center Bali"
             }
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsVideoOpen(true);
-            }}
+            onClick={() => setIsVideoOpen(true)}
           >
             <Play size={20} fill="currentColor" aria-hidden="true" />
           </button>
@@ -147,7 +141,9 @@ export default function HomeSmarterWay() {
                 src="/images/mobi-video.mp4"
                 controls
                 autoPlay
+                muted
                 playsInline
+                preload="metadata"
                 className="smarter-modal-video"
               />
             </div>

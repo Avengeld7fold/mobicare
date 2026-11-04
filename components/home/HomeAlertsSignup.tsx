@@ -57,7 +57,6 @@ export default function HomeAlertsSignup() {
             width={36}
             height={36}
             unoptimized
-            priority
           />
         </div>
 

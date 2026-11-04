@@ -34,8 +34,6 @@ export default function MobiCareDivider({ className = "" }: MobiCareDividerProps
         <div className="mobi-divider__track">
           <DividerSegment />
           <DividerSegment />
-          <DividerSegment />
-          <DividerSegment />
         </div>
       </div>
     </div>

@@ -7,23 +7,23 @@ import { useAssetPreloader } from "./useAssetPreloader";
 /**
  * LoadingGate — bungkus aplikasi.
  *
- * SEMENTARA DIMATIKAN DENGAN FLAG `DISABLE_LOADER_IN_DEV = true`
- * agar proses pengembangan & testing berjalan instant tanpa perlu menunggu animasi loading.
- * Ubah kembali menjadi `false` saat aplikasi siap dipublikasikan/live.
+ * Loader dikendalikan oleh environment variable `NEXT_PUBLIC_ENABLE_LOADER === "1"`.
+ * Secara default nonaktif untuk efisiensi render dan performa instant.
  */
-const DISABLE_LOADER_IN_DEV = true;
+const ENABLE_LOADER = process.env.NEXT_PUBLIC_ENABLE_LOADER === "1";
+const DISABLE_LOADER = !ENABLE_LOADER;
 
 const CRITICAL_ASSETS: string[] = [];
 
 export default function LoadingGate({ children }: { children: React.ReactNode }) {
-  const { progress } = useAssetPreloader(DISABLE_LOADER_IN_DEV ? [] : CRITICAL_ASSETS, {
-    waitForFonts: !DISABLE_LOADER_IN_DEV,
+  const { progress } = useAssetPreloader(DISABLE_LOADER ? [] : CRITICAL_ASSETS, {
+    waitForFonts: ENABLE_LOADER,
     waitForWindowLoad: false,
   });
-  const [revealed, setRevealed] = useState(DISABLE_LOADER_IN_DEV);
+  const [revealed, setRevealed] = useState(DISABLE_LOADER);
 
   useEffect(() => {
-    if (DISABLE_LOADER_IN_DEV) {
+    if (DISABLE_LOADER) {
       (window as unknown as Record<string, unknown>).__fixmiLoaded = true;
       window.dispatchEvent(new Event("fixmi:loaded"));
     }

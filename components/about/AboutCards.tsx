@@ -139,7 +139,6 @@ export default function AboutCards() {
   // GSAP Stacking & Parallax Animation on Desktop (≥ 1024px)
   useGSAP(
     () => {
-      gsap.ticker.lagSmoothing(0);
       const mm = gsap.matchMedia();
 
       mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
