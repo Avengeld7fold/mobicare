@@ -136,25 +136,6 @@ export default function HeroDeviceSlider({ className = "" }: HeroDeviceSliderPro
         />
       </div>
 
-      {/* Floating Badges */}
-      <div
-        className="mobi-hero__slider-badge mobi-hero__slider-badge--before"
-        style={{ opacity: sliderPos < 18 ? 0 : 1 }}
-        aria-hidden="true"
-      >
-        <span className="mobi-hero__slider-dot mobi-hero__slider-dot--before" />
-        <span>{isEn ? "BEFORE" : "SEBELUM"}</span>
-      </div>
-
-      <div
-        className="mobi-hero__slider-badge mobi-hero__slider-badge--after"
-        style={{ opacity: sliderPos > 82 ? 0 : 1 }}
-        aria-hidden="true"
-      >
-        <span className="mobi-hero__slider-dot mobi-hero__slider-dot--after" />
-        <span>{isEn ? "AFTER" : "SESUDAH"}</span>
-      </div>
-
       {/* Divider Bar & Frosted Glass Handle */}
       <div
         className="mobi-hero__slider-line"

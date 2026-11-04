@@ -260,17 +260,17 @@
   position: absolute;
   top: 4%;
   bottom: 4%;
-  width: 2px;
+  width: 1.5px;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.05) 0%,
-    rgba(57, 224, 123, 0.7) 20%,
-    #39e07b 50%,
-    rgba(0, 166, 81, 0.7) 80%,
-    rgba(255, 255, 255, 0.05) 100%
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.85) 12%,
+    #ffffff 50%,
+    rgba(255, 255, 255, 0.85) 88%,
+    rgba(255, 255, 255, 0) 100%
   );
   transform: translateX(-50%);
-  box-shadow: 0 0 16px rgba(0, 166, 81, 0.6);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 2px rgba(0, 0, 0, 0.6);
   pointer-events: none;
   z-index: 5;
 }
@@ -283,17 +283,24 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: rgba(8, 12, 9, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1.5px solid rgba(255, 255, 255, 0.28);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.65), 0 0 14px rgba(0, 166, 81, 0.4);
+  background: rgba(14, 18, 15, 0.72);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.55),
+    0 2px 6px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #ffffff;
   cursor: grab;
-  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  transition:
+    transform 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
   pointer-events: auto;
   touch-action: none;
 }
@@ -301,74 +308,29 @@
 .mobi-hero__slider-handle:hover,
 .mobi-hero__slider-handle:focus-visible,
 .mobi-hero__slider-container.is-dragging .mobi-hero__slider-handle {
-  transform: translate(-50%, -50%) scale(1.14);
-  background: rgba(10, 20, 14, 0.95);
-  border-color: #39e07b;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.75), 0 0 22px rgba(57, 224, 123, 0.75);
+  transform: translate(-50%, -50%) scale(1.09);
+  background: rgba(18, 26, 20, 0.9);
+  border-color: rgba(255, 255, 255, 0.75);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.7),
+    0 0 16px rgba(255, 255, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
   cursor: grabbing;
   outline: none;
 }
 
 .mobi-hero__slider-icon {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   stroke: #ffffff;
-  transition: stroke 0.2s ease;
+  opacity: 0.92;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .mobi-hero__slider-handle:hover .mobi-hero__slider-icon,
 .mobi-hero__slider-container.is-dragging .mobi-hero__slider-icon {
-  stroke: #39e07b;
-}
-
-.mobi-hero__slider-badge {
-  position: absolute;
-  bottom: clamp(14px, 3vh, 32px);
-  z-index: 6;
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 6px 14px;
-  border-radius: 9999px;
-  background: rgba(8, 12, 9, 0.78);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  font-family: var(--font-greycliff), var(--mobi-text);
-  font-size: clamp(9.5px, 1.1vw, 11px);
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #f0f0f0;
-  pointer-events: none;
-  transition: opacity 0.25s ease;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-  user-select: none;
-}
-
-.mobi-hero__slider-badge--before {
-  left: clamp(14px, 3vw, 32px);
-}
-
-.mobi-hero__slider-badge--after {
-  right: clamp(14px, 3vw, 32px);
-}
-
-.mobi-hero__slider-dot {
-  width: 6.5px;
-  height: 6.5px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.mobi-hero__slider-dot--before {
-  background: #ff5252;
-  box-shadow: 0 0 8px rgba(255, 82, 82, 0.75);
-}
-
-.mobi-hero__slider-dot--after {
-  background: #39e07b;
-  box-shadow: 0 0 8px rgba(57, 224, 123, 0.85);
+  opacity: 1;
+  transform: scale(1.05);
 }
 
 @media (max-width: 768px) {
@@ -377,12 +339,8 @@
     height: 38px;
   }
   .mobi-hero__slider-icon {
-    width: 17px;
-    height: 17px;
-  }
-  .mobi-hero__slider-badge {
-    padding: 5px 10px;
-    letter-spacing: 0.1em;
+    width: 16px;
+    height: 16px;
   }
 }
 
