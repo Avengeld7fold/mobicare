@@ -3,9 +3,9 @@
 export const WHATSAPP_NUMBER = "6281999336722";
 
 export const SOCIAL_LINKS = {
-  instagram: "https://www.instagram.com/fixmi_id/",
-  tiktok: "https://www.tiktok.com/@fixmiservicecenter",
-  facebook: "https://facebook.com/fixmibali",
+  instagram: "https://www.instagram.com/mobicare.servicecenter/?hl=en",
+  tiktok: "https://www.tiktok.com/@mobicare.servicecenter",
+  facebook: "https://www.facebook.com/people/Mobicare-service-center/61571168670377/",
 };
 
 export const DEFAULT_WA_MESSAGE = `Halo MobiCare Service Center, saya mau konsultasi perbaikan gadget:

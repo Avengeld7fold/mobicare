@@ -4,6 +4,7 @@ import LoadingGate from "@/components/loader/LoadingGate";
 import HtmlLanguage from "@/components/HtmlLanguage";
 import ImageProtection from "@/components/ImageProtection";
 import MobiCareNavbar from "@/components/MobiCareNavbar";
+import { SOCIAL_LINKS } from "@/lib/constants";
 import "lenis/dist/lenis.css";
 import "./globals.css";
 import "./mobicare.css";
@@ -98,8 +99,9 @@ const jsonLd = {
   },
   url: SITE_URL,
   sameAs: [
-    "https://www.instagram.com/fixmi_id/",
-    "https://www.tiktok.com/@fixmiservicecenter",
+    SOCIAL_LINKS.instagram,
+    SOCIAL_LINKS.tiktok,
+    SOCIAL_LINKS.facebook,
   ],
 };
 

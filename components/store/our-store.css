@@ -66,8 +66,10 @@
 .store-pin.is-selected circle { fill: #8f0d14; }
 .store-map-canvas .leaflet-control-zoom { border: 0; border-radius: 4px; box-shadow: 0 2px 8px #10261926; overflow: hidden; }
 .store-page .store-map-canvas .leaflet-control-zoom a { width: 44px; height: 44px; line-height: 44px; color: #102619; background: #fff; }
-.store-map-canvas .leaflet-control-attribution { right: 6px; bottom: 6px; margin: 0; padding: 1px 4px; border-radius: 2px; font: 10px/1.45 var(--mobi-text); background: rgba(245, 245, 243, .82); color: #405848; }
-.store-map-canvas .leaflet-control-attribution a { color: #17452b; text-decoration: underline; text-underline-offset: 2px; }
+.store-map-canvas .leaflet-control-attribution,
+.store-map-canvas .maplibregl-ctrl-attrib {
+  display: none !important;
+}
 .store-mobile-details { display: none; }
 .store-detail-popup .leaflet-popup-content-wrapper { padding: 0; border-radius: 4px; box-shadow: 0 4px 18px #10261926; }
 .store-detail-popup .leaflet-popup-content { margin: 0; width: 280px !important; max-width: 300px; }

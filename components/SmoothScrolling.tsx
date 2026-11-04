@@ -1,8 +1,9 @@
 "use client";
 
-import { ReactLenis, type LenisRef } from "lenis/react";
+import { ReactLenis, useLenis, type LenisRef } from "lenis/react";
 import { ReactNode, useEffect, useRef, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
+import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 interface SmoothScrollingProps {
@@ -33,6 +34,45 @@ function getServerNativeScrollSnapshot() {
  * PENTING: jangan set `scroll-behavior: smooth` di CSS — konflik fatal
  * dengan Lenis (dua animasi saling lawan = scroll macet).
  */
+function LenisGsapDriver() {
+  const lenis = useLenis();
+
+  useEffect(() => {
+    if (!lenis) return;
+
+    lenis.on("scroll", ScrollTrigger.update);
+
+    const updateTicker = (time: number) => {
+      lenis.raf(time * 1000);
+    };
+
+    gsap.ticker.add(updateTicker);
+    gsap.ticker.lagSmoothing(0);
+
+    // Lenis memantau tinggi konten lewat ResizeObserver di <html>, tapi html
+    // ber-class h-full (tinggi terkunci = viewport) sehingga observer itu buta
+    // saat konten memanjang (akordeon pricelist expand, dll).
+    // Pantau <body> (yang ikut tinggi konten) dan refresh limit Lenis.
+    let rafId: number | null = null;
+    const ro = new ResizeObserver(() => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        lenis.resize();
+      });
+    });
+    ro.observe(document.body);
+
+    return () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      lenis.off("scroll", ScrollTrigger.update);
+      gsap.ticker.remove(updateTicker);
+      ro.disconnect();
+    };
+  }, [lenis]);
+
+  return null;
+}
+
 export default function SmoothScrolling({ children }: SmoothScrollingProps) {
   const lenisRef = useRef<LenisRef>(null);
   const pathname = usePathname();
@@ -72,32 +112,6 @@ export default function SmoothScrolling({ children }: SmoothScrollingProps) {
     return () => clearTimeout(timer);
   }, [pathname]);
 
-  useEffect(() => {
-    if (useNativeScroll) return;
-
-    const lenis = lenisRef.current?.lenis;
-    lenis?.on("scroll", ScrollTrigger.update);
-
-    // Lenis memantau tinggi konten lewat ResizeObserver di <html>, tapi html
-    // ber-class h-full (tinggi terkunci = viewport) sehingga observer itu buta
-    // saat konten memanjang (akordeon pricelist expand, dll).
-    // Pantau <body> (yang ikut tinggi konten) dan refresh limit Lenis.
-    let rafId: number | null = null;
-    const ro = new ResizeObserver(() => {
-      if (rafId !== null) cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(() => {
-        lenisRef.current?.lenis?.resize();
-      });
-    });
-    ro.observe(document.body);
-
-    return () => {
-      if (rafId !== null) cancelAnimationFrame(rafId);
-      lenis?.off("scroll", ScrollTrigger.update);
-      ro.disconnect();
-    };
-  }, [useNativeScroll]);
-
   // Native touch scrolling avoids an always-running animation loop on phones.
   if (useNativeScroll) return <>{children}</>;
 
@@ -106,6 +120,7 @@ export default function SmoothScrolling({ children }: SmoothScrollingProps) {
       root
       ref={lenisRef}
       options={{
+        autoRaf: false,
         lerp: 0.1,
         duration: 1.5,
         smoothWheel: true,
@@ -115,6 +130,7 @@ export default function SmoothScrolling({ children }: SmoothScrollingProps) {
         infinite: false,
       }}
     >
+      <LenisGsapDriver />
       {children}
     </ReactLenis>
   );

@@ -85,7 +85,10 @@ function normalizeBrand(source) {
 }
 
 function normalizeFile(file, source) {
-  const normalized = normalizeBrand(source);
+  let normalized = normalizeBrand(source);
+  if (file === "lib/constants.ts") {
+    normalized = normalized.replace(/export const SOCIAL_LINKS = \{[\s\S]*?\};/, "export const SOCIAL_LINKS = {};");
+  }
   return file.endsWith(".css") ? normalized.replace(/\s+/g, "") : normalized;
 }
 

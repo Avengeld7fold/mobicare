@@ -33,7 +33,6 @@ export default function AboutCards() {
   const { locale } = useI18n();
   const isEn = locale === "en";
   const containerRef = useRef<HTMLDivElement>(null);
-  const leftStickyRef = useRef<HTMLDivElement>(null);
   const rightStackRef = useRef<HTMLDivElement>(null);
 
   const stackPhotos: StackPhoto[] = [
@@ -140,6 +139,7 @@ export default function AboutCards() {
   // GSAP Stacking & Parallax Animation on Desktop (≥ 1024px)
   useGSAP(
     () => {
+      gsap.ticker.lagSmoothing(0);
       const mm = gsap.matchMedia();
 
       mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
@@ -153,19 +153,17 @@ export default function AboutCards() {
             item,
             {
               y: 50 * (index + 1),
-              opacity: 0.85,
-              scale: 0.95,
             },
             {
               y: 0,
-              opacity: 1,
-              scale: 1,
               ease: "none",
+              force3D: true,
               scrollTrigger: {
                 trigger: item,
                 start: "top 90%",
                 end: "top 40%",
-                scrub: 1.2,
+                scrub: 0.5,
+                fastScrollEnd: true,
               },
             }
           );
@@ -188,7 +186,6 @@ export default function AboutCards() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 xl:gap-20 items-start">
           {/* ── Left Column: Sticky Editorial Narrative (Words from MobiCare) ── */}
           <div
-            ref={leftStickyRef}
             className="about-cards-sticky lg:col-span-6 flex flex-col justify-start lg:pr-6"
             style={{
               alignSelf: "flex-start",
@@ -216,7 +213,7 @@ export default function AboutCards() {
                       {point.title}
                     </h3>
                   </div>
-                  <p className="text-sm leading-relaxed text-[#a0aba3] pl-7">
+                  <p className="text-sm leading-relaxed text-[var(--about-fade-2)] pl-7">
                     {point.description}
                   </p>
                 </div>
@@ -227,7 +224,7 @@ export default function AboutCards() {
           {/* ── Right Column: Mobile Horizontal Slider (< lg) / Desktop Vertical Overlapping Stack (lg:) ── */}
           <div ref={rightStackRef} className="lg:col-span-6 w-full mt-6 lg:mt-0">
             {/* Mobile & Tablet Horizontal Scroll Notice */}
-            <div className="flex lg:hidden items-center justify-between mb-4 text-[#8b9a90] font-mono text-xs uppercase tracking-wider px-1">
+            <div className="flex lg:hidden items-center justify-between mb-4 text-[var(--about-fade-3)] font-mono text-xs uppercase tracking-wider px-1">
               <span>{isEn ? "WORKSHOP DOCUMENTATION" : "DOKUMENTASI WORKSHOP"}</span>
               <span className="text-[var(--about-green)] font-semibold flex items-center gap-1.5">
                 <span>{isEn ? "Swipe Horizontal" : "Geser Horizontal"}</span>
@@ -240,10 +237,10 @@ export default function AboutCards() {
               {stackPhotos.map((photo) => (
                 <div
                   key={photo.id}
-                  className={`stack-photo-item relative w-[80vw] sm:w-[52vw] md:w-[44vw] lg:w-[84%] shrink-0 lg:shrink snap-center lg:snap-align-none ${photo.desktopOffset}`}
+                  className={`stack-photo-item relative w-[80vw] sm:w-[52vw] md:w-[44vw] lg:w-[84%] shrink-0 lg:shrink snap-center lg:snap-align-none will-change-transform transform-gpu ${photo.desktopOffset}`}
                 >
                   <div
-                    className={`stack-photo-card group relative aspect-[4/5] w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-white/10 bg-[#0c0c0c] shadow-[0_16px_40px_rgba(0,0,0,0.85)] transition-all duration-500 ease-out hover:border-[var(--about-green)]/60 hover:shadow-[0_24px_60px_rgba(0,166,81,0.22)] hover:rotate-0 origin-center ${photo.tiltClass}`}
+                    className={`stack-photo-card group relative aspect-[4/5] w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-white/10 bg-[var(--about-card-bg)] shadow-[var(--about-card-shadow)] transition-[border-color,box-shadow,transform] duration-500 ease-out hover:border-[var(--about-green)]/60 hover:shadow-[var(--about-card-shadow-hover)] hover:rotate-0 origin-center ${photo.tiltClass}`}
                   >
                     {/* Photo Image: Grayscale by default, Full Color & Scale on Hover */}
                     <div className="relative h-full w-full overflow-hidden">
@@ -251,16 +248,15 @@ export default function AboutCards() {
                         src={photo.src}
                         alt={photo.title}
                         fill
-                        className="object-cover grayscale contrast-105 transition-all duration-700 ease-out group-hover:scale-105 group-hover:grayscale-0 group-hover:contrast-100"
+                        className="object-cover grayscale contrast-105 transition-[transform,filter] duration-700 ease-out group-hover:scale-105 group-hover:grayscale-0 group-hover:contrast-100 will-change-transform transform-gpu"
                         sizes="(max-width: 640px) 80vw, (max-width: 1024px) 50vw, 40vw"
-                        priority={photo.id === 1}
                       />
 
                       {/* Vignette Gradient Overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent pointer-events-none" />
 
                       {/* Top Tag Badge */}
-                      <div className="absolute top-3.5 sm:top-4 left-3.5 sm:left-4 rounded-full border border-white/20 bg-black/60 px-2.5 sm:px-3 py-0.5 sm:py-1 font-mono text-[0.625rem] sm:text-[0.6875rem] tracking-wider text-white backdrop-blur-md">
+                      <div className="absolute top-3.5 sm:top-4 left-3.5 sm:left-4 rounded-full border border-white/20 bg-black/60 px-2.5 sm:px-3 py-0.5 sm:py-1 font-mono text-[0.625rem] sm:text-[0.6875rem] tracking-wider text-white backdrop-blur-md transform-gpu">
                         {photo.tag}
                       </div>
 

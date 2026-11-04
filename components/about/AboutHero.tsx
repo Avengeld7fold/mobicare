@@ -35,7 +35,7 @@ export default function AboutHero({ imageSrc = "/images/mobi-team.webp" }: About
         <h1>
           <span>MobiCare</span>
           <span>
-            Service Center<em>.</em>
+            Service Center<span className="about-hero-dot">.</span>
           </span>
         </h1>
 

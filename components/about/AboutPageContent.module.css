@@ -10,7 +10,6 @@
   --about-paper-light: #f4f7f2;
   --about-green: #00a651;
   --about-green-bright: #00bb5b;
-  --about-green-hover: #34d67e;
   --about-green-dark: #006c35;
   --about-muted: #4c6052;
   --about-rule: #bdccbe;
@@ -18,17 +17,18 @@
   --about-ink-rule: rgba(255, 255, 255, 0.22);
   --about-ink-copy: #d3dfd5;
   --about-green-wash: rgba(0, 166, 81, 0.08);
-  --about-green-wash-strong: rgba(0, 166, 81, 0.16);
   --about-green-bloom: rgba(0, 166, 81, 0.22);
   --about-green-ghost: rgba(0, 166, 81, 0.16);
-  --about-green-line: rgba(0, 187, 91, 0.28);
-  --about-corner: rgba(0, 187, 91, 0.55);
-  --about-card-shade-strong: rgba(8, 12, 9, 0.88);
-  --about-card-shade-soft: rgba(8, 12, 9, 0.18);
-  --about-card-copy: #cfe0d3;
-  --about-mark: rgba(0, 187, 91, 0.4);
   --about-collage-shadow: rgba(8, 12, 9, 0.28);
   --about-focus: #006c35;
+  --about-fade: #888888;
+  --about-fade-2: #a0aba3;
+  --about-fade-3: #8b9a90;
+  --about-card-bg: #0c0c0c;
+  --about-frame: rgba(255, 255, 255, 0.12);
+  --about-frame-strong: rgba(255, 255, 255, 0.28);
+  --about-card-shadow: 0 16px 40px rgba(0, 0, 0, 0.85);
+  --about-card-shadow-hover: 0 24px 60px rgba(0, 166, 81, 0.22);
   --about-font-display: var(--font-gobold), Arial, sans-serif;
   --about-font-body: var(--mobi-text);
   --about-gutter: clamp(22px, 4.5vw, 76px);
@@ -69,12 +69,15 @@
   background: var(--about-green);
   color: var(--about-ink);
   border-block: 1px solid var(--about-ink);
+  contain: paint;
 }
 
 .marqueeTrack {
   display: flex;
   width: max-content;
   animation: marquee-scroll 26s linear infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
 
 .marquee:hover .marqueeTrack {
@@ -207,6 +210,8 @@
   border-radius: 50%;
   background: radial-gradient(circle, var(--about-green-bloom), transparent 62%);
   pointer-events: none;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .cardsTitle {
@@ -335,15 +340,17 @@
   overflow: hidden;
   background: var(--about-ink-soft);
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 /* Misi: gambar dasar miring, lurus saat hover; inset tetap diam */
 .collage:not(.collageFlip) .collageBase {
-  transform: rotate(-2.5deg);
+  transform: rotate(-2.5deg) translateZ(0);
 }
 
 .collage:not(.collageFlip) .collageBase:hover {
-  transform: rotate(0deg);
+  transform: rotate(0deg) translateZ(0);
 }
 
 /* Visi: gambar dasar lurus, inset miring saat hover */
@@ -351,10 +358,12 @@
   right: 0;
   left: auto;
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .collageFlip .collageInset:hover {
-  transform: rotate(2.5deg);
+  transform: rotate(2.5deg) translateZ(0);
 }
 
 .collageInset {
@@ -367,11 +376,14 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 24px 56px var(--about-collage-shadow);
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .collageImage {
   object-fit: cover;
   transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
 }
 
 .collageBase:hover .collageImage,
@@ -538,7 +550,7 @@
   position: relative;
   overflow: hidden;
   padding-block: clamp(88px, 10vw, 152px);
-  background: #080c09;
+  background: var(--about-ink);
   color: var(--about-white);
 }
 
@@ -552,15 +564,13 @@
   content: "";
   animation: foundation-scan 7s ease-in-out infinite;
   opacity: 0.7;
+  will-change: transform;
+  transform: translate3d(-100%, 0, 0);
 }
 
 @keyframes foundation-scan {
-  0% { transform: translateX(-100%); }
-  60%, 100% { transform: translateX(100%); }
-}
-
-.foundationBloom {
-  display: none;
+  0% { transform: translate3d(-100%, 0, 0); }
+  60%, 100% { transform: translate3d(100%, 0, 0); }
 }
 
 .foundationInner {
@@ -597,20 +607,23 @@
   aspect-ratio: 4 / 5;
   border-radius: 24px;
   overflow: hidden;
-  background: #080c09;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--about-ink);
+  color: var(--about-white);
+  border: 1px solid var(--about-frame);
   transition: border-color 0.25s ease-out, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .foundationCard:hover .foundationCardPhotoWrap {
-  border-color: rgba(255, 255, 255, 0.28);
+  border-color: var(--about-frame-strong);
   transform: translateY(-4px);
 }
 
 .foundationCardPhotoImage {
   object-fit: contain;
   object-position: bottom center;
-  padding: 10px 8px 0;
+  padding: 8px 8px 0;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -619,12 +632,12 @@
 }
 
 .foundationCardCaption {
-  padding-top: 18px;
+  padding-top: 16px;
 }
 
 .foundationCardName {
   margin: 0;
-  color: #ffffff;
+  color: var(--about-white);
   font-size: 19px;
   font-weight: 600;
   line-height: 1.25;
@@ -632,8 +645,8 @@
 }
 
 .foundationCardRole {
-  margin: 5px 0 0;
-  color: #888888;
+  margin: 4px 0 0;
+  color: var(--about-fade);
   font-size: 14.5px;
   line-height: 1.45;
   font-weight: 400;
@@ -650,12 +663,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #888888;
+  color: var(--about-fade);
   transition: color 0.18s ease-out, transform 0.18s ease-out;
 }
 
 .foundationSocialLink:hover {
-  color: #ffffff;
+  color: var(--about-white);
   transform: translateY(-1.5px);
 }
 
@@ -728,7 +741,8 @@
   font: 400 clamp(120px, 24vw, 400px)/0.8 var(--about-font-display);
   letter-spacing: -0.04em;
   text-transform: uppercase;
-  transform: translate(-50%, -50%);
+  transform: translate3d(-50%, -50%, 0);
+  will-change: transform;
   pointer-events: none;
   white-space: nowrap;
 }
@@ -1051,7 +1065,6 @@
     animation: none;
   }
 
-  .cardImage,
   .collageBase,
   .collageFlip .collageInset,
   .collageImage {

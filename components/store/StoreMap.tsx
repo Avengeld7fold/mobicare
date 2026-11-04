@@ -102,9 +102,9 @@ export default function StoreMap({ activeKey, viewRequest, isEnglish, onSelect, 
     const map = L.map(container.current, {
       scrollWheelZoom: false, zoomControl: false, minZoom: 2, maxZoom: 19,
       zoomSnap: 0.5,
+      attributionControl: false,
     });
     mapRef.current = map;
-    map.attributionControl.setPrefix(false);
     const markerRegistry = markers.current;
     const zoom = L.control.zoom({
       position: "bottomright",
@@ -112,7 +112,6 @@ export default function StoreMap({ activeKey, viewRequest, isEnglish, onSelect, 
       zoomOutTitle: isEnglish ? "Zoom out" : "Perkecil",
     }).addTo(map);
     const tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       maxZoom: 19, keepBuffer: 0, updateWhenIdle: true,
     });
     let disposed = false;
@@ -172,7 +171,7 @@ export default function StoreMap({ activeKey, viewRequest, isEnglish, onSelect, 
       gl.setWorkerUrl("/maps/worker/maplibre-gl-worker.mjs");
       vector = binding.maplibreGL({
         style: "/maps/mobicare-light.json",
-        attributionControl: { customAttribution: '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' },
+        attributionControl: false,
         interactive: false,
       });
       vector.addTo(map);

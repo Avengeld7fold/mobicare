@@ -57,6 +57,8 @@ export default function AboutDifference() {
             duration: 0.55,
             ease: "power2.out",
             stagger: 0.06,
+            force3D: true,
+            clearProps: "transform,opacity",
             scrollTrigger: {
               trigger: listRef.current,
               start: "top 92%",
