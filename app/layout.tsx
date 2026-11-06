@@ -82,7 +82,7 @@ const jsonLd = {
   name: "MobiCare Service Center",
   image: `${SITE_URL}/images/logo.svg`,
   description: SITE_DESCRIPTION,
-  telephone: "+6281999336722",
+  telephone: "+628991099999",
   priceRange: "$$",
   address: {
     "@type": "PostalAddress",

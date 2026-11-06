@@ -136,31 +136,6 @@ export default function HeroDeviceSlider({ className = "" }: HeroDeviceSliderPro
         />
       </div>
 
-      {/* Editorial Comparison Tags (Clean, Minimal, Non-AI-Slop) */}
-      <div
-        className="mobi-hero__slider-tag mobi-hero__slider-tag--before"
-        style={{ opacity: sliderPos < 18 ? 0 : 1 }}
-        aria-hidden="true"
-      >
-        <span className="mobi-hero__slider-tag-idx">01</span>
-        <span className="mobi-hero__slider-tag-divider">/</span>
-        <span className="mobi-hero__slider-tag-text">
-          {isEn ? "BEFORE" : "SEBELUM"}
-        </span>
-      </div>
-
-      <div
-        className="mobi-hero__slider-tag mobi-hero__slider-tag--after"
-        style={{ opacity: sliderPos > 82 ? 0 : 1 }}
-        aria-hidden="true"
-      >
-        <span className="mobi-hero__slider-tag-idx">02</span>
-        <span className="mobi-hero__slider-tag-divider">/</span>
-        <span className="mobi-hero__slider-tag-text">
-          {isEn ? "AFTER" : "SESUDAH"}
-        </span>
-      </div>
-
       {/* Divider Bar & Frosted Glass Handle */}
       <div
         className="mobi-hero__slider-line"

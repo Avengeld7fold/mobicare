@@ -1,6 +1,6 @@
 // Kontak terpusat — ganti di sini sekali, berlaku di seluruh situs.
-// Format internasional tanpa "+" atau spasi. 0819-9933-6722 → 6281999336722.
-export const WHATSAPP_NUMBER = "6281999336722";
+// Format internasional tanpa "+" atau spasi. 0899-109-9999 → 628991099999.
+export const WHATSAPP_NUMBER = "628991099999";
 
 export const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/mobicare.servicecenter/?hl=en",

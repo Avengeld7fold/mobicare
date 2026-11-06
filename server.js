@@ -14,6 +14,6 @@ app.prepare().then(() => {
     handle(req, res, parsedUrl);
   }).listen(port, (err) => {
     if (err) throw err;
-    console.log(`> FIXMI running on port ${port}`);
+    console.log(`> MobiCare running on port ${port}`);
   });
 });

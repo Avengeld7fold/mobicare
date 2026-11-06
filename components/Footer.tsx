@@ -29,8 +29,8 @@ export default function Footer() {
         {/* Kolom 2: Kontak */}
         <div className="footer-contact">
           <span className="footer-label">{isEn ? "contact" : "kontak"}</span>
-          <a href="tel:081999336722">
-            0819<span className="footer-sym">-</span>9933<span className="footer-sym">-</span>6722
+          <a href="tel:08991099999">
+            0899<span className="footer-sym">-</span>109<span className="footer-sym">-</span>9999
           </a>
           <a
             href={whatsappUrl("Halo MobiCare, saya ingin konsultasi perbaikan gadget.")}

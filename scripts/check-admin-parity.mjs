@@ -87,7 +87,9 @@ function normalizeBrand(source) {
 function normalizeFile(file, source) {
   let normalized = normalizeBrand(source);
   if (file === "lib/constants.ts") {
-    normalized = normalized.replace(/export const SOCIAL_LINKS = \{[\s\S]*?\};/, "export const SOCIAL_LINKS = {};");
+    normalized = normalized
+      .replace(/\/\/ Format internasional.*?\nexport const WHATSAPP_NUMBER = ".*?";/, '// Format internasional\nexport const WHATSAPP_NUMBER = "WHATSAPP_NUMBER";')
+      .replace(/export const SOCIAL_LINKS = \{[\s\S]*?\};/, "export const SOCIAL_LINKS = {};");
   }
   return file.endsWith(".css") ? normalized.replace(/\s+/g, "") : normalized;
 }
